@@ -13,31 +13,31 @@ library(betapart)
 #TELE0 ESPECE
 
 # load and prepare data : table with samples in rows and species in columns
-teleo <- read.csv("01_Analyses_teleo/00_data/teleo_reads.csv", sep=",", header = T, row.names = 1)
+metazoa <- read.csv("02_Analyses_metazoa/00_data/metazoa_reads.csv", sep=",", header = T, row.names = 1)
 
-teleo <- teleo[,colSums(teleo)!=0]
+metazoa <- metazoa[,colSums(metazoa)!=0]
 
-teleo <- as.data.frame(t(teleo))
+metazoa <- as.data.frame(t(metazoa))
 
 # compute 'Bray' distance between samples
-teleo.bray <- vegdist(teleo, method="bray")
+metazoa.bray <- vegdist(metazoa, method="bray")
 
 # compute PCoA = ordination des points dans un espace
-pcoa_teleo <- dudi.pco(teleo.bray, scannf = FALSE, nf = 3)
+pcoa_metazoa <- dudi.pco(metazoa.bray, scannf = FALSE, nf = 3)
 
 # select data to plot
-teleo2plot <- pcoa_teleo$li
+metazoa2plot <- pcoa_metazoa$li
 
 # ajout d'une colonne Ports et d'une colonne Habitat
 meta <- read.csv("00_Metadata/metadata_port.csv", sep=",")
 
-teleo2plot$code_spygen <- rownames(teleo2plot)
-teleo2plot <-left_join(teleo2plot, meta[,c("code_spygen", "site", "habitat")])
+metazoa2plot$code_spygen <- rownames(metazoa2plot)
+metazoa2plot <-left_join(metazoa2plot, meta[,c("code_spygen", "site", "habitat")])
 
 
 ##############################################################################################################################
 ## Load the eDNA data (matrix species per sample)
-adne <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", header=T, row.names = 1)
+adne <- read.csv("02_Analyses_metazoa/00_data/metazoa_presence.csv", header=T, row.names = 1)
 
 adne <- adne[rowSums(adne)!=0,]
 adne <- adne[,colSums(adne)!=0]
@@ -77,7 +77,7 @@ permutest(dispersion_nest)
 
 # plot
 
-teleo_plot <- ggplot(teleo2plot, aes(x=A1, y=A2))+
+metazoa_plot <- ggplot(metazoa2plot, aes(x=A1, y=A2))+
   geom_point(aes(x=A1, y=A2, color=site, shape=habitat), size=2.5)+
   scale_shape_manual(values = c(16, 17), 
                      name = "Habitat",  labels = c("Biohut","Port"))+
@@ -97,9 +97,9 @@ teleo_plot <- ggplot(teleo2plot, aes(x=A1, y=A2))+
         legend.text=element_text(size=15),
         axis.text=element_text(size=15),
         plot.title = element_text(size=18))+
-  ggtitle("PCoA teleost species composition among ports")
+  ggtitle("PCoA metazoa species composition among ports")
 
-teleo_plot
+metazoa_plot
 
-ggsave("01_Analyses_teleo/03_Outputs/PCoA_teleo_species.png", width = 11, height = 8)
+ggsave("02_Analyses_metazoa/03_Outputs/PCoA_metazoa_species.png", width = 11, height = 8)
 

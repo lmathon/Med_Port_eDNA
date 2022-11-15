@@ -12,23 +12,23 @@ library(betapart)
 meta_tot <- read.csv("00_Metadata/metadata_tot.csv", header=T)
 
 ## Load the eDNA data (matrix species per sample)
-adne <- read.csv("01_Analyses_teleo/00_data/matrice_teleo_totale.csv", header=T, row.names=1)
+adne <- read.csv("02_Analyses_metazoa/00_data/matrice_metazoa_totale.csv", header=T, row.names=1)
 
 
-teleo <- as.data.frame(t(adne))
+metazoa <- as.data.frame(t(adne))
 
 # compute 'Bray' distance between samples
-teleo.bray <- vegdist(teleo, method="bray")
+metazoa.bray <- vegdist(metazoa, method="bray")
 
 # compute PCoA = ordination des points dans un espace
-pcoa_teleo <- dudi.pco(teleo.bray, scannf = FALSE, nf = 3)
+pcoa_metazoa <- dudi.pco(metazoa.bray, scannf = FALSE, nf = 3)
 
 # select data to plot
-teleo2plot <- pcoa_teleo$li
+metazoa2plot <- pcoa_metazoa$li
 
 # ajout d'une colonne Ports et d'une colonne Habitat
-teleo2plot$code_spygen <- rownames(teleo2plot)
-teleo2plot <-left_join(teleo2plot, meta_tot[,c("code_spygen", "site", "habitat")])
+metazoa2plot$code_spygen <- rownames(metazoa2plot)
+metazoa2plot <-left_join(metazoa2plot, meta_tot[,c("code_spygen", "site", "habitat")])
 
 ################################################################################################################################???
 adne <- adne[rowSums(adne)!=0,]
@@ -80,7 +80,7 @@ colors <- c("#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#
             "#3F3C05", "#1D6F61", "#FE065E")
 # plot
 
-teleo_plot <- ggplot(teleo2plot, aes(x=A1, y=A2))+
+metazoa_plot <- ggplot(metazoa2plot, aes(x=A1, y=A2))+
   geom_point(aes(x=A1, y=A2, color=site), size=2.5)+
   scale_color_manual(values=colors)+#, 
   #name = "Port", labels = c("Port_Vendres", "Agde", "Marseillan", "Saintes_Maries_de_la_Mer","La_Ciotat","Porquerolles","Cannes")) +
@@ -98,8 +98,8 @@ teleo_plot <- ggplot(teleo2plot, aes(x=A1, y=A2))+
         legend.text=element_text(size=15),
         axis.text=element_text(size=15),
         plot.title = element_text(size=18))+
-  ggtitle("PCoA teleost species composition among ports")
+  ggtitle("PCoA metazoa species composition among ports")
 
-teleo_plot
+metazoa_plot
 
-ggsave("01_Analyses_teleo/03_Outputs/PCoA_teleo_tous_sites.png", width = 11, height = 8)
+ggsave("02_Analyses_metazoa/03_Outputs/PCoA_metazoa_tous_sites.png", width = 11, height = 8)
