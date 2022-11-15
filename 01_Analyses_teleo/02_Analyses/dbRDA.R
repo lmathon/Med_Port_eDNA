@@ -1,75 +1,63 @@
-library(spdep)
-library(corrgram)
-library(MuMIn)
-library(visreg)
-library(sjPlot)
-library(car)
-library(rsq)
-library(caret)
-library(relimp)
-library(MASS)
-library(spatialreg)
-library(spind)
-library(raster)
-library(lattice)
-library(nlme)
-library(scales)
-library(lme4)
-library(piecewiseSEM)
-library(performance)
-library(lmtest)
 library(dplyr)
-library(plyr)
-library(FactoMineR)
-library(factoextra)
-library(cluster)
-library(ape)
+library(forcats)
+library(stringr)
+library(rsq)
+library(margins)
+library(betapart)
+library(reshape)
+library(tidyverse)
+library(tidyselect)
 library(vegan)
-library(rdacca.hp)
-library(ggord)
-library(gridExtra)
-library(grid)
-library(ggpubr)
-library(ggpattern)
+library(ggplot2)
+library(patchwork)
 library(ggalt)
 library(ggrepel)
-library(patchwork)
-library(shades)
-library(tidyverse)
+library(grid)
+library(ggpubr)
+
 ### Load data
 # ADNe presence/abscence
 biodiv=read.csv("01_Analyses_teleo/00_data/matrice_teleo_totale.csv", row.names=1) %>%
-t(.)
+t(.) %>%
+as.data.frame(.)
+
+biodiv <- biodiv[rowSums(biodiv)!=0,]
+biodiv <- biodiv[,colSums(biodiv)!=0]
+
+biodiv$code_spygen <- rownames(biodiv)
+
 
 # Indicateurs
-ind_ports =read.csv("indicators_ports_oct21_repassee.csv",row.names=1)
+ind_ports =read.csv("01_Analyses_teleo/00_data/Indicators_ports_2022_per_filter.csv",row.names=1)
 
 # milieu naturel
-meta_nat <- read.csv("metadata_milieu_naturel.csv", header=T)
-ind_nat <- read.csv("indicators_milieu_naturel.csv", header=T, row.names=1) %>%
+meta_nat <- read.csv("00_Metadata/metadata_milieu_naturel.csv", header=T)
+ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T, row.names = 2) %>%
   select(colnames(ind_ports))
 
 # Combine the two datasets
-ind <- rbind(ind_nat,ind_ports) %>%
-  mutate(DP_B_ratio = log10(DP_B_ratio))
+ind <- rbind(ind_nat,ind_ports) 
+ind$code_spygen <- rownames(ind)
 
 # metadata
-meta=read.csv("metadata_tot.csv", sep=",",row.names=1) %>%
-  column_to_rownames(var="code_spygen")
+meta=read.csv("00_Metadata/metadata_tot.csv", sep=",") 
 
 # merge indicateurs et metadata 
-indmeta=merge(ind,meta,by=0) %>%
+indmeta=left_join(ind,meta) %>%
   filter(R>4) # enlever échantillons avec moins de 4 espèces
-rownames(indmeta)=indmeta[,"Row.names"]
+rownames(indmeta)=indmeta[,"code_spygen"]
 
 # combiner toutes les données
-data_all=merge(biodiv,indmeta,by=0)
-rownames(data_all)=data_all[,"Row.names"]
+data_all=left_join(biodiv,indmeta)
+rownames(data_all)=data_all[,"code_spygen"]
 head(data_all)
 dim(data_all)
 
+data_all <- data_all %>%
+  filter(!is.na(port))
+
 ## matrice des traits
-traits <- read.table("Functional_data_corrected_20220124.csv", sep=",", header=T)
+traits <- read.table("01_Analyses_teleo/00_data/Functional_data_corrected_20220124.csv", sep=",", header=T)
 
 # vecteurs de noms d'espèces commerciales / non-commerciales / menacées
 commercial <- traits %>%
@@ -91,7 +79,10 @@ threatened <- traits %>%
   pull(Species)
 
 #### faire la dbRDA
-RDA_all=capscale(data_all[,c(2:186)] ~ port, data_all, dist="jaccard", add =TRUE)
+data_dbrda <- data_all[,c(1:160)]
+meta_dbrda <- data_all[,c(161:ncol(data_all))]
+
+RDA_all<- capscale(data_dbrda ~ port, meta_dbrda, distance ="jaccard")
 
 #############################################################
 ## Plot RDA port/hors port + species
@@ -102,8 +93,15 @@ species_scores <- scores(RDA_all)$species %>% data.frame()   ## separating out t
 rsqr <- round(RsquareAdj(RDA_all)$adj.r.squared*100, 2) # r squared
 
 # get most differentiated species along first axis (les espèces qui "tirent" la dbRDA = celles qui ont le plus d'importance pour différencier les sites)
-quant50 <- quantile(abs(species_scores$CAP1), probs = c(0.50))
-species_scores_diff50 <- species_scores[which(abs(species_scores$CAP1) > quant50["50%"]),]
+quant50_cap1 <- quantile(abs(species_scores$CAP1), probs = c(0.5))
+quant50_cap2 <- quantile(abs(species_scores$MDS1), probs = c(0.5))
+quant50 <- rbind(quant50_cap1, quant50_cap2 )
+species_scores_diff50_cap1 <- species_scores[which(abs(species_scores$CAP1) > quant50_cap1["50%"]),]
+species_scores_diff50_cap2 <- species_scores[which(abs(species_scores$MDS1) > quant50_cap2["50%"]),]
+species_scores_diff50 <- rbind(species_scores_diff50_cap1, species_scores_diff50_cap2)
+species_scores_diff50 <- unique(species_scores_diff50)
+
+
 # add colour variable by commercial/non-commercial/threatened
 species_scores_diff50$col <- rep("other", nrow(species_scores_diff50))
 species_scores_diff50$col[rownames(species_scores_diff50) %in% commercial]   <- "commercial"
@@ -120,7 +118,8 @@ CAP1 <- round(sumdbrda$cont$importance["Proportion Explained", "CAP1"]*100, 1)
 MDS1 <- round(sumdbrda$cont$importance["Proportion Explained", "MDS1"]*100, 1)
 
 # add metadata
-site_scores_groups <- cbind(site_scores,select(data_all, port))
+identical(as.character(meta_dbrda$code_spygen), rownames(site_scores)) # verify that data in same order
+site_scores_groups <- cbind(site_scores,select(meta_dbrda, port))
 
 # vecteur de couleurs
 mycol = c("#FCBBA1FF","#7FCDBBFF")
@@ -128,7 +127,7 @@ mycol = c("#FCBBA1FF","#7FCDBBFF")
 ##########################
 # plot in ggplot
 #########################
-### Represente les sites par catégories 
+### Represente les sites par categories 
 grda_sites <- ggplot(site_scores_groups, aes(x= CAP1, y = MDS1)) +
   geom_hline(yintercept = 0, lty = 2, col = "grey") + # ligne horizontqle
   geom_vline(xintercept = 0, lty = 2, col = "grey") + # ligne verticale
@@ -157,14 +156,14 @@ grda_sites <- ggplot(site_scores_groups, aes(x= CAP1, y = MDS1)) +
         panel.background = element_rect(colour = "black", size=1)) 
 grda_sites
 
-### Represente les espèces
+### Represente les espces
 grda_species <- ggplot() + 
   geom_segment(data= species_scores_diff50, aes(x=0, xend=CAP1,y = 0, yend=MDS1, col = col),
                arrow=arrow(length=unit(0.01,"npc")), size=0.5) + # most differentiated species
   geom_hline(yintercept = 0, lty = 2, col = "grey") +
   geom_vline(xintercept = 0, lty = 2, col = "grey") +
   scale_color_manual(values = c("#e31a1c", "#1f78b4", "grey"), name = "", labels = c("Threatened species","Commercial species", "Other species")) +
-  labs(x = paste0("CAP1 (", CAP1, "%)"), y = paste0("MDS1 (", CAP2, "%)")) +
+  labs(x = paste0("CAP1 (", CAP1, "%)"), y = paste0("MDS1 (", MDS1, "%)")) +
   theme_bw() +
   guides(colour = guide_legend(override.aes = list(size = 1.2))) +
   theme(axis.line = element_line(colour = "black"),
@@ -181,10 +180,9 @@ grda_species <- ggplot() +
 grda_species
 
 # combine the 2 graphs
-fig2 <-  (grda_sites + grda_species) + 
-  plot_annotation(tag_levels = "A") & theme(plot.tag = element_text(face="bold", size = 17))
+fig2 <-  ggarrange(grda_sites,grda_species, ncol=2) 
 fig2
 
 # export figure
-ggsave(plot = fig2, filename = "db-RDA_with_species.jpeg", 
+ggsave(plot = fig2, filename = "01_Analyses_teleo/03_Outputs/dbRDA_with_species.jpeg", 
        width = 15,  height = 7, dpi = 600)
