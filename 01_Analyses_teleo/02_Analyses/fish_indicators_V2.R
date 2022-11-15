@@ -16,10 +16,18 @@ library(fishtree)
 
 ## Load data
 data <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv")
+data$scientific_name <- gsub("_", " ", data$scientific_name)
 
 meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
+# Add a column "campaign" : October21 or June22
+meta <- meta %>%
+  mutate(Campaign = ifelse(grepl("2022", meta$date,fixed = TRUE), 'June22', 'October21'))
+# save
+write.csv(meta, "00_Metadata/metadata_port.csv", row.names=F)
 
 traits <- read.csv("01_Analyses_teleo/00_data/Functional_data_corrected_20220124.csv", header=T)
+
+taxo <- read.csv("01_Analyses_teleo/00_data/teleo_taxo.csv")
 
 ##########################################################################################
 ###### Calculate indicators 
@@ -41,6 +49,10 @@ data <- data %>%
 species <- rownames(data)
 # list of samples
 samples <- colnames(data)
+# list elasmobranch species
+elasmo <- taxo %>%
+  filter(Class == "Chondrichthyes") %>%
+  pull(scientific_name)
 
 # Quelles espèces ne sont pas dans les traits ?
 #check <- species[which(species %in% traits$Species ==F)]
@@ -84,7 +96,6 @@ for (i in 1:nrow(indicators)) { # for each sample
 ## 3 - Large Reef Fish Index - LFI
 ## 5 - Ratio Demerso-pelagic / benthic
 ## 7 - Non-indigenous species
-## 9 - Chondrichtyen species
 ## 11 - Commercial species
 ## 12 - Highly commercial species 
 ##########################################################
@@ -96,12 +107,11 @@ for (i in 1:nrow(indicators)) { # for each sample
     pull(Sp)
   
   # Calculate indicators
-  indicators[i,"LFI"] <- sum(traits[which(traits$Species %in% s_i), "LRFI"]) 
-  indicators[i,"DeBRa"] <- sum(traits[which(traits$Species %in% s_i), "DP"]) / (sum(traits[which(traits$Species %in% s_i), "B"])+1)
-  indicators[i,"Exo"] <- sum(traits[which(traits$Species %in% s_i), "NI"])
-  indicators[i,"Chondri"] <- sum(traits[which(traits$Species %in% s_i), "SHarK"])
-  indicators[i,"Commercial"] <- sum(traits[which(traits$Species %in% s_i), "all_commercial_level"])
-  indicators[i,"High_commerc"] <- sum(traits[which(traits$Species %in% s_i), "highly_commercial_only"])
+  indicators[i,"LFI"] <- sum(traits[which(traits$Species %in% s_i), "LRFI"], na.rm=T) 
+  indicators[i,"DeBRa"] <- sum(traits[which(traits$Species %in% s_i), "DP"], na.rm=T) / (sum(traits[which(traits$Species %in% s_i), "B"], na.rm=T)+1)
+  indicators[i,"Exo"] <- sum(traits[which(traits$Species %in% s_i), "NI"], na.rm=T)
+  indicators[i,"Commercial"] <- sum(traits[which(traits$Species %in% s_i), "all_commercial_level"], na.rm=T)
+  indicators[i,"High_commerc"] <- sum(traits[which(traits$Species %in% s_i), "highly_commercial_only"], na.rm=T)
 }
 
 ###########################################################
@@ -112,8 +122,10 @@ crypto_families = c("Tripterygiidae", "Grammatidae", "Creediidae", "Aploactinida
                     "Chaenopsidae", "Gobiesocidae", "Labrisomidae", "Pseudochromidae", "Bythitidae", 
                     "Plesiopidae", "Blenniidae", "Apogonidae", "Callionymidae", "Opistognathidae", "Syngnathidae")
 
-traits <- traits %>%
-  mutate(crypto_Brandl = if_else(Family %in% crypto_families, 1,0))
+crypto <- taxo %>%
+  filter(Family %in% crypto_families) %>%
+  pull(scientific_name)
+
 
 for (i in 1:nrow(indicators)) { # for each sample
   # list species present in the sample
@@ -122,8 +134,26 @@ for (i in 1:nrow(indicators)) { # for each sample
     tibble::rownames_to_column(var="Sp") %>%
     pull(Sp)
   
+  crypto_i <- s_i[which(s_i %in% crypto)]
+  
   # Calculate indicator
-  indicators[i,"Crypto"] <- sum(traits[which(traits$Species %in% s_i), "crypto_Brandl"]) 
+  indicators[i,"Crypto"] <- length(crypto_i)
+}
+
+###########################################################
+## 9 Chondrichtyens
+###########################################################
+for (i in 1:nrow(indicators)) { # for each sample
+  # list species present in the sample
+  s_i <- data %>%
+    filter(data[,i] == 1) %>%
+    tibble::rownames_to_column(var="Sp") %>%
+    pull(Sp)
+  
+  elasmo_i <- s_i[which(s_i %in% elasmo)]
+  
+  # Calculate indicator
+  indicators[i,"Chondri"] <-length(elasmo_i)
 }
 
 ##########################################################
@@ -147,8 +177,6 @@ for (i in 1:nrow(indicators)) { # for each sample
 ##########################################################
 ## 8 - Red List IUCN
 ##########################################################
-## Assign different weighs to the IUCN categories: NT/LC = 0,VU = 1, EN = 2, CR = 3
-
 ### Make a dummy variable for IUCN categories
 traits <- dummy_cols(traits, select_columns = 'IUCN_Red_List_Category')
 
@@ -166,7 +194,7 @@ for (i in 1:nrow(indicators)) { # for each sample
   CR <- sum(traits[which(traits$Species %in% s_i), "IUCN_Red_List_Category_CR"], na.rm=T)
   
   # Calculate indicator
-  indicators[i,"RedList"] <- 0 + VU + EN*2 + CR*3
+  indicators[i,"RedList"] <- VU + EN + CR
 }
 
 ##########################################################
@@ -205,7 +233,7 @@ rownames(data)[rownames(data) == "Chelon_ramada"] <- "Liza_ramada"
 
 # Retrieve the missing phylogeny 
 phy <- fishtree_phylogeny(species = species, type="phylogram")
-nc <- geiger::name.check(phy, data) # 34 espèces manquantes
+nc <- geiger::name.check(phy, data) # 40 espèces manquantes
 
 # Remove from the data the species that are not in the tree
 data2 <- data[which(rownames(data) %in% nc$data_not_tree == F),]
@@ -222,27 +250,8 @@ pd.result <- pd(data2, prunedTree, include.root=T)
 # Add PD to indicator dataframe
 indicators[,"PD"] <- pd.result$PD
 
-write.table(indicators, file="Indicators_ports_2021.csv", sep=",")
+write.table(indicators, file="01_Analyses_teleo/00_data/Indicators_ports_2022_per_filter.csv", sep=",")
 
-#### Summarize indicators per site
-indicators  %>% 
-  as.data.frame(.) %>%
-  rownames_to_column(var="code_spygen") %>%
-  inner_join(meta, by="code_spygen") %>%
-  select(R, Crypto, Chondri, Commercial, Exo, RedList, site) %>%
-  group_by(site) %>%
-  summarise(across(everything(), list(mean)))
-
-#### Summarize indicators per habitat (biohut ou non)
-indicators  %>% 
-  as.data.frame(.) %>%
-  rownames_to_column(var="code_spygen") %>%
-  inner_join(meta, by="code_spygen") %>%
-  # selectionner les sites où les biohuts on été échantillonné
-  filter(site %in% c("Cannes", "Marseillan ", "Saintes Maries de la Mer")) %>%
-  select(R, Crypto, Chondri, Commercial, Exo, RedList, habitat) %>%
-  group_by(habitat) %>%
-  summarise(across(everything(), list(mean)))
 
 #### Summarize total
 indicators  %>% 
@@ -250,6 +259,16 @@ indicators  %>%
   summarise(across(everything(), list(mean=mean,
                                       min=min,
                                       max=max)))
+
+#######################################################################################################
+## Calculate indicators per site (pooling the species list of the two replicates)
+#######################################################################################################
+data2 <- data %>%
+  t(.) %>%
+  as.data.frame(.) %>%
+  rownames_to_column(var="code_spygen") %>%
+  left_join(meta, by="code_spygen") %>%
+  group_by()
 
 #######################################################################################################
 ## Plots
