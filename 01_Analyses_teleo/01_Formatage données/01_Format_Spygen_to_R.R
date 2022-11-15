@@ -2,10 +2,16 @@ library(tidyverse)
 
 
 # load csv spygen -> really messy !
-data_teleo <- read.csv("01_Analyses_teleo/00_data/Teleo_SC21250_résultats_campagnes 1 et 2.csv", sep=";")
+data_teleo <- read.csv("01_Analyses_teleo/00_data/Teleo_SC21250_rÃ©sultats_campagnes 1 et 2.csv", sep=";")
 
 # Cas particulier : code spygen manquant dans la colonne "nb seq" du premier echantillon
 data_teleo[3,7] <- data_teleo[3,6]
+
+# Save the taxo in a new DF
+taxo <- data_teleo[5:nrow(data_teleo), 1:4]
+colnames(taxo) <- c("Class", "Order", "Family", "scientific_name")
+#save taxo
+write.csv(taxo, file="01_Analyses_teleo/00_data/teleo_taxo.csv", row.names = F)
 
 # change column names 
 colnames(data_teleo) <- c(as.character(data_teleo[4,1:5]), as.character(data_teleo[3,6:ncol(data_teleo)]))

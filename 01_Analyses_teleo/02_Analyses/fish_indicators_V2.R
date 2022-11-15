@@ -15,12 +15,11 @@ library(fishtree)
 
 
 ## Load data
-data <- read.csv2("teleo_presence.csv")
+data <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv")
 
-meta <- read.csv("metadata_eDNA_port_october_2021.csv", header=T)
+meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
 
-traits <- read.csv("C:/Users/AliciaDalongeville/Documents/MARBEC/LABCOM/Data/ADNe/Functional_data_corrected_20220124.csv", header=T)
-
+traits <- read.csv("01_Analyses_teleo/00_data/Functional_data_corrected_20220124.csv", header=T)
 
 ##########################################################################################
 ###### Calculate indicators 
