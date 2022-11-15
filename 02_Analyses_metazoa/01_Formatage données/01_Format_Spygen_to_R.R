@@ -18,6 +18,12 @@ data_metazoa[,2:ncol(data_metazoa)] <- as.numeric(unlist(data_metazoa[,2:ncol(da
 # replace empty cells with 0
 data_metazoa[is.na(data_metazoa)] <- 0
 
+# Remove rows with 0 obs
+data_metazoa <- data_metazoa[rowSums(data_metazoa[,-1])!=0,]
+
+# clean species_names
+data_metazoa$scientific_name <- gsub(" ", "_", data_metazoa$scientific_name)
+
 #save data
 write.csv(data_metazoa, file="02_Analyses_metazoa/00_data/metazoa_reads.csv", row.names = F)
 

@@ -41,7 +41,7 @@ data_teleo[,2:ncol(data_teleo)] <- as.numeric(unlist(data_teleo[,2:ncol(data_tel
 # replace empty cells with 0
 data_teleo[is.na(data_teleo)] <- 0
 
-# Remove rowswith 0 obs
+# Remove rows with 0 obs
 data_teleo <- data_teleo[rowSums(data_teleo[,-1])!=0,]
 
 # clean species_names

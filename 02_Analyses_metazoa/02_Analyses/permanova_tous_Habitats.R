@@ -12,7 +12,7 @@ library(betapart)
 meta_tot <- read.csv("00_Metadata/metadata_tot.csv", header=T)
 
 ## Load the eDNA data (matrix species per sample)
-adne <- read.csv("01_Analyses_teleo/00_data/matrice_teleo_totale.csv", header=T, row.names=1)
+adne <- read.csv("02_Analyses_metazoa/00_data/matrice_metazoa_totale.csv", header=T, row.names=1)
 
 adne <- adne[rowSums(adne)!=0,]
 adne <- adne[,colSums(adne)!=0]
@@ -97,12 +97,12 @@ panel.a<-ggplot() +
   geom_point(data=seg.data, aes(x=v.PCoA1,y=v.PCoA2, colour=group),size=2) +
   theme_mine + 
   scale_colour_manual(values=c("#F5A6E6","#F18F01","#0087DB", "#94F000"), labels = c("Biohut", "Unprotected","Port", "Reserve")) +
-  labs(title="PCoA teleost species among habitats",x="PCoA 1",y="PCoA 2")
+  labs(title="PCoA metazoa species among habitats",x="PCoA 1",y="PCoA 2")
 
 panel.a
 
 
-ggsave("01_Analyses_teleo/03_Outputs/PCoA_habitats.png", width = 11, height = 8)
+ggsave("02_Analyses_metazoa/03_Outputs/PCoA_habitats.png", width = 11, height = 8)
 
 
 

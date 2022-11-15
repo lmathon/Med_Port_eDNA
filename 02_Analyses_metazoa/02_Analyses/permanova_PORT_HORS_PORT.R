@@ -16,7 +16,7 @@ meta_tot <- meta_tot %>%
 
 
 ## Load the eDNA data (matrix species per sample)
-adne <- read.csv("01_Analyses_teleo/00_data/matrice_teleo_totale.csv", header=T, row.names=1)
+adne <- read.csv("02_Analyses_metazoa/00_data/matrice_metazoa_totale.csv", header=T, row.names=1)
 
 
 # Enlever les pts biohuts
@@ -105,7 +105,7 @@ panel.a<-ggplot() +
 panel.a
 
 
-ggsave("01_Analyses_teleo/03_Outputs/PCoA_horsport_port.png", width = 11, height = 8)
+ggsave("02_Analyses_metazoa/03_Outputs/PCoA_horsport_port.png", width = 11, height = 8)
 
 
 
