@@ -1,8 +1,54 @@
 library("VennDiagram")
-#ici nous avons retiré les sp non identifiées
-#nous avons également retiré le saumon d'atlantique qui semble très peu probablement présent (contamination ?)
-draw.pairwise.venn(159, 95, 86, c("Hors port", "Port"),fill=c("lightblue","yellow"),scaled=T,fontfamily=c("Courier","Courier","Courier"),cat.fontfamily=c("Courier","Courier"), cat.dist=c(-0.05,-0.009), 
-                   cat.cex=c(1.4,1.4),cex=c(1.4,1.4,1.4),ext.pos=c(2,10))
+library(ggvenn)
+library(dplyr)
+library(nVennR)
+
+# load port data and extract species names
+port <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", row.names = 1)
+
+port <- port[rowSums(port)!=0,]
+port <- port[,colSums(port)!=0]
+
+port <- as.data.frame(rownames(port))
+names(port) <- "species"
+  
+# keep only species genus_species
+port <- port %>%
+  filter(grepl('_', species)) %>%
+  filter(!grepl('_sp.', species)) 
+
+port <- as.vector(port$species)
 
 
+# load outside data and extract species names
+outside <- read.csv("01_Analyses_teleo/00_data/biodiv_milieu_naturel.csv", row.names = 1) %>%
+  t(.) %>%
+  as.data.frame(.)
 
+outside <- outside[rowSums(outside)!=0,]
+outside <- outside[,colSums(outside)!=0]
+
+outside <- rownames(outside)
+  
+
+
+# plot venn diagram simple
+species_venn <- list(
+  Hors_port = outside,
+  Ports = port
+)
+
+
+vennplot <- ggvenn(species_venn, 
+                         fill_color = c("#EE5E81", "#77CB81"),
+                         stroke_size = 0.5, set_name_size = 4, show_percentage = TRUE, show_elements = FALSE)
+
+
+# plot venn diagram proportional
+species_venn2 <- createVennObj(nSets = 2, sNames = c('Hors_port', 'Ports'))
+species_venn2 <- setVennRegion(species_venn2, c("Hors_port"), 32)
+species_venn2 <- setVennRegion(species_venn2, c("Ports"), 35)
+species_venn2 <- setVennRegion(species_venn2, c("Hors_port", "Ports"), 78)
+
+
+vennplot2 <- plotVenn(nVennObj = species_venn2, systemShow=T)
