@@ -521,7 +521,7 @@ resp_expl
 all_plots = pmap(resp_expl, ~ boxplot_fun(x = .y, y = .x) )
 
 ## Print the plots in a grid
-png("boxplots_indicateurs_habitat.png", width = 900, height = 900)
+png("01_Analyses_teleo/03_Outputs/boxplots_indicateurs_habitat.png", width = 900, height = 900)
 cowplot::plot_grid(plotlist = all_plots)
 dev.off()
 
