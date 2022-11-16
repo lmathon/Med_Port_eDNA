@@ -1,0 +1,120 @@
+"","phylum","class","order","family","taxon","Agde_port_1","Agde_port_2","Cannes_Biohut","Cannes_Port_1","Cannes_Port_2","La_Ciotat_Port_1","La_Ciotat_Port_2","Marseillan_Port_1","Marseillan_Port_2","Marseillan_Biohut","Porquerolles_Port_1","Porquerolles_Port_2","Port_Vendre_Port_1","Port_Vendre_Port_2","SMM_Biohut","SMM_Port_1","SMM_Port_2"
+"1","Actinobacteria","Actinobacteria","Micrococcales","Microbacteriaceae","Yonghaparkia sp. MOLA 360",0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,0,0
+"2","Actinobacteria","Actinobacteria","Streptomycetales","Streptomycetaceae","Streptomyces",0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0
+"3","Actinobacteria","Actinobacteria","-","-","Actinobacteria",1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0
+"4","Actinobacteria","Coriobacteriia","Eggerthellales","Eggerthellaceae","Raoultibacter",0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0
+"5","Bacteroidetes","Bacteroidia","Bacteroidales","Bacteroidaceae","Bacteroides",0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0
+"6","Bacteroidetes","Bacteroidia","Bacteroidales","Bacteroidaceae","Bacteroides vulgatus",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"7","Bacteroidetes","Bacteroidia","Bacteroidales","Porphyromonadaceae","Macellibacteroides fermentans",0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"8","Bacteroidetes","Bacteroidia","Bacteroidales","Prevotellaceae","Prevotella",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"9","Bacteroidetes","Bacteroidia","Bacteroidales","Prevotellaceae","Prevotella copri",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"10","Bacteroidetes","Bacteroidia","Bacteroidales","Rikenellaceae","Alistipes",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"11","Bacteroidetes","Cytophagia","Cytophagales","Flammeovirgaceae","Flammeovirgaceae",0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0
+"12","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Actibacter",0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0
+"13","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Aureimarina marisflavi",0,1,0,0,0,1,1,1,1,1,0,0,0,0,1,0,0
+"14","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Flavobacteriaceae",1,1,0,0,0,1,0,1,1,1,1,0,0,1,1,1,1
+"15","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Flavobacterium sp. SCGC AAA015-C20",0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+"16","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Flavobacterium sp. SCGC AAA298-O21",0,0,0,0,0,0,1,1,1,1,0,1,0,1,1,0,0
+"17","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Flavobacterium sp. SCGC AAA300-I04",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"18","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Flavobacterium sp. SCGC AAA300-K05",1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1
+"19","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Tenacibaculum",1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1
+"20","Bacteroidetes","Flavobacteriia","Flavobacteriales","Flavobacteriaceae","Tenacibaculum mesophilum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+"21","Bacteroidetes","-","-","-","Bacteroidetes",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"22","Cyanobacteria","-","Chroococcales","Aphanothecaceae","Candidatus Atelocyanobacterium thalassa",0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+"23","Cyanobacteria","-","Synechococcales","Prochloraceae","Prochlorococcus",0,0,0,0,0,0,1,1,1,0,0,1,0,1,0,0,0
+"24","Cyanobacteria","-","Synechococcales","Prochloraceae","Prochlorococcus sp. SCGC AAA298-C17",1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1
+"25","Cyanobacteria","-","Synechococcales","Synechococcaceae","Synechococcus sp. RCC328",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"26","Cyanobacteria","-","Synechococcales","Synechococcaceae","Synechococcus sp. UW179",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"27","Cyanobacteria","-","Synechococcales","-","Synechococcales",0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,0,0
+"28","Euryarchaeota","Poseidoniia","Poseidoniales","Thalassarchaeaceae","Candidatus Thalassoarchaea mediterranii",0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0
+"29","Firmicutes","Clostridia","Clostridiales","Lachnospiraceae","Butyrivibrio crossotus",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"30","Firmicutes","Clostridia","Clostridiales","Lachnospiraceae","Roseburia",1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"31","Firmicutes","Clostridia","Clostridiales","Lachnospiraceae","Roseburia intestinalis",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"32","Firmicutes","Clostridia","Clostridiales","Peptostreptococcaceae","Acetoanaerobium",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"33","Firmicutes","Clostridia","Clostridiales","Ruminococcaceae","Faecalibacterium",1,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0
+"34","Firmicutes","Clostridia","Clostridiales","Ruminococcaceae","Faecalibacterium prausnitzii",0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+"35","Planctomycetes","Planctomycetia","Pirellulales","Pirellulaceae","Pirellulaceae",0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0
+"36","Planctomycetes","Planctomycetia","Pirellulales","Pirellulaceae","Rhodopirellula sp.",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+"37","Planctomycetes","Planctomycetia","Pirellulales","Pirellulaceae","Rhodopirellula sp. SM52",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"38","Proteobacteria","Alphaproteobacteria","Pelagibacterales","Pelagibacteraceae","Candidatus Pelagibacter",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0
+"39","Proteobacteria","Alphaproteobacteria","Pelagibacterales","Pelagibacteraceae","Candidatus Pelagibacter sp. AAA795-M22",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+"40","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Hyphomonadaceae","Hellea balneolensis",1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"41","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Amylibacter ulvae",0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0
+"42","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Nioella sp.",1,1,1,1,1,1,1,1,1,0,1,1,0,0,0,0,0
+"43","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Octadecabacter sp. LPB0143",0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1
+"44","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Pacificibacter",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"45","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Phaeobacter sp. 6362",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1
+"46","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Rhodobacteraceae",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+"47","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Roseivivax",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+"48","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Roseobacter sp. 3008",0,0,0,0,0,0,0,1,1,1,0,1,0,1,0,0,0
+"49","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Roseovarius",1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"50","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Ruegeria",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"51","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Thalassobacter",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"52","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Erythrobacteraceae","Altererythrobacter sp. IMCC5004",1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+"53","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Erythrobacteraceae","Erythrobacteraceae",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0
+"54","Proteobacteria","Alphaproteobacteria","-","-","Alphaproteobacteria",1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0
+"55","Proteobacteria","Betaproteobacteria","Burkholderiales","Alcaligenaceae","Alcaligenaceae",0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+"56","Proteobacteria","Betaproteobacteria","Burkholderiales","Burkholderiaceae","Burkholderia",0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+"57","Proteobacteria","Betaproteobacteria","Burkholderiales","Burkholderiaceae","Burkholderia cenocepacia",0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+"58","Proteobacteria","Betaproteobacteria","Burkholderiales","Burkholderiaceae","Burkholderiaceae",0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0
+"59","Proteobacteria","Betaproteobacteria","Burkholderiales","Comamonadaceae","Comamonadaceae",0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0
+"60","Proteobacteria","Betaproteobacteria","Neisseriales","-","Neisseriales",1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1
+"61","Proteobacteria","Betaproteobacteria","Rhodocyclales","Zoogloeaceae","Zoogloeaceae",0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+"62","Proteobacteria","Deltaproteobacteria","Desulfovibrionales","Desulfovibrionaceae","Desulfovibrionaceae",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"63","Proteobacteria","Deltaproteobacteria","-","-","Deltaproteobacteria",0,0,0,0,0,0,0,1,1,0,0,1,0,1,1,0,0
+"64","Proteobacteria","Epsilonproteobacteria","Campylobacterales","Campylobacteraceae","Arcobacter",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"65","Proteobacteria","Epsilonproteobacteria","Campylobacterales","Campylobacteraceae","Arcobacter lekithochrous",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"66","Proteobacteria","Epsilonproteobacteria","Campylobacterales","Campylobacteraceae","Arcobacter nitrofigilis",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"67","Proteobacteria","Epsilonproteobacteria","Campylobacterales","Campylobacteraceae","Arcobacter sp.",0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0
+"68","Proteobacteria","Epsilonproteobacteria","Campylobacterales","Campylobacteraceae","Campylobacteraceae",0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0
+"69","Proteobacteria","Epsilonproteobacteria","Campylobacterales","Helicobacteraceae","Sulfurimonas",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"70","Proteobacteria","Epsilonproteobacteria","Campylobacterales","Helicobacteraceae","Sulfurimonas sp. MA01",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"71","Proteobacteria","Gammaproteobacteria","Aeromonadales","Aeromonadaceae","Tolumonas auensis",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"72","Proteobacteria","Gammaproteobacteria","Alteromonadales","Alteromonadaceae","Alteromonadaceae",0,0,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0
+"73","Proteobacteria","Gammaproteobacteria","Alteromonadales","Alteromonadaceae","Alteromonas sp.",0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+"74","Proteobacteria","Gammaproteobacteria","Alteromonadales","Colwelliaceae","Colwelliaceae",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"75","Proteobacteria","Gammaproteobacteria","Alteromonadales","Shewanellaceae","Shewanella",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"76","Proteobacteria","Gammaproteobacteria","Alteromonadales","-","Alteromonadales",0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0
+"77","Proteobacteria","Gammaproteobacteria","Cellvibrionales","Cellvibrionaceae","Eionea flava",1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"78","Proteobacteria","Gammaproteobacteria","Cellvibrionales","Cellvibrionaceae","Teredinibacter sp.",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"79","Proteobacteria","Gammaproteobacteria","Cellvibrionales","Halieaceae","Halieaceae",0,1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1
+"80","Proteobacteria","Gammaproteobacteria","Cellvibrionales","Porticoccaceae","Porticoccus",0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1
+"81","Proteobacteria","Gammaproteobacteria","Cellvibrionales","Porticoccaceae","Porticoccus hydrocarbonoclasticus",1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1
+"82","Proteobacteria","Gammaproteobacteria","Chromatiales","Thioprofundaceae","Thioprofundum",0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1
+"83","Proteobacteria","Gammaproteobacteria","Chromatiales","-","Chromatiales",0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0
+"84","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Citrobacter freundii",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+"85","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Enterobacter",1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+"86","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Enterobacter cloacae",1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1
+"87","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Enterobacter sp. Nj-68",0,0,0,1,1,0,1,0,0,1,0,0,0,0,0,1,0
+"88","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Enterobacteriaceae",1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0
+"89","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Klebsiella sp. L16",0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+"90","Proteobacteria","Gammaproteobacteria","Enterobacterales","Hafniaceae","Hafnia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+"91","Proteobacteria","Gammaproteobacteria","Enterobacterales","Morganellaceae","Morganella",1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"92","Proteobacteria","Gammaproteobacteria","Enterobacterales","Morganellaceae","Providencia",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+"93","Proteobacteria","Gammaproteobacteria","Enterobacterales","Yersiniaceae","Serratia",1,1,0,1,1,1,1,0,0,1,1,1,0,1,1,1,1
+"94","Proteobacteria","Gammaproteobacteria","Enterobacterales","Yersiniaceae","Serratia marcescens",0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+"95","Proteobacteria","Gammaproteobacteria","Enterobacterales","Yersiniaceae","Serratia sp. SP-1.4",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"96","Proteobacteria","Gammaproteobacteria","Enterobacterales","Yersiniaceae","Yersiniaceae",0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,1,0
+"97","Proteobacteria","Gammaproteobacteria","Enterobacterales","-","Enterobacterales",1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1
+"98","Proteobacteria","Gammaproteobacteria","Oceanospirillales","Hahellaceae","Hahella chejuensis",1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1
+"99","Proteobacteria","Gammaproteobacteria","Oceanospirillales","Litoricolaceae","Litoricola",0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0
+"100","Proteobacteria","Gammaproteobacteria","Oceanospirillales","Oceanospirillaceae","Marinobacterium",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"101","Proteobacteria","Gammaproteobacteria","Oceanospirillales","Oceanospirillaceae","Neptuniibacter",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+"102","Proteobacteria","Gammaproteobacteria","Oceanospirillales","Oceanospirillaceae","Oceanospirillum sp. ME101",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"103","Proteobacteria","Gammaproteobacteria","Oceanospirillales","Oceanospirillaceae","Oleibacter sp. AU5AA5",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"104","Proteobacteria","Gammaproteobacteria","Oceanospirillales","Saccharospirillaceae","Reinekea",0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+"105","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Acinetobacter radioresistens",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1
+"106","Proteobacteria","Gammaproteobacteria","Thiotrichales","Francisellaceae","Francisella uliginis",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"107","Proteobacteria","Gammaproteobacteria","Thiotrichales","Piscirickettsiaceae","Cycloclasticus",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+"108","Proteobacteria","Gammaproteobacteria","Thiotrichales","Piscirickettsiaceae","Piscirickettsiaceae",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"109","Proteobacteria","Gammaproteobacteria","Thiotrichales","Piscirickettsiaceae","Thiomicrospira sp.",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"110","Proteobacteria","Gammaproteobacteria","Vibrionales","Vibrionaceae","Vibrio",1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0
+"111","Proteobacteria","Gammaproteobacteria","Vibrionales","Vibrionaceae","Vibrio sp. PaD2.27",0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+"112","Proteobacteria","Gammaproteobacteria","Vibrionales","Vibrionaceae","Vibrionaceae",0,0,0,0,0,1,1,0,1,0,0,1,1,1,0,0,0
+"113","Proteobacteria","Gammaproteobacteria","-","-","Gammaproteobacteria",0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0
+"114","Proteobacteria","-","-","-","Proteobacteria",0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0
+"115","Thaumarchaeota","-","Nitrosopumilales","Nitrosopumilaceae","Nitrosopumilaceae",0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1
+"116","Verrucomicrobia","Opitutae","Puniceicoccales","Puniceicoccaceae","Coraliomargarita sp.",0,0,0,0,0,0,0,1,1,1,0,0,0,1,0,0,0
+"117","Verrucomicrobia","Verrucomicrobiae","Verrucomicrobiales","Verrucomicrobiaceae","Fucophilus fucoidanolyticus",0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0
+"118","Total avant filtres","","","","",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+"119","Total après filtres","","","","",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
