@@ -208,3 +208,21 @@ final
 
 ### Save the map
 image_write(final, "01_Analyses_teleo/03_Outputs/Map_Richesse.png", density=300)
+
+#############################################################################################
+## Barplot per port per campaign
+#############################################################################################
+### put data together
+df <- ind_ports %>%
+  rownames_to_column(var="RowNames") %>%
+  separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
+  mutate(Campaign = factor(Campaign, levels = c("October21", "June22")))
+
+for (i in c(3,4,15,6,7,9,10,11,13)) {
+  
+}
+
+#############################################################################################
+## Boxplot per campaign
+#############################################################################################
+
