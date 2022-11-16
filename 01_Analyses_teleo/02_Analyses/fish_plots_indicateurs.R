@@ -216,13 +216,96 @@ image_write(final, "01_Analyses_teleo/03_Outputs/Map_Richesse.png", density=300)
 df <- ind_ports %>%
   rownames_to_column(var="RowNames") %>%
   separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
-  mutate(Campaign = factor(Campaign, levels = c("October21", "June22")))
+  mutate(Campaign = factor(Campaign, levels = c("October21", "June22"))) %>%
+  mutate(Site = factor(Site, levels = c("Cannes", "Porquerolles", "La Ciotat",
+                                        "Saintes Maries de la Mer", 
+                                        "Marseillan", "Agde", "Port Vendres")))
+
+
+# list of port names
+ports <- levels(df$Site)
+port_names <- ports
+port_names[4] <- "St.Maries Mer"
+
+## vector of indicator names
+names <- c("Species richness", "Functional Diversity", "Phylogenetic Diversity",
+           "Cryptobenthic richness", "DeBRa", "Non-Indigenous species", "Threatened species",
+           "Elasmobranch species", "Commercial species")
+
+bp <- list()
+e=1
 
 for (i in c(3,4,15,6,7,9,10,11,13)) {
+  to_plot <- df[,c(i,1,2)]
+  colnames(to_plot) <- c("Y", "Site", "Sampling")
   
+  
+  bp[[e]]<-ggplot(data=to_plot, aes(x=Site, y=Y, fill=Sampling)) +
+    geom_bar( position = 'dodge',stat="identity") +
+    scale_fill_manual(values=c("lightsalmon", "lightblue2"),
+                        name="Sampling",
+                        labels = c("Oct. 21", "Jun. 22")) +
+    labs(y=colnames(df)[i],
+         title=names[e]) +
+    scale_x_discrete(labels=port_names) +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          legend.position="bottom",
+          axis.text.y=element_text(colour="black",size=8),
+          axis.text.x=element_text(colour="black",size=9, angle=30, vjust=0.6),
+          axis.title.y=element_text(colour="black",size=9),
+          axis.title.x=element_blank(),
+          title = element_text(colour="black", size=9, face="bold"),
+          legend.text = element_text(colour="black", size=9),
+          legend.title = element_text(colour="black", size=9,  face="bold")) 
+  
+  e=e+1
+
 }
+
+## Combine plots and save
+library(gridExtra)
+library(lemon)
+Fig1 <- do.call("grid_arrange_shared_legend", c(bp, ncol=3, nrow=3, position="bottom"))
+# save the figure
+ggsave("01_Analyses_teleo/03_Outputs/Barplot_indicators_per_ports.jpeg",
+       plot=Fig1,
+       width = 31,
+       height = 23,
+       units = "cm")
 
 #############################################################################################
 ## Boxplot per campaign
 #############################################################################################
+p <-list()
+## Draw the plot
+l=1
+for (i in c(3,4,15,6,7,9,10,11,13)) { # Choix des indicateurs à présenter
+  # Gather data
+  dat_i <- df[,c(i,2)]
+  colnames(dat_i)[1] <- "Y"
+  
+  p[[l]]<-ggplot(data=dat_i, aes(x=Campaign, y=Y, fill=Campaign)) +
+    geom_boxplot(notch=F) +
+    scale_fill_manual(values=c("lightsalmon", "lightblue2")) +
+    labs(y=colnames(df)[i],
+         title=names[l]) +
+    scale_x_discrete(labels=c("Oct. 21","Jun. 22")) +
+    theme_bw() +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=16)) +
+    theme(axis.text.x=element_text(colour="black",size=18)) +
+    theme(axis.title.x=element_blank()) +
+    theme(axis.title.y=element_text(colour="black",size=18))+ 
+    #stat_compare_means(aes(label = paste0("p = ", ..p.format..)), size=4)
+    stat_compare_means(aes(label = paste0("p = ", ..p.signif..)), size=6)
+  
+  l=l+1  
+}
 
+## Save plot
+png("01_Analyses_teleo/03_Outputs/Boxplots_indicators_campaigns.png", 
+    width = 1200, height = 1200) 
+do.call(grid.arrange,c(p, list(ncol=3)))
+dev.off()
