@@ -46,11 +46,11 @@ nestedness <- beta.dist[[2]]
 ## perform PERMANOVA : tester la significativite de la variable "methode d'echantillonnage"
    # sur la diversite beta, le turnover et la nestedness
 habitat.div<-adonis2(sp.dist~habitat, data=sp_mat, permutations = 999, method="jaccard")
-habitat.div # signif
+habitat.div 
 habitat.turn<-adonis2(turnover~habitat, data=sp_mat, permutations = 999, method="jaccard")
-habitat.turn # signif
+habitat.turn 
 habitat.nest<-adonis2(nestedness~habitat, data=sp_mat, permutations = 999, method="jaccard")
-habitat.nest # not signif
+habitat.nest # signif
 
 ## Multivariate dispersion : tester l'homogénéité des variances entre les méthodes
 dispersion_m<-betadisper(sp.dist, group=sp_mat$habitat)

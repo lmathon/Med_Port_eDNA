@@ -17,6 +17,10 @@ write.csv(adne_port, "02_Analyses_metazoa/00_data/matrice_metazoa_port.csv", row
 
 
 
+##############################################################################################################
+## Not available for now
+##############################################################################################################
+
 # Load Metazoaires outside 
 adne <- read.csv("02_Analyses_metazoa/00_data/biodiv_milieu_naturel.csv", header=T, row.names=1) %>%
   t(.) %>%

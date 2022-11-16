@@ -6,21 +6,21 @@ library(ggplot2)
 library(vegan)
 library(betapart)
 
-#COMPARAISON PORT ET HORS PORT TOUT CONFONDU SANS LES BIOHUTS
+###COMPARAISON PORT PROPRE VS NON CERTIFIE 
 
 # Metadata
-meta_tot <- read.csv("00_Metadata/metadata_tot.csv", header=T)
+meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
 
-meta_tot <- meta_tot %>%
+# Enlever les biohuts
+meta <- meta %>%
   filter(habitat != "BIOHUT_port")
 
 
 ## Load the eDNA data (matrix species per sample)
-adne <- read.csv("02_Analyses_metazoa/00_data/matrice_metazoa_totale.csv", header=T, row.names=1)
+adne <- read.csv("02_Analyses_metazoa/00_data/metazoa_presence.csv", header=T, row.names=1)
 
-
-# Enlever les pts biohuts
-keep <- names(adne)[(names(adne) %in% meta_tot$code_spygen)]
+# Enlever les samples biohuts
+keep <- names(adne)[(names(adne) %in% meta$code_spygen)]
 adne <- adne[, keep]
 
 adne <- adne[rowSums(adne)!=0,]
@@ -32,7 +32,7 @@ sp_mat <- adne %>%
   t(.) %>%
   as.data.frame(.) %>%
   tibble::rownames_to_column(var="Samples") %>%
-  inner_join(meta_tot, by=c("Samples" = "code_spygen"))
+  inner_join(meta, by=c("Samples" = "code_spygen"))
 
 ## Create dissimilarity matrix (Jaccard distance for presence/absence)
 sp.dist<-vegdist(t(adne), method='jaccard')
@@ -42,21 +42,21 @@ beta.dist <- beta.pair(t(adne), index.family = "jac")
 turnover <- beta.dist[[1]]
 nestedness <- beta.dist[[2]]
 
-## Perform PERMANOVA : tester la significativite de la variable "habitat" (= port ou hors port)
-# sur la diversite beta, le turnover et la nestedness
-habitat.div<-adonis2(sp.dist~port, data=sp_mat, permutations = 999, method="jaccard")
+## Perform PERMANOVA : tester la significativité de la variable "proprete
+# sur la diversité béta, le turnover et la nestedness
+habitat.div<-adonis2(sp.dist~Campaign, data=sp_mat, permutations = 999, method="jaccard")
 habitat.div 
-habitat.turn<-adonis2(turnover~port, data=sp_mat, permutations = 999, method="jaccard")
+habitat.turn<-adonis2(turnover~Campaign, data=sp_mat, permutations = 999, method="jaccard")
 habitat.turn 
-habitat.nest<-adonis2(nestedness~port, data=sp_mat, permutations = 999, method="jaccard")
+habitat.nest<-adonis2(nestedness~Campaign, data=sp_mat, permutations = 999, method="jaccard")
 habitat.nest 
 
-## Multivariate dispersion : tester l'homogénéité des variances entre les habitats
-dispersion_m<-betadisper(sp.dist, group=sp_mat$port)
+## Multivariate dispersion : tester l'homogénéité des variances entre les méthodes
+dispersion_m<-betadisper(sp.dist, group=sp_mat$Campaign)
 permutest(dispersion_m)
-dispersion_turn<-betadisper(turnover, group=sp_mat$port)
+dispersion_turn<-betadisper(turnover, group=sp_mat$Campaign)
 permutest(dispersion_turn)
-dispersion_nest<-betadisper(nestedness, group=sp_mat$port)
+dispersion_nest<-betadisper(nestedness, group=sp_mat$Campaign)
 permutest(dispersion_nest)
 
 
@@ -73,8 +73,8 @@ seg.data<-cbind(vectors[,1:3],centroids[rep(1:nrow(centroids),as.data.frame(tabl
 names(seg.data)<-c("group","v.PCoA1","v.PCoA2","PCoA1","PCoA2")
 
 # create the convex hulls of the outermost points
-grp1.hull<-seg.data[seg.data$group=="true",1:3][chull(seg.data[seg.data$group=="true",2:3]),]
-grp2.hull<-seg.data[seg.data$group=="false",1:3][chull(seg.data[seg.data$group=="false",2:3]),]
+grp1.hull<-seg.data[seg.data$group=="October21",1:3][chull(seg.data[seg.data$group=="October21",2:3]),]
+grp2.hull<-seg.data[seg.data$group=="June22",1:3][chull(seg.data[seg.data$group=="June22",2:3]),]
 all.hull<-rbind(grp1.hull,grp2.hull)
 
 ## Draw plot
@@ -98,15 +98,12 @@ panel.a<-ggplot() +
   geom_point(data=centroids[,1:3], aes(x=PCoA1,y=PCoA2,colour=grps, shape=grps),size=4) + 
   geom_point(data=seg.data, aes(x=v.PCoA1,y=v.PCoA2, colour=group, shape=group),size=2) +
   theme_mine + 
-  scale_colour_manual(values=c("#FCBBA1FF","#7FCDBBFF"), labels = c("Hors port","Port")) +
-  scale_shape_manual(values=c(19,17), labels = c("Hors port","Port")) +
+  scale_colour_manual(values=c("lightblue","coral"), labels = c("June22", "October21")) +
+  scale_shape_manual(values=c(19,17), labels = c("June22", "October21")) +
   labs(title="",x="PCoA 1",y="PCoA 2",
-       colour = "Zone d'�chantillonnage", shape = "Zone d'�chantillonnage")
+       colour = "Campagne", shape = "Campagne")
+
 panel.a
 
-
-ggsave("02_Analyses_metazoa/03_Outputs/PCoA_horsport_port.png", width = 11, height = 8)
-
-
-
+ggsave("02_Analyses_metazoa/03_Outputs/PCoA_campaign.png", width = 11, height = 8)
 
