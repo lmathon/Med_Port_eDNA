@@ -41,6 +41,7 @@ data_euk2 <- read.csv("03_Analyses_eukaryotes/00_data/Euka_SC21250_CEFE_campagne
 
 # change column names 
 colnames(data_euk2) <- as.character(data_euk2[1,])
+colnames(data_euk2) <- gsub(" ", "", colnames(data_euk2))
 
 # remove first row
 data_euk2 <- data_euk2[-1,]
@@ -67,6 +68,8 @@ data_euk2 <- data_euk2[rowSums(data_euk2[,-1])!=0,]
 # Assemble two data frames
 
 data_euk <- full_join(data_euk1, data_euk2)
+data_euk[is.na(data_euk)] <- 0
+
 
 #save data
 write.csv(data_euk, file="03_Analyses_eukaryotes/00_data/eukaryote_reads.csv", row.names = F)
