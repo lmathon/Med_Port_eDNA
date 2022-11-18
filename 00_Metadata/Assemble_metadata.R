@@ -49,7 +49,7 @@ write.csv(meta_port, "00_Metadata/metadata_port.csv", row.names = F)
 meta2 <- read.csv("00_Metadata/metadata_milieu_naturel.csv", header=T)
 
 
-meta2 <- meta2[,c('spygen_code','Date', 'Site', 'Site', 'projet', 'protection')]
+meta2 <- meta2[,c('SPYGEN_code','Date', 'Site', 'Site', 'projet', 'protection')]
 colnames(meta2) <- c('code_spygen','date','station','site','project','habitat')
 meta2$port <-"false"
 
@@ -70,7 +70,11 @@ meta2 <- meta2 %>%
     station=="cap_lardier" ~ "cap-lardier_outside",
     station=="cap_negre" ~ "cap-negre_outside",
     station=="Banyuls" ~ "Banyuls_outside",
-    station=="banyuls" ~ "Banyuls_outside"
+    station=="banyuls" ~ "Banyuls_outside",
+    station=="embiez" ~ "Embiez_outside",
+    station=="carry" ~ "carry-le-Rouet_outside",
+    station=="calanques" ~ "Calanques_outside",
+    station=="Calvi" ~ "Calvi_outside"
       ))
 
 meta_port <- meta_port %>%
