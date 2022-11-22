@@ -56,12 +56,15 @@ data_euk2 <- data_euk2 %>%
 data_euk2 <- data_euk2 %>%
   select(class_order, c(5:18))
 
-# replace empty cells with 0
-data_euk2[is.na(data_euk2)] <- 0
 
-# Remove rows with 0 obs
+# replace empty cells with 0
+for (i in 2:ncol(data_euk2)) {
+  data_euk2[,i] <- gsub(" ", "", data_euk2[,i])
+}
+
 data_euk2[,2:ncol(data_euk2)] <- as.numeric(unlist(data_euk2[,2:ncol(data_euk2)]))
 data_euk2[is.na(data_euk2)] <- 0
+# Remove rows with 0 obs
 data_euk2 <- data_euk2[rowSums(data_euk2[,-1])!=0,]
 
 ###########################################################################################################

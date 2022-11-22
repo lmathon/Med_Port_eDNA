@@ -2,7 +2,7 @@ library(tidyverse)
 
 
 # load csv spygen -> really messy !
-data_metazoa <- read.csv("02_Analyses_metazoa/00_data/Metazoaires_SC21250_résultats_campagnes 1 et 2.csv", sep=";")
+data_metazoa <- read.csv("02_Analyses_metazoa/00_data/Metazoaires_SC21250_résultats_campagnes 1 et 2.csv", sep=";", na.strings = "")
 
 # change column names 
 colnames(data_metazoa) <- c(as.character(data_metazoa[4,1:6]), as.character(data_metazoa[3,7:ncol(data_metazoa)]))
@@ -13,9 +13,13 @@ data_metazoa <- data_metazoa[-c(1:4),]
 
 # keep only scientific_name and samples
 data_metazoa <- data_metazoa[, -c(1:4,6)]
-data_metazoa[,2:ncol(data_metazoa)] <- as.numeric(unlist(data_metazoa[,2:ncol(data_metazoa)]))
 
 # replace empty cells with 0
+for (i in 2:ncol(data_metazoa)) {
+  data_metazoa[,i] <- gsub(" ", "", data_metazoa[,i])
+}
+data_metazoa[,2:ncol(data_metazoa)] <- as.numeric(unlist(data_metazoa[,2:ncol(data_metazoa)]))
+
 data_metazoa[is.na(data_metazoa)] <- 0
 
 # Remove rows with 0 obs

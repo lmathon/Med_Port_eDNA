@@ -2,7 +2,7 @@ library(tidyverse)
 
 
 # load csv spygen -> really messy !
-data_teleo <- read.csv("01_Analyses_teleo/00_data/Teleo_SC21250_rÃ©sultats_campagnes 1 et 2.csv", sep=";")
+data_teleo <- read.csv("01_Analyses_teleo/00_data/Teleo_SC21250_résultats_campagnes 1 et 2.csv", sep=";")
 
 # Cas particulier : code spygen manquant dans la colonne "nb seq" du premier echantillon
 data_teleo[3,7] <- data_teleo[3,6]
@@ -35,10 +35,14 @@ data_teleo <- data_teleo[-c(1:4),]
 
 # keep only scientific_name and samples
 data_teleo <- data_teleo[, -c(1:3,5)]
-data_teleo[,2:ncol(data_teleo)] <- as.numeric(unlist(data_teleo[,2:ncol(data_teleo)]))
 
 
 # replace empty cells with 0
+for (i in 2:ncol(data_teleo)) {
+  data_teleo[,i] <- gsub(" ", "", data_teleo[,i])
+}
+data_teleo[,2:ncol(data_teleo)] <- as.numeric(unlist(data_teleo[,2:ncol(data_teleo)]))
+
 data_teleo[is.na(data_teleo)] <- 0
 
 # Remove rows with 0 obs
@@ -47,16 +51,28 @@ data_teleo <- data_teleo[rowSums(data_teleo[,-1])!=0,]
 # clean species_names
 data_teleo$scientific_name <- gsub(" ", "_", data_teleo$scientific_name)
 
-# Resolve duplicated species names (Engraulis_encrasicolus)
+# Resolve duplicated species names (Engraulis_encrasicolus, Dicentrarchus_labrax)
 dup <- data_teleo %>%
   filter(scientific_name=="Engraulis_encrasicolus")
 new <- data.frame(t(c("Engraulis_encrasicolus", colSums(dup[,-1]))))
 colnames(new)[1] <- "scientific_name"
 
-
 data_teleo <- data_teleo %>%
   filter(scientific_name!="Engraulis_encrasicolus") %>%
   rbind(new)
+
+
+dup2 <- data_teleo %>%
+  filter(scientific_name=="Dicentrarchus_labrax")
+dup2[,2:ncol(dup2)] <- as.numeric(unlist(dup2[,2:ncol(dup2)]))
+new2 <- data.frame(t(c("Dicentrarchus_labrax", colSums(dup2[,-1]))))
+colnames(new2)[1] <- "scientific_name"
+
+
+data_teleo <- data_teleo %>%
+  filter(scientific_name!="Dicentrarchus_labrax") %>%
+  rbind(new2)
+
 
 data_teleo[,2:ncol(data_teleo)] <- as.numeric(unlist(data_teleo[,2:ncol(data_teleo)]))
 
