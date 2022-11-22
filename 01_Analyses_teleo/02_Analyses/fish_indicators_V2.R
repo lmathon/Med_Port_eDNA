@@ -20,10 +20,10 @@ data$scientific_name <- gsub("_", " ", data$scientific_name)
 
 meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
 # Add a column "campaign" : October21 or June22
-meta <- meta %>%
-  mutate(Campaign = ifelse(grepl("2022", meta$date,fixed = TRUE), 'June22', 'October21'))
+#meta <- meta %>%
+#  mutate(Campaign = ifelse(grepl("2022", meta$date,fixed = TRUE), 'June22', 'October21'))
 # save
-write.csv(meta, "00_Metadata/metadata_port.csv", row.names=F)
+#write.csv(meta, "00_Metadata/metadata_port.csv", row.names=F)
 
 traits <- read.csv("01_Analyses_teleo/00_data/Functional_data_corrected_20220124.csv", header=T)
 
@@ -263,6 +263,8 @@ indicators  %>%
 #######################################################################################################
 ## Calculate indicators per site (pooling the species list of the two replicates)
 #######################################################################################################
+rownames(data) <- gsub("_", " ", rownames(data))
+
 data2 <- data %>%
   t(.) %>%
   as.data.frame(.) %>%
