@@ -148,7 +148,7 @@ for (i in 1: 7) {
   bp[[i]]<-ggplot(data=to_plot, aes(x=Sampling, y=value, fill=Sampling)) +
     geom_bar( position = 'dodge',stat="identity") +
     scale_fill_manual(values=c("lightsalmon", "lightblue2")) +
-    ylim(0,56) +
+    ylim(0,68) +
     theme(
       panel.background = element_rect(fill='transparent'), #transparent panel bg
       plot.background = element_rect(fill='transparent', color=NA), #transparent plot bg
