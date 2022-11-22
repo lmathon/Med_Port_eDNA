@@ -17,8 +17,8 @@ data <- read.csv("02_Analyses_metazoa/00_data/metazoa_presence.csv")
 data$scientific_name <- gsub("_", " ", data$scientific_name)
 
 # make species names row names
-data <- data %>%
-  column_to_rownames(loc=1)
+rownames(data) <- data$scientific_name 
+data <- data[,-1]
 
 
 meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
@@ -36,7 +36,7 @@ data2 <- data %>%
   mutate_if(is.numeric, ~1 * (. > 0)) %>%
   # create a new var combining site and campaign column
   mutate(Names = paste(site,Campaign, sep="_")) %>%
-  column_to_rownames(loc=ncol(.)) %>%
+  column_to_rownames(var="Names") %>%
   select(3:ncol(.)) %>%
   t() %>%
   as.data.frame()
@@ -102,7 +102,7 @@ for (i in 1: 7) {
   bp[[i]]<-ggplot(data=to_plot, aes(x=Sampling, y=value, fill=Sampling)) +
     geom_bar( position = 'dodge',stat="identity") +
     scale_fill_manual(values=c("lightsalmon", "lightblue2")) +
-    ylim(0,100) +
+    ylim(0,110) +
     theme(
       panel.background = element_rect(fill='transparent'), #transparent panel bg
       plot.background = element_rect(fill='transparent', color=NA), #transparent plot bg

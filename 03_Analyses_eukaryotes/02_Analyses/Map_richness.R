@@ -18,7 +18,7 @@ data <- read.csv("03_Analyses_eukaryotes/00_data/eukaryote_presence.csv")
 
 # make species names row names
 data <- data %>%
-  column_to_rownames(loc=1)
+  column_to_rownames(var="class_order")
 
 
 meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
@@ -36,7 +36,7 @@ data2 <- data %>%
   mutate_if(is.numeric, ~1 * (. > 0)) %>%
   # create a new var combining site and campaign column
   mutate(Names = paste(site,Campaign, sep="_")) %>%
-  column_to_rownames(loc=ncol(.)) %>%
+  column_to_rownames(var="Names") %>%
   select(3:ncol(.)) %>%
   t() %>%
   as.data.frame()
