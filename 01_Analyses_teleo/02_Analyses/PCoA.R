@@ -87,7 +87,7 @@ teleo_plot <- ggplot(teleo2plot, aes(x=A1, y=A2))+
   ylab("PCoA2")+
   xlab("PCoA1")+
   xlim(-0.6,0.8)+
-  ylim(-0.6,0.4)+
+  ylim(-0.6,0.5)+
   theme(legend.title = element_blank(),
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(), 

@@ -70,11 +70,7 @@ grp3.hull<-seg.data[seg.data$group=="Port",1:3][chull(seg.data[seg.data$group=="
 grp4.hull<-seg.data[seg.data$group=="BIOHUT_port",1:3][chull(seg.data[seg.data$group=="BIOHUT_port",2:3]),]
 all.hull<-rbind(grp1.hull,grp2.hull,grp3.hull,grp4.hull)
 
-#ajout colonne couleur 
-color <- c("#F18F01","black","#F5A6E6","#0087DB","#FCF300","black","black","#A05CFF","#FF575C","#94F000")
-centroids <- cbind(centroids,color)
-centroids <- centroids %>% dplyr::select("color", 
-                                     everything())
+                                   
 ## Draw plot
 # Create a theme
 theme_mine <- theme(
