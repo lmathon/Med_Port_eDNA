@@ -29,7 +29,7 @@ ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_port.
 
 # Charger datas milieu naturel (= réserve et hors réserve)
 meta_nat <- read.csv("00_Metadata/metadata_milieu_naturel.csv", header=T)
-ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T, row.names=1) %>%
+ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T) %>%
   inner_join(meta_nat[,c("SPYGEN_code", "protection")], by=c("Sample"="SPYGEN_code")) %>%
   rename(Location = protection) %>%
   column_to_rownames(var="Sample") %>%

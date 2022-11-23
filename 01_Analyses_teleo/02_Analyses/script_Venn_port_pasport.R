@@ -27,28 +27,19 @@ port <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", row.names = 1)
 port <- port[rowSums(port)!=0,]
 port <- port[,colSums(port)!=0]
 
-port <- as.data.frame(rownames(port))
-names(port) <- "species"
-  
-# keep only species genus_species
-port <- port %>%
-  filter(grepl('_', species)) %>%
-  filter(!grepl('_sp.', species)) 
-
-port <- as.vector(port$species)
+port <- rownames(port)
+port <- gsub("_", " ", port)
 
 
 # load outside data and extract species names
-outside <- read.csv("01_Analyses_teleo/00_data/biodiv_milieu_naturel.csv", row.names = 1) %>%
-  t(.) %>%
-  as.data.frame(.)
+outside <- read.csv("01_Analyses_teleo/00_data/biodiv_milieu_naturel.csv", row.names = 1) 
 
 outside <- outside[rowSums(outside)!=0,]
 outside <- outside[,colSums(outside)!=0]
 
 outside <- rownames(outside)
+outside <- gsub("_", " ", outside)
   
-
 
 # plot venn diagram simple
 species_venn <- list(
@@ -87,12 +78,12 @@ venn.diagram(
   output=F)
 
 # Plot species names
-png("01_Analyses_teleo/03_Outputs/Species_Venn_Port_HorsPort3.png", width = 1200, height = 900)
+png("01_Analyses_teleo/03_Outputs/Species_Venn_Port_HorsPort3.png", width = 1500, height = 1100)
 
 # Setting a multi-panel graph 4x3
 layout(
-  matrix(1:4, ncol=4, byrow=TRUE),  # plot 12 graphs in 3 columns
-  widths=c(1,1,1,1), # widths of each column
+  matrix(1:5, ncol=5, byrow=TRUE),  # plot 12 graphs in 3 columns
+  widths=c(1,1,1,1,1), # widths of each column
   heights=c(1)) # height of each row
 
 # Print the names of the species that are only outside
@@ -105,7 +96,20 @@ plot(x = 0:1,                   # Create empty plot
      yaxt = "n")
 text(x = 0.55,                   # Add text to empty plot
      y = 0.5,
-     paste(setdiff(outside, port), collapse="\n"), 
+     paste(setdiff(outside, port)[1:50], collapse="\n"), 
+     col= "black",
+     cex = 2,
+     font=3) # italic
+plot(x = 0:1,                   # Create empty plot
+     y = 0:1,
+     ann = F,
+     bty = "n",
+     type = "n",
+     xaxt = "n",
+     yaxt = "n")
+text(x = 0.55,                   # Add text to empty plot
+     y = 0.5,
+     paste(setdiff(outside, port)[51:100], collapse="\n"), 
      col= "black",
      cex = 2,
      font=3) # italic
@@ -126,3 +130,4 @@ text(x = 0.55,                   # Add text to empty plot
      font=3) # italic
 
 dev.off()
+
