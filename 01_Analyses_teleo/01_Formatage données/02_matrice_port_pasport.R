@@ -14,9 +14,8 @@ colnames(adne_port)[1] <- "Species"
  
 
 adne <- read.csv("01_Analyses_teleo/00_data/biodiv_milieu_naturel.csv", header=T, row.names=1) %>%
-  t(.) %>%
-  as.data.frame(.) %>%
   tibble::rownames_to_column(var="Species") #--> prends les noms de ligne pour en faire une colonne 
+adne$Species <- gsub(" ", "_", adne$Species)
 
 #jointure by Species 
 adne_tot <- adne %>%

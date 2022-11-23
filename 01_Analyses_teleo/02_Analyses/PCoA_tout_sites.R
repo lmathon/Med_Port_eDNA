@@ -5,6 +5,7 @@ library(purrr)
 library(ggplot2)
 library(vegan)
 library(betapart)
+library(ade4)
 
 #COMPARAISON PORT ET HORS PORT TOUT CONFONDU SANS LES BH
 
@@ -39,7 +40,7 @@ sp_mat <- adne %>%
   t(.) %>%
   as.data.frame(.) %>%
   tibble::rownames_to_column(var="Samples") %>%
-  inner_join(meta_tot, by=c("Samples" = "code_spygen"))
+  left_join(meta_tot, by=c("Samples" = "code_spygen"))
 
 ## create dissimilarity matrix (Jaccard distance for presence/absence)
 sp.dist<-vegdist(t(adne), method='jaccard')
@@ -71,13 +72,13 @@ permutest(dispersion_nest)
 
 
 ##############################################################################################################################
-n1 <- nrow(data)                                        # Amount of default colors
-hex_codes1 <- hue_pal()(12)                             # Identify hex codes
+library(scales)                                     # Amount of default colors
+hex_codes1 <- hue_pal()(14)                             # Identify hex codes
 hex_codes1
 
 colors <- c("#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F",
             "#FF7F00", "#CAB2D6", "#6A3D9A", "#FFFF99", "#B15928", "grey80", "black",
-            "#3F3C05", "#1D6F61", "#FE065E")
+            "#3F3C05", "#1D6F61", "#FE065E", "#FB61D7", "#FF66A8")
 # plot
 
 teleo_plot <- ggplot(teleo2plot, aes(x=A1, y=A2))+
@@ -88,7 +89,7 @@ teleo_plot <- ggplot(teleo2plot, aes(x=A1, y=A2))+
   ylab("PCoA2")+
   xlab("PCoA1")+
   xlim(-0.6,0.8)+
-  ylim(-0.6,0.4)+
+  ylim(-0.7,0.5)+
   theme(legend.title = element_blank(),
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(), 

@@ -32,7 +32,7 @@ ind_ports =read.csv("01_Analyses_teleo/00_data/Indicators_ports_2022_per_filter.
 
 # milieu naturel
 meta_nat <- read.csv("00_Metadata/metadata_milieu_naturel.csv", header=T)
-ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T, row.names = 2) %>%
+ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T, row.names = 1) %>%
   select(colnames(ind_ports))
 
 # Combine the two datasets
@@ -79,8 +79,8 @@ threatened <- traits %>%
   pull(Species)
 
 #### faire la dbRDA
-data_dbrda <- data_all[,c(1:160)]
-meta_dbrda <- data_all[,c(161:ncol(data_all))]
+data_dbrda <- data_all[,c(1:236)]
+meta_dbrda <- data_all[,c(237:ncol(data_all))]
 
 RDA_all<- capscale(data_dbrda ~ port, meta_dbrda, distance ="jaccard")
 

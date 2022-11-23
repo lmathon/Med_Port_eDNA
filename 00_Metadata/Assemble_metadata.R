@@ -74,7 +74,8 @@ meta2 <- meta2 %>%
     station=="embiez" ~ "Embiez_outside",
     station=="carry" ~ "carry-le-Rouet_outside",
     station=="calanques" ~ "Calanques_outside",
-    station=="Calvi" ~ "Calvi_outside"
+    station=="Calvi" ~ "Calvi_outside",
+    station=="calvi" ~ "Calvi_outside"
       ))
 
 meta_port <- meta_port %>%
