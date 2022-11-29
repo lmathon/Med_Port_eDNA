@@ -131,3 +131,90 @@ text(x = 0.55,                   # Add text to empty plot
 
 dev.off()
 
+#####################################################################################
+## Venn diagram per category (reserve/lockdown)
+#####################################################################################
+# load port data and extract species names
+port <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", row.names = 1)
+
+port <- port[rowSums(port)!=0,]
+port <- port[,colSums(port)!=0]
+
+port <- rownames(port)
+port <- gsub("_", " ", port)
+
+
+# load outside data and extract species names
+outside <- read.csv("01_Analyses_teleo/00_data/biodiv_milieu_naturel.csv", row.names = 1)
+meta_nat <- read.csv2("00_Metadata/metadata_milieu_naturel.csv", header=T)
+samples_reserve_N <- meta_nat %>% 
+  filter(Confinement == "N" & protection == "reserve") %>%
+  pull(SPYGEN_code)
+samples_reserve_Y <- meta_nat %>% 
+  filter(Confinement == "Y" & protection == "reserve") %>%
+  pull(SPYGEN_code)
+samples_out_N <- meta_nat %>% 
+  filter(Confinement == "N" & protection == "outside") %>%
+  pull(SPYGEN_code)
+samples_out_Y <- meta_nat %>% 
+  filter(Confinement == "Y" & protection == "outside") %>%
+  pull(SPYGEN_code)
+
+# Lockdown reserve
+reserve_Y <- outside[,samples_reserve_Y]
+reserve_Y <- reserve_Y[rowSums(reserve_Y)!=0,]
+reserve_Y <- reserve_Y[,colSums(reserve_Y)!=0]
+
+reserve_Y <- rownames(reserve_Y)
+reserve_Y <- gsub("_", " ", reserve_Y)
+
+# Not Lockdown reserve
+reserve_N <- outside[,samples_reserve_N]
+reserve_N <- reserve_N[rowSums(reserve_N)!=0,]
+reserve_N <- reserve_N[,colSums(reserve_N)!=0]
+
+reserve_N <- rownames(reserve_N)
+reserve_N <- gsub("_", " ", reserve_N)
+
+# Lockdown fished
+fished_Y <- outside[,samples_out_Y]
+fished_Y <- fished_Y[rowSums(fished_Y)!=0,]
+fished_Y <- fished_Y[,colSums(fished_Y)!=0]
+
+fished_Y <- rownames(fished_Y)
+fished_Y <- gsub("_", " ", fished_Y)
+
+# Not Lockdown fished
+fished_N <- outside[,samples_out_N]
+fished_N <- fished_N[rowSums(fished_N)!=0,]
+fished_N <- fished_N[,colSums(fished_N)!=0]
+
+fished_N <- rownames(fished_N)
+fished_N <- gsub("_", " ", fished_N)
+
+
+# plot venn diagram simple
+species_venn <- list(
+  Ports = port,
+  Reserve_Unlock = reserve_N,
+  Reserve_Lockdown = reserve_Y,
+  Fished_Lockdown = fished_Y,
+  Fished_Unlock = fished_N
+)
+
+## Venn diagram
+venn.diagram(
+  x = species_venn,
+  height = 2500, 
+  width = 3100,
+  resolution = 300, imagetype = "tiff", 
+  units = "px",
+  # category.names = c("Ports" , "Hors port"),
+  cat.cex = 1.2, cex=1,
+  cat.just=list(c(0,2),c(0,-5),c(0,0),c(0,0),c(1,-4)),
+  col = viridis(5),
+  fill = viridis(5),
+  cat.col = viridis(5),
+  alpha = 0.2,
+  filename="01_Analyses_teleo/03_Outputs/Species_Venn_categories.png",
+  output=F)

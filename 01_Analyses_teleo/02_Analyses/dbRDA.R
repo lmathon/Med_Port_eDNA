@@ -31,7 +31,7 @@ biodiv$code_spygen <- rownames(biodiv)
 ind_ports =read.csv("01_Analyses_teleo/00_data/Indicators_ports_2022_per_filter.csv",row.names=1)
 
 # milieu naturel
-meta_nat <- read.csv("00_Metadata/metadata_milieu_naturel.csv", header=T)
+meta_nat <- read.csv2("00_Metadata/metadata_milieu_naturel.csv", header=T)
 ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T, row.names = 1) %>%
   select(colnames(ind_ports))
 
