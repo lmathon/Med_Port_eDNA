@@ -1,72 +1,72 @@
-"code_spygen","date","site","project","habitat","port","Campaign","Confinement"
-"SPY181817","11/07/2019","Banyuls","ReserveBenefits","outside","false","Natural","N"
-"SPY181827","11/07/2019","Banyuls","ReserveBenefits","outside","false","Natural","N"
-"SPY181975","11/07/2019","Banyuls","ReserveBenefits","reserve","false","Natural","N"
-"SPY182168","11/07/2019","Banyuls","ReserveBenefits","reserve","false","Natural","N"
-"SPY200455","20/05/2020","Banyuls","eRef","outside","false","Natural","Y"
-"SPY200460","20/05/2020","Banyuls","eRef","outside","false","Natural","Y"
-"SPY200456","20/05/2020","Banyuls","eRef","reserve","false","Natural","Y"
-"SPY200465","20/05/2020","Banyuls","eRef","reserve","false","Natural","Y"
-"SPY192279","01/07/2019","Calanques","ReserveBenefits","outside","false","Natural","N"
-"SPY192284","01/07/2019","Calanques","ReserveBenefits","outside","false","Natural","N"
-"SPY192280","01/07/2019","Calanques","ReserveBenefits","reserve","false","Natural","N"
-"SPY192289","01/07/2019","Calanques","ReserveBenefits","reserve","false","Natural","N"
-"SPY180625","28/05/2020","Calanques","eRef","outside","false","Natural","Y"
-"SPY180629","28/05/2020","Calanques","eRef","outside","false","Natural","Y"
-"SPY181699","28/05/2020","Calanques","eRef","reserve","false","Natural","Y"
-"SPY181824","28/05/2020","Calanques","eRef","reserve","false","Natural","Y"
-"SPY180630","21/06/2018","cap_roux","ReserveBenefits","outside","false","Natural","N"
-"SPY180634","21/06/2018","cap_roux","ReserveBenefits","outside","false","Natural","N"
-"SPY181810","21/06/2018","cap_roux","ReserveBenefits","reserve","false","Natural","N"
-"SPY181814","21/06/2018","cap_roux","ReserveBenefits","reserve","false","Natural","N"
-"SPY200788","20/05/2020","cap_roux","eRef","outside","false","Natural","Y"
-"SPY200794","20/05/2020","cap_roux","eRef","outside","false","Natural","Y"
-"SPY200804","20/05/2020","cap_roux","eRef","reserve","false","Natural","Y"
-"SPY200805","20/05/2020","cap_roux","eRef","reserve","false","Natural","Y"
-"SPY181703","05/06/2018","carry-le-Rouet","ReserveBenefits","outside","false","Natural","N"
-"SPY181704","05/06/2018","carry-le-Rouet","ReserveBenefits","outside","false","Natural","N"
-"SPY181702","05/06/2018","carry-le-Rouet","ReserveBenefits","reserve","false","Natural","N"
-"SPY181705","05/06/2018","carry-le-Rouet","ReserveBenefits","reserve","false","Natural","N"
-"SPY200457","27/05/2020","carry-le-Rouet","eRef","outside","false","Natural","Y"
-"SPY200461","27/05/2020","carry-le-Rouet","eRef","outside","false","Natural","Y"
-"SPY200471","27/05/2020","carry-le-Rouet","eRef","reserve","false","Natural","Y"
-"SPY200473","27/05/2020","carry-le-Rouet","eRef","reserve","false","Natural","Y"
-"SPY181808","15/06/2018","porquerolles","ReserveBenefits","outside","false","Natural","N"
-"SPY181813","15/06/2018","porquerolles","ReserveBenefits","outside","false","Natural","N"
-"SPY181153","15/06/2018","porquerolles","ReserveBenefits","reserve","false","Natural","N"
-"SPY181812","15/06/2018","porquerolles","ReserveBenefits","reserve","false","Natural","N"
-"SPY200475","22/05/2020","porquerolles","eRef","outside","false","Natural","Y"
-"SPY200481","22/05/2020","porquerolles","eRef","outside","false","Natural","Y"
-"SPY201241","22/05/2020","porquerolles","eRef","reserve","false","Natural","Y"
-"SPY201247","22/05/2020","porquerolles","eRef","reserve","false","Natural","Y"
-"SPY213515","04/10/2021","Cannes","MedPortADNe","BIOHUT_port","true","October21","N"
-"SPY213512","04/10/2021","Cannes","MedPortADNe","Port","true","October21","N"
-"SPY213516","04/10/2021","Cannes","MedPortADNe","Port","true","October21","N"
-"SPY213517","05/10/2021","La Ciotat","MedPortADNe","Port","true","October21","N"
-"SPY213514","05/10/2021","La Ciotat","MedPortADNe","Port","true","October21","N"
-"SPY202505","11/10/2021","Marseillan","MedPortADNe","Port","true","October21","N"
-"SPY202519","11/10/2021","Marseillan","MedPortADNe","Port","true","October21","N"
-"SPY202520","11/10/2021","Marseillan","MedPortADNe","BIOHUT_port","true","October21","N"
-"SPY213521","12/10/2021","Saintes Maries de la Mer","MedPortADNe","Port","true","October21","N"
-"SPY213522","12/10/2021","Saintes Maries de la Mer","MedPortADNe","Port","true","October21","N"
-"SPY213518","12/10/2021","Saintes Maries de la Mer","MedPortADNe","BIOHUT_port","true","October21","N"
-"SPY213520","13/10/2021","Agde","MedPortADNe","Port","true","October21","N"
-"SPY213513","13/10/2021","Agde","MedPortADNe","Port","true","October21","N"
-"SPY213525","25/10/2021","Port Vendres","MedPortADNe","Port","true","October21","N"
-"SPY213523","25/10/2021","Port Vendres","MedPortADNe","Port","true","October21","N"
-"SPY213527","29/10/2021","Porquerolles","MedPortADNe","Port","true","October21","N"
-"SPY213519","29/10/2021","Porquerolles","MedPortADNe","Port","true","October21","N"
-"SPY221739","3/6/2022","Saintes Maries de la Mer","MedPorteDNA","Port","true","June22","N"
-"SPY221740","3/6/2022","Saintes Maries de la Mer","MedPorteDNA","Port","true","June22","N"
-"SPY221741","7/6/2022","Agde","MedPorteDNA","Port","true","June22","N"
-"SPY221742","7/6/2022","Agde","MedPorteDNA","Port","true","June22","N"
-"SPY221743","22/06/2022","Port Vendres","MedPorteDNA","Port","true","June22","N"
-"SPY221744","22/6/2022","Port Vendres","MedPorteDNA","Port","true","June22","N"
-"SPY221745","28/6/2022","Cannes","MedPorteDNA","Port","true","June22","N"
-"SPY221746","28/6/2022","Cannes","MedPorteDNA","Port","true","June22","N"
-"SPY221747","29/6/2022","Porquerolles","MedPorteDNA","Port","true","June22","N"
-"SPY221748","29/6/2022","Porquerolles","MedPorteDNA","Port","true","June22","N"
-"SPY221749","30/6/2022","La Ciotat","MedPorteDNA","Port","true","June22","N"
-"SPY221750","30/6/2022","La Ciotat","MedPorteDNA","Port","true","June22","N"
-"SPY221751","30/6/2022","La Ciotat","MedPorteDNA","Port","true","June22","N"
-"SPY221753","30/6/2022","La Ciotat","MedPorteDNA","Port","true","June22","N"
+code_spygen;date;site;project;habitat;port;Campaign;Confinement
+SPY181817;11/07/2019;Banyuls;ReserveBenefits;outside;FALSE;Natural;N
+SPY181827;11/07/2019;Banyuls;ReserveBenefits;outside;FALSE;Natural;N
+SPY181975;11/07/2019;Banyuls;ReserveBenefits;reserve;FALSE;Natural;N
+SPY182168;11/07/2019;Banyuls;ReserveBenefits;reserve;FALSE;Natural;N
+SPY200455;20/05/2020;Banyuls;eRef;outside;FALSE;Natural;Y
+SPY200460;20/05/2020;Banyuls;eRef;outside;FALSE;Natural;Y
+SPY200456;20/05/2020;Banyuls;eRef;reserve;FALSE;Natural;Y
+SPY200465;20/05/2020;Banyuls;eRef;reserve;FALSE;Natural;Y
+SPY192279;01/07/2019;Calanques;ReserveBenefits;outside;FALSE;Natural;N
+SPY192284;01/07/2019;Calanques;ReserveBenefits;outside;FALSE;Natural;N
+SPY192280;01/07/2019;Calanques;ReserveBenefits;reserve;FALSE;Natural;N
+SPY192289;01/07/2019;Calanques;ReserveBenefits;reserve;FALSE;Natural;N
+SPY180625;28/05/2020;Calanques;eRef;outside;FALSE;Natural;Y
+SPY180629;28/05/2020;Calanques;eRef;outside;FALSE;Natural;Y
+SPY181699;28/05/2020;Calanques;eRef;reserve;FALSE;Natural;Y
+SPY181824;28/05/2020;Calanques;eRef;reserve;FALSE;Natural;Y
+SPY180630;21/06/2018;cap_roux;ReserveBenefits;outside;FALSE;Natural;N
+SPY180634;21/06/2018;cap_roux;ReserveBenefits;outside;FALSE;Natural;N
+SPY181810;21/06/2018;cap_roux;ReserveBenefits;reserve;FALSE;Natural;N
+SPY181814;21/06/2018;cap_roux;ReserveBenefits;reserve;FALSE;Natural;N
+SPY200788;20/05/2020;cap_roux;eRef;outside;FALSE;Natural;Y
+SPY200794;20/05/2020;cap_roux;eRef;outside;FALSE;Natural;Y
+SPY200804;20/05/2020;cap_roux;eRef;reserve;FALSE;Natural;Y
+SPY200806;20/05/2020;cap_roux;eRef;reserve;FALSE;Natural;Y
+SPY181703;05/06/2018;carry-le-Rouet;ReserveBenefits;outside;FALSE;Natural;N
+SPY181704;05/06/2018;carry-le-Rouet;ReserveBenefits;outside;FALSE;Natural;N
+SPY181702;05/06/2018;carry-le-Rouet;ReserveBenefits;reserve;FALSE;Natural;N
+SPY181705;05/06/2018;carry-le-Rouet;ReserveBenefits;reserve;FALSE;Natural;N
+SPY200457;27/05/2020;carry-le-Rouet;eRef;outside;FALSE;Natural;Y
+SPY200461;27/05/2020;carry-le-Rouet;eRef;outside;FALSE;Natural;Y
+SPY200471;27/05/2020;carry-le-Rouet;eRef;reserve;FALSE;Natural;Y
+SPY200473;27/05/2020;carry-le-Rouet;eRef;reserve;FALSE;Natural;Y
+SPY181808;15/06/2018;porquerolles;ReserveBenefits;outside;FALSE;Natural;N
+SPY181813;15/06/2018;porquerolles;ReserveBenefits;outside;FALSE;Natural;N
+SPY181153;15/06/2018;porquerolles;ReserveBenefits;reserve;FALSE;Natural;N
+SPY181812;15/06/2018;porquerolles;ReserveBenefits;reserve;FALSE;Natural;N
+SPY200480;22/05/2020;porquerolles;eRef;outside;FALSE;Natural;Y
+SPY200481;22/05/2020;porquerolles;eRef;outside;FALSE;Natural;Y
+SPY201241;22/05/2020;porquerolles;eRef;reserve;FALSE;Natural;Y
+SPY201247;22/05/2020;porquerolles;eRef;reserve;FALSE;Natural;Y
+SPY213515;04/10/2021;Cannes;MedPortADNe;BIOHUT_port;TRUE;October21;N
+SPY213512;04/10/2021;Cannes;MedPortADNe;Port;TRUE;October21;N
+SPY213516;04/10/2021;Cannes;MedPortADNe;Port;TRUE;October21;N
+SPY213517;05/10/2021;La Ciotat;MedPortADNe;Port;TRUE;October21;N
+SPY213514;05/10/2021;La Ciotat;MedPortADNe;Port;TRUE;October21;N
+SPY202505;11/10/2021;Marseillan;MedPortADNe;Port;TRUE;October21;N
+SPY202519;11/10/2021;Marseillan;MedPortADNe;Port;TRUE;October21;N
+SPY202520;11/10/2021;Marseillan;MedPortADNe;BIOHUT_port;TRUE;October21;N
+SPY213521;12/10/2021;Saintes Maries de la Mer;MedPortADNe;Port;TRUE;October21;N
+SPY213522;12/10/2021;Saintes Maries de la Mer;MedPortADNe;Port;TRUE;October21;N
+SPY213518;12/10/2021;Saintes Maries de la Mer;MedPortADNe;BIOHUT_port;TRUE;October21;N
+SPY213520;13/10/2021;Agde;MedPortADNe;Port;TRUE;October21;N
+SPY213513;13/10/2021;Agde;MedPortADNe;Port;TRUE;October21;N
+SPY213525;25/10/2021;Port Vendres;MedPortADNe;Port;TRUE;October21;N
+SPY213523;25/10/2021;Port Vendres;MedPortADNe;Port;TRUE;October21;N
+SPY213527;29/10/2021;Porquerolles;MedPortADNe;Port;TRUE;October21;N
+SPY213519;29/10/2021;Porquerolles;MedPortADNe;Port;TRUE;October21;N
+SPY221739;03/06/2022;Saintes Maries de la Mer;MedPorteDNA;Port;TRUE;June22;N
+SPY221740;03/06/2022;Saintes Maries de la Mer;MedPorteDNA;Port;TRUE;June22;N
+SPY221741;07/06/2022;Agde;MedPorteDNA;Port;TRUE;June22;N
+SPY221742;07/06/2022;Agde;MedPorteDNA;Port;TRUE;June22;N
+SPY221743;22/06/2022;Port Vendres;MedPorteDNA;Port;TRUE;June22;N
+SPY221744;22/06/2022;Port Vendres;MedPorteDNA;Port;TRUE;June22;N
+SPY221745;28/06/2022;Cannes;MedPorteDNA;Port;TRUE;June22;N
+SPY221746;28/06/2022;Cannes;MedPorteDNA;Port;TRUE;June22;N
+SPY221747;29/06/2022;Porquerolles;MedPorteDNA;Port;TRUE;June22;N
+SPY221748;29/06/2022;Porquerolles;MedPorteDNA;Port;TRUE;June22;N
+SPY221749;30/06/2022;La Ciotat;MedPorteDNA;Port;TRUE;June22;N
+SPY221750;30/06/2022;La Ciotat;MedPorteDNA;Port;TRUE;June22;N
+SPY221751;30/06/2022;La Ciotat;MedPorteDNA;Port;TRUE;June22;N
+SPY221753;30/06/2022;La Ciotat;MedPorteDNA;Port;TRUE;June22;N
