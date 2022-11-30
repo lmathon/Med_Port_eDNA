@@ -218,3 +218,29 @@ venn.diagram(
   alpha = 0.2,
   filename="01_Analyses_teleo/03_Outputs/Species_Venn_categories.png",
   output=F)
+
+#################################################################################
+## Table species list
+#################################################################################
+reserve <- union(reserve_N,reserve_Y)
+lockdown <- union(reserve_Y,fished_Y)
+fished <- union(fished_Y, fished_N)
+natural <- union(reserve, fished)
+unlock <- union(reserve_N,fished_N)
+
+port_only <- setdiff(port, natural)
+reserve_only <- setdiff(reserve, union(fished,port))
+lockdown_only <- setdiff(lockdown, union(unlock,port))
+
+## Create table with species list
+max_length <- max(c(length(port_only), length(reserve_only), length(lockdown_only)))    # Find out maximum length
+max_length 
+
+sp_table <- data.frame(Port_only = c(port_only,                 # Create data frame with unequal vectors
+                            rep(NA, max_length - length(port_only))),
+                   Reserve_only = c(reserve_only,
+                            rep(NA, max_length - length(reserve_only))),
+                   Lockdown_only = c(lockdown_only,
+                                    rep(NA, max_length - length(lockdown_only))))
+sp_table  
+write.csv(sp_table, "01_Analyses_teleo/03_Outputs/Species_list_per_category.csv", row.names=F)
