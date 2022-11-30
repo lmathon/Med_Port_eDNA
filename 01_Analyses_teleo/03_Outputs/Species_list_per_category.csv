@@ -1,17 +1,15 @@
 "Port_only","Reserve_only","Lockdown_only"
 "Acipenser sp.","Gobiesocidae","Gobius geniporus"
-"Trachinotus ovatus","Chelidonichthys sp.","Ceratoscopelus maderensis"
-"Alosa sp.","Boops sp.","Sarda sp."
-"Cyprininae","Sphyraenidae","Gymnammodytes semisquamatus"
-"Leuciscinae","Mobula mobular","Scyliorhinus stellaris"
-"Rutilus rutilus","Gobius geniporus","Dasyatis marmorata"
-"Gambusia holbrooki","Sarda sp.","Myliobatis aquila"
-"Gadidae","Gymnammodytes semisquamatus","Aetomylaeus bovinus"
-"Trisopterus capelanus","Scyliorhinus stellaris",NA
-"Aphia minuta","Dasyatis marmorata",NA
+"Trachinotus ovatus","Chelidonichthys sp.","Lebetus guilleti"
+"Alosa sp.","Boops sp.","Ceratoscopelus maderensis"
+"Cyprininae","Sphyraenidae","Sarda sp."
+"Leuciscinae","Mobula mobular","Gymnammodytes semisquamatus"
+"Rutilus rutilus","Lebetus guilleti","Scyliorhinus stellaris"
+"Gambusia holbrooki","Sarda sp.","Dasyatis marmorata"
+"Gadidae","Gymnammodytes semisquamatus","Myliobatis aquila"
+"Trisopterus capelanus","Scyliorhinus stellaris","Nerophis maculatus"
+"Aphia minuta","Dasyatis marmorata","Aetomylaeus bovinus"
 "Gammogobius steinitzi",NA,NA
-"Millerigobius macrocephalus",NA,NA
-"Odondebuenia balearica",NA,NA
 "Pomatoschistus minutus",NA,NA
 "Zosterisessor ophiocephalus",NA,NA
 "Lophius piscatorius",NA,NA
