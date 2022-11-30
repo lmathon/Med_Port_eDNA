@@ -40,7 +40,7 @@ ind <- rbind(ind_nat,ind_ports)
 ind$code_spygen <- rownames(ind)
 
 # metadata
-meta=read.csv("00_Metadata/metadata_tot.csv", sep=",") 
+meta=read.csv("00_Metadata/metadata_tot.csv", sep=";") 
 
 # merge indicateurs et metadata 
 indmeta=left_join(ind,meta) %>%
@@ -79,8 +79,8 @@ threatened <- traits %>%
   pull(Species)
 
 #### faire la dbRDA
-data_dbrda <- data_all[,c(1:236)]
-meta_dbrda <- data_all[,c(237:ncol(data_all))]
+data_dbrda <- data_all[,c(1:184)]
+meta_dbrda <- data_all[,c(185:ncol(data_all))]
 
 RDA_all<- capscale(data_dbrda ~ port, meta_dbrda, distance ="jaccard")
 
