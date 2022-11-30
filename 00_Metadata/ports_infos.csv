@@ -1,8 +1,8 @@
-Port;X;Y;PortPropre;Region
-Cannes Port-Canto;43.54027858308602;7.0326685845926935;Oui;PACA
-La Ciotat;43.1778044292684;5.613601324184733;Oui;PACA
-Marseillan-Plage ;43.356587405373155;3.5343557706122213;Non;Occitanie
-Les Saintes Maries de la Mer;43.44862324479564;4.423255624743435;Oui;Occitanie
-Agde;43.27291794682697;3.5092290417139;Non;Occitanie
-Port-Vendres;42.520597103260194;3.1117181010975012;Oui;Occitanie
-Porquerolles;43.003408386663075;6.200826313414731;Oui;PACA
+Port;X;Y;PortPropre;Region;site;surface_couverte_ha;lineaire_exterieur_m
+Cannes Port Pierre Canto;43.54027858308602;7.0326685845926935;Oui;PACA;Cannes;10.23;1096.32
+La Ciotat Port de plaisance;43.1778044292684;5.613601324184733;Oui;PACA;La Ciotat ;5.05;630.72
+Marseillan-Plage ;43.356587405373155;3.5343557706122213;Non;Occitanie;Marseillan;2.34;590.09
+Les Saintes Maries de la Mer;43.44862324479564;4.423255624743435;Oui;Occitanie;Saintes Maries de la Mer;2.52;390.19
+Port du Cap d'Agde;43.27291794682697;3.5092290417139;Non;Occitanie;Agde;7.5;1322.68
+Port-Vendres Anse Gerbal;42.520597103260194;3.1117181010975012;Oui;Occitanie;Port Vendres;5.94;102.73
+Porquerolles;43.003408386663075;6.200826313414731;Oui;PACA;Porquerolles;1.92;581.12
