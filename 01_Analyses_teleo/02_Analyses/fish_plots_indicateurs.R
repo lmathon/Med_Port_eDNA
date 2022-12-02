@@ -102,7 +102,7 @@ ind_all <- ind_all %>%
 ind_all$habitat <- factor(ind_all$habitat, levels=c("reserve", "outside", "Port"))
 ind_all$Confinement <- factor(ind_all$Confinement, labels=c("Unlock", "Lockdown"))
 
-  
+ind_names <- c("Total species richness", "Functional diversity", "Threatened species richness", "Commercial species richness")  
 
 p <-list()
 ## Draw the plot
@@ -117,7 +117,7 @@ for (i in c(1,2,8,11)) { # Choix des indicateurs à présenter
     facet_wrap(~Confinement) +
     scale_color_manual(values=c("darkblue", "cyan4",  "darkorange"),
                        labels=c("reserve", "fished", "port")) +
-    ylab(colnames(ind_all)[i]) +
+    ylab(ind_names[l]) +
     theme_bw() +
     theme(legend.position="none") +
     theme(axis.text.y=element_text(colour="black",size=16)) +
