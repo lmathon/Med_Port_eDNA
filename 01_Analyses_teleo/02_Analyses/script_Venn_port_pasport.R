@@ -135,9 +135,9 @@ dev.off()
 ## Venn diagram per category (reserve/lockdown)
 #####################################################################################
 # load port data and extract species names
-port <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", row.names = 1)
+adne <- read.csv("01_Analyses_teleo/00_data/teleo_presence_per_port.csv", row.names = 1)
 
-port <- port[rowSums(port)!=0,]
+port <- adne[rowSums(adne)!=0,]
 port <- port[,colSums(port)!=0]
 
 port <- rownames(port)
@@ -244,3 +244,7 @@ sp_table <- data.frame(Port_only = c(port_only,                 # Create data fr
                                     rep(NA, max_length - length(lockdown_only))))
 sp_table  
 write.csv(sp_table, "01_Analyses_teleo/03_Outputs/Species_list_per_category.csv", row.names=F)
+
+######### sp per port
+sp_port <- adne[port_only,]
+write.csv(sp_port, "01_Analyses_teleo/03_Outputs/Species_list_per_port.csv", row.names=F)

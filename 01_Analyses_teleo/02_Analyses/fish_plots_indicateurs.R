@@ -28,8 +28,9 @@ ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_port.
   mutate(Location = "port")
 
 # Charger datas milieu naturel (= réserve et hors réserve)
-meta_nat <- read.csv("00_Metadata/metadata_milieu_naturel.csv", header=T)
-ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T) %>%
+meta_nat <- read.csv2("00_Metadata/metadata_milieu_naturel.csv", header=T)
+ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T, row.names = 1) %>%
+  rownames_to_column(var="Sample") %>%
   inner_join(meta_nat[,c("SPYGEN_code", "protection")], by=c("Sample"="SPYGEN_code")) %>%
   rename(Location = protection) %>%
   column_to_rownames(var="Sample") %>%
@@ -75,6 +76,64 @@ for (i in c(1,2,8,11)) { # Choix des indicateurs à présenter
 ## Save plot
 png("01_Analyses_teleo/03_Outputs/Boxplots_indicators_port_milieu_nat3.png", 
     width = 900, height = 1000) 
+do.call(grid.arrange,c(p, list(ncol=2)))
+dev.off()
+
+################################################################################
+####### Plot lockdown / reserve / ports
+################################################################################
+# Metadata
+ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1)
+# Combiner les deux datasets
+ind_all <- rbind(ind_nat[,1:14],ind_ports) %>%
+  mutate(DeBRa = log10(DeBRa))
+
+meta_tot <- read.csv2("00_Metadata/metadata_tot.csv", header=T)
+
+meta_tot <- meta_tot %>%
+  filter(habitat != "BIOHUT_port")
+
+ind_all <- ind_all %>%
+  rownames_to_column(var="code_spygen") %>%
+  inner_join(meta_tot, by="code_spygen") %>%
+  column_to_rownames(var="code_spygen") %>%
+  mutate_at('Confinement', as.factor)
+
+ind_all$habitat <- factor(ind_all$habitat, levels=c("reserve", "outside", "Port"))
+ind_all$Confinement <- factor(ind_all$Confinement, labels=c("Unlock", "Lockdown"))
+
+  
+
+p <-list()
+## Draw the plot
+l=1
+for (i in c(1,2,8,11)) { # Choix des indicateurs à présenter
+  # Gather data
+  dat_i <- ind_all[,c(i,18,21)]
+  colnames(dat_i)[1] <- "Y"
+  
+  p[[l]]<-ggplot(data=dat_i, aes(x=habitat, y=Y, color=habitat)) +
+    geom_boxplot(notch=F) +
+    facet_wrap(~Confinement) +
+    scale_color_manual(values=c("darkblue", "cyan4",  "darkorange"),
+                       labels=c("reserve", "fished", "port")) +
+    ylab(colnames(ind_all)[i]) +
+    theme_bw() +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=16)) +
+    theme(axis.text.x=element_text(colour="black",size=18)) +
+    theme(axis.title.x=element_blank()) +
+    theme(axis.title.y=element_text(colour="black",size=18))+ 
+    theme(strip.text = element_text(size = 18)) +
+    #stat_compare_means(aes(label = paste0("p = ", ..p.format..)), size=4)
+    stat_compare_means(aes(label = paste0("p = ", ..p.signif..)), size=6)
+  
+  l=l+1  
+}
+
+## Save plot
+png("01_Analyses_teleo/03_Outputs/Boxplots_indicators_per_category.png", 
+    width = 1200, height = 1000) 
 do.call(grid.arrange,c(p, list(ncol=2)))
 dev.off()
 

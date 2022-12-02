@@ -302,7 +302,7 @@ data3 <- data %>%
   t() %>%
   as.data.frame()
 
-write.csv(data2, "01_Analyses_teleo/00_data/teleo_presence_per_port.csv")
+write.csv(data3, "01_Analyses_teleo/00_data/teleo_presence_per_port.csv")
 
 ## Create the result matrix
 indicators2 <- matrix(NA,ncol(data2), 14,

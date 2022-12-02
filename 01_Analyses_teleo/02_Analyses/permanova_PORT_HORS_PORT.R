@@ -9,7 +9,7 @@ library(betapart)
 #COMPARAISON PORT ET HORS PORT TOUT CONFONDU SANS LES BIOHUTS
 
 # Metadata
-meta_tot <- read.csv("00_Metadata/metadata_tot.csv", header=T)
+meta_tot <- read.csv2("00_Metadata/metadata_tot.csv", header=T)
 
 meta_tot <- meta_tot %>%
   filter(habitat != "BIOHUT_port")
@@ -98,10 +98,10 @@ panel.a<-ggplot() +
   geom_point(data=centroids[,1:3], aes(x=PCoA1,y=PCoA2,colour=grps, shape=grps),size=4) + 
   geom_point(data=seg.data, aes(x=v.PCoA1,y=v.PCoA2, colour=group, shape=group),size=2) +
   theme_mine + 
-  scale_colour_manual(values=c("#FCBBA1FF","#7FCDBBFF"), labels = c("Hors port","Port")) +
-  scale_shape_manual(values=c(19,17), labels = c("Hors port","Port")) +
+  scale_colour_manual(values=c("#FCBBA1FF","#7FCDBBFF"), labels = c("Sea","Port")) +
+  scale_shape_manual(values=c(19,17), labels = c("Sea","Port")) +
   labs(title="",x="PCoA 1",y="PCoA 2",
-       colour = "Zone d'échantillonnage", shape = "Zone d'échantillonnage")
+       colour = "Sampling", shape = "Sampling")
 panel.a
 
 

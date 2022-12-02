@@ -10,7 +10,7 @@ library(ade4)
 #COMPARAISON PORT ET HORS PORT TOUT CONFONDU SANS LES BH
 
 # Metadata
-meta_tot <- read.csv("00_Metadata/metadata_tot.csv", header=T)
+meta_tot <- read.csv("00_Metadata/metadata_tot.csv", header=T, sep=";")
 
 ## Load the eDNA data (matrix species per sample)
 adne <- read.csv("01_Analyses_teleo/00_data/matrice_teleo_totale.csv", header=T, row.names=1)
