@@ -1,34 +1,34 @@
-"Agde","Cannes","La.Ciotat","Marseillan","Porquerolles","Port.Vendres","Saintes.Maries.de.la.Mer"
-0,1,0,0,0,0,0
-0,0,0,0,0,0,1
-0,0,0,0,0,1,1
-0,0,0,0,0,0,1
-0,1,0,0,0,0,1
-0,1,0,0,0,0,0
-0,0,0,0,1,0,1
-0,0,0,0,1,0,0
-0,0,0,0,0,1,0
-0,0,0,0,0,1,1
-0,1,0,0,0,0,0
-1,0,0,1,0,0,1
-1,0,1,1,0,0,0
-0,0,0,0,1,1,0
-0,0,0,0,0,0,1
-0,0,0,0,0,0,1
-0,0,0,0,0,1,1
-0,0,0,0,0,1,0
-0,0,0,1,0,1,1
-0,0,0,0,0,0,1
-0,0,0,1,0,1,1
-0,1,1,0,1,0,0
-0,0,0,0,0,0,1
-1,1,0,1,0,1,0
-0,0,0,1,0,0,0
-0,0,0,0,0,0,1
-0,0,0,0,0,1,0
-0,0,0,0,1,0,0
-0,0,0,0,0,0,1
-0,0,0,0,1,0,0
-0,0,0,0,0,1,0
-1,1,0,1,1,1,1
-1,0,0,0,0,0,0
+"","Agde","Cannes","La.Ciotat","Marseillan","Porquerolles","Port.Vendres","Saintes.Maries.de.la.Mer","Nb_port"
+"Acipenser sp.",0,1,0,0,0,0,0,1
+"Trachinotus ovatus",0,0,0,0,0,0,1,1
+"Alosa sp.",0,0,0,0,0,1,1,2
+"Cyprininae",0,0,0,0,0,0,1,1
+"Leuciscinae",0,1,0,0,0,0,1,2
+"Rutilus rutilus",0,1,0,0,0,0,0,1
+"Gambusia holbrooki",0,0,0,0,1,0,1,2
+"Gadidae",0,0,0,0,1,0,0,1
+"Trisopterus capelanus",0,0,0,0,0,1,0,1
+"Aphia minuta",0,0,0,0,0,1,1,2
+"Gammogobius steinitzi",0,1,0,0,0,0,0,1
+"Pomatoschistus minutus",1,0,0,1,0,0,1,3
+"Zosterisessor ophiocephalus",1,0,1,1,0,0,0,3
+"Lophius piscatorius",0,0,0,0,1,1,0,2
+"Pomadasys incisus",0,0,0,0,0,0,1,1
+"Sander sp.",0,0,0,0,0,0,1,1
+"C. obscurus T. lastoviza",0,0,0,0,0,1,1,2
+"E. gurnardus T. lyra",0,0,0,0,0,1,0,1
+"Arnoglossus laterna",0,0,0,1,0,1,1,3
+"Pleuronectidae",0,0,0,0,0,0,1,1
+"Solea solea",0,0,0,1,0,1,1,3
+"Salmo salar",0,1,1,0,1,0,0,3
+"Silurus glanis",0,0,0,0,0,0,1,1
+"Spicara flexuosa S smaris",1,1,0,1,0,1,0,4
+"Syngnathus acus",0,0,0,1,0,0,0,1
+"Balistes capriscus",0,0,0,0,0,0,1,1
+"Zeus faber",0,0,0,0,0,1,0,1
+"Argyrosomus regius",0,0,0,0,1,0,0,1
+"Mustelus mustelus",0,0,0,0,0,0,1,1
+"Hexanchus griseus",0,0,0,0,1,0,0,1
+"Raja undulata",0,0,0,0,0,1,0,1
+"Raja asterias Raja clavata",1,1,0,1,1,1,1,6
+"Tetronarce nobiliana",1,0,0,0,0,0,0,1

@@ -246,5 +246,6 @@ sp_table
 write.csv(sp_table, "01_Analyses_teleo/03_Outputs/Species_list_per_category.csv", row.names=F)
 
 ######### sp per port
-sp_port <- adne[port_only,]
-write.csv(sp_port, "01_Analyses_teleo/03_Outputs/Species_list_per_port.csv", row.names=F)
+sp_port <- adne[port_only,] %>%
+  mutate(Nb_port = rowSums(., na.rm=TRUE))
+write.csv(sp_port, "01_Analyses_teleo/03_Outputs/Species_list_per_port.csv")
