@@ -273,7 +273,8 @@ data2 <- data %>%
   # remove the biohut samples
   filter(habitat == "Port") %>%
   group_by(site, Campaign) %>%
-  summarise_at(2:132, sum) %>% 
+  mutate_at(.vars=c(2:137), as.numeric) %>%
+  summarise_at(2:137, sum) %>% 
   # convert to presence/abscence
   mutate_if(is.numeric, ~1 * (. > 0)) %>%
   # create a new var combining site and campaign column
@@ -282,6 +283,26 @@ data2 <- data %>%
   select(3:ncol(.)) %>%
   t() %>%
   as.data.frame()
+
+write.csv(data2, "01_Analyses_teleo/00_data/teleo_presence_per_port_per_season.csv")
+
+data3 <- data %>%
+  t(.) %>%
+  as.data.frame(.) %>%
+  rownames_to_column(var="code_spygen") %>%
+  left_join(meta, by="code_spygen") %>%
+  # remove the biohut samples
+  filter(habitat == "Port") %>%
+  group_by(site) %>%
+  mutate_at(.vars=c(2:137), as.numeric) %>%
+  summarise_at(2:137, sum) %>% 
+  # convert to presence/abscence
+  mutate_if(is.numeric, ~1 * (. > 0)) %>%
+  column_to_rownames(var="site") %>%
+  t() %>%
+  as.data.frame()
+
+write.csv(data2, "01_Analyses_teleo/00_data/teleo_presence_per_port.csv")
 
 ## Create the result matrix
 indicators2 <- matrix(NA,ncol(data2), 14,
