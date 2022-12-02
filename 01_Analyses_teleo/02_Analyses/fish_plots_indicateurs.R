@@ -82,7 +82,7 @@ dev.off()
 ################################################################################
 ####### Plot lockdown / reserve / ports
 ################################################################################
-# Metadata
+# load data
 ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1)
 # Combiner les deux datasets
 ind_all <- rbind(ind_nat[,1:14],ind_ports) %>%
