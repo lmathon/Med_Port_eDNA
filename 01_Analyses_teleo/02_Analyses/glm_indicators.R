@@ -89,6 +89,7 @@ for (i in 1:ncol(Y)) {
   coef[,(i+ncol(Y))] <- car::Anova(m_i,test.statistic="F")$"Pr(>F)"[1:4]
 }
 
+write.csv(coef,"01_Analyses_teleo/03_Outputs/GLM_indicators_coefficients.csv")
 
 ####################################################################
 #check Spatial autocorrelation 
