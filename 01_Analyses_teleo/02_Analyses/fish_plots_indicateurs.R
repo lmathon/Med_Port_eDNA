@@ -52,7 +52,7 @@ ind_all$Location <- factor(ind_all$Location,                                    
 p <-list()
 ## Draw the plot
 l=1
-for (i in c(1,2,8,11)) { # Choix des indicateurs à présenter
+for (i in c(1,4,8,11)) { # Choix des indicateurs à présenter
   # Gather data
   dat_i <- ind_all[,c(i,15)]
   colnames(dat_i)[1] <- "Y"
@@ -102,12 +102,12 @@ ind_all <- ind_all %>%
 ind_all$habitat <- factor(ind_all$habitat, levels=c("reserve", "outside", "Port"))
 ind_all$Confinement <- factor(ind_all$Confinement, labels=c("Unlock", "Lockdown"))
 
-ind_names <- c("Total species richness", "Functional diversity", "Threatened species richness", "Commercial species richness")  
+ind_names <- c("Total species richness", "Cryptobenthic species richness", "Threatened species richness", "Commercial species richness")  
 
 p <-list()
 ## Draw the plot
 l=1
-for (i in c(1,2,8,11)) { # Choix des indicateurs à présenter
+for (i in c(1,4,8,11)) { # Choix des indicateurs à présenter
   # Gather data
   dat_i <- ind_all[,c(i,18,21)]
   colnames(dat_i)[1] <- "Y"
@@ -119,6 +119,8 @@ for (i in c(1,2,8,11)) { # Choix des indicateurs à présenter
                        labels=c("reserve", "fished", "port")) +
     ylab(ind_names[l]) +
     theme_bw() +
+    theme(panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank()) +
     theme(legend.position="none") +
     theme(axis.text.y=element_text(colour="black",size=16)) +
     theme(axis.text.x=element_text(colour="black",size=18)) +
@@ -149,6 +151,7 @@ library(ggmap)
 library(maps)
 library(magick)
 library(mapdata)
+library(tidyr)
 ########################################################################################
 ## MAP
 #########################################################################################
@@ -187,6 +190,15 @@ df <- ind_ports %>%
   rownames_to_column(var="RowNames") %>%
   separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
   mutate(Campaign = factor(Campaign, levels = c("October21", "June22")))
+
+#df <- ind_ports %>%
+#  rownames_to_column(var="RowNames") %>%
+#  separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
+#  mutate(Campaign = factor(Campaign, levels = c("October21", "June22"))) %>%
+#  group_by(Site) %>%
+#  summarise(All = mean(R),
+#            Threatened = mean(RedList)) %>%
+#  pivot_longer(cols=2:3, names_to = "Species", values_to = "Y")
 
 # list of port names
 ports <- unique(df$Site)
