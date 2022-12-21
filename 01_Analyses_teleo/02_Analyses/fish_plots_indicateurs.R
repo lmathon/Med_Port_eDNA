@@ -12,6 +12,7 @@ library(gridExtra)
 library(viridis)
 library(ggpubr)
 library(fishtree)
+library(multcomp)
 
 
 ## Load data
@@ -24,7 +25,7 @@ meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
 
 traits <- read.csv("01_Analyses_teleo/00_data/Functional_data_corrected_20220124.csv", header=T)
 
-ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_port.csv", header=T, row.names=1) %>%
+ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1) %>%
   mutate(Location = "port")
 
 # Charger datas milieu naturel (= réserve et hors réserve)
@@ -83,7 +84,7 @@ dev.off()
 ####### Plot lockdown / reserve / ports
 ################################################################################
 # load data
-ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_port.csv", header=T, row.names=1)
+ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1)
 # Combiner les deux datasets
 ind_all <- rbind(ind_nat[,1:14],ind_ports) %>%
   mutate(DeBRa = log10(DeBRa))
@@ -112,10 +113,10 @@ for (i in c(1,4,8,11)) { # Choix des indicateurs à présenter
   dat_i <- ind_all[,c(i,18,21)]
   colnames(dat_i)[1] <- "Y"
   
-  p[[l]]<-ggplot(data=dat_i, aes(x=habitat, y=Y, color=habitat)) +
-    geom_boxplot(notch=F) +
+  p[[l]]<-ggplot(data=dat_i, aes(x=habitat, y=Y, fill=habitat)) +
+    geom_boxplot(notch=F, alpha=0.5) +
     facet_wrap(~Confinement) +
-    scale_color_manual(values=c("darkblue", "cyan4",  "darkorange"),
+    scale_fill_manual(values=c("darkblue", "cyan4",  "darkorange"),
                        labels=c("reserve", "fished", "port")) +
     ylab(ind_names[l]) +
     theme_bw() +
@@ -138,6 +139,42 @@ png("01_Analyses_teleo/03_Outputs/Boxplots_indicators_per_category.png",
     width = 1200, height = 1000) 
 do.call(grid.arrange,c(p, list(ncol=2)))
 dev.off()
+
+####
+## Tukey test between port and lockdown
+ind_all <- ind_all %>%
+  unite(group, c("habitat", "Confinement")) %>%
+  mutate(group = as.factor(group))
+
+
+# Create a matrix to store the coefficient and pvalues
+compa <- c("outside_Unlock - outside_Lockdown" ,  "Port - outside_Lockdown"   ,   "reserve_Lockdown - outside_Lockdown",
+            "reserve_Unlock - outside_Lockdown" ,  "Port - outside_Unlock" ,       "reserve_Lockdown - outside_Unlock",  
+           "reserve_Unlock - outside_Unlock",     "reserve_Lockdown - Port" ,     "reserve_Unlock - Port",       
+           "reserve_Unlock - reserve_Lockdown" )
+res_tukey <- matrix(NA, 10, (2*ncol(Y)),
+               dimnames= list(compa,
+                              paste(rep(ind_names,each=2),c("coef", "pval"), sep="_" )))
+
+# Make a loop to do the glm for each indicator
+l=1
+
+for (i in c(1,4,8,11)) { # Choix des indicateurs à présenter
+  # Gather data
+  dat_i <- ind_all[,c(i,18)]
+  colnames(dat_i)[1] <- "Y"
+  
+  portAnova_i <- aov(Y ~ group, data = dat_i)
+  portTukey_i <- TukeyHSD(portAnova_i, conf.level=.9) 
+  
+  res_tukey[,l:(l+1)] <- portTukey_i$group[,c(1,4)]
+  
+  l=l+2
+
+}
+
+
+write.csv(res_tukey,"01_Analyses_teleo/03_Outputs/PostHoc_test_indicators.csv")
 
 ###############################################################################################
 ## Plot indicator values for ports
@@ -217,7 +254,7 @@ for (i in 1: 7) {
   
   bp[[i]]<-ggplot(data=to_plot, aes(x=Species, y=value, fill=Species)) +
     geom_bar( position = 'dodge',stat="identity") +
-    scale_fill_manual(values=c("lightgreen", "grey70")) +
+    scale_fill_manual(values=c("lightgreen", "sandybrown")) +
     ylim(0,68) +
     theme(
       panel.background = element_rect(fill='transparent'), #transparent panel bg
@@ -228,8 +265,8 @@ for (i in 1: 7) {
     labs(y="Species richness",
          title=port_names[i]) +
     scale_x_discrete(labels=c("Total","Cryptobenthics")) +
-    theme(axis.text.y=element_text(colour="black",size=10)) +
-    theme(axis.text.x=element_text(colour="black",size=10, angle=30, vjust=0.8)) +
+    theme(axis.text.y=element_text(colour="black",size=8)) +
+    theme(axis.text.x=element_text(colour="black",size=8, angle=30, vjust=0.8)) +
     theme(axis.title.y = element_blank()) +
     theme(axis.title.x=element_blank())  +
     theme(plot.title = element_text(colour="black", size=9, face="bold", hjust=0.5)) 

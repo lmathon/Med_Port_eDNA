@@ -28,9 +28,9 @@ mydata <- ind_ports %>%
 
 ### Create a data set of response variables (indicators)
 Y <- mydata %>%
-  dplyr::select(R,FD,RedList, Commercial) %>%
+  dplyr::select(R,Crypto,RedList, Commercial) %>%
   # express vqriables as proportion of species richness
-  mutate(across(c(FD, RedList,  Commercial), ~ .x/R)) 
+  mutate(across(c(Crypto, RedList,  Commercial), ~ .x/R)) 
 
 ### Create a data set of explanatory variables (environment + protection)
 X <- mydata %>%
@@ -49,7 +49,7 @@ coords<- mydata %>%
   as.matrix(.)
 
 ### Create a vector of indicator names
-ind_names <- c("Total species richness", "Functional diversity", 
+ind_names <- c("Total species richness", "Cryptobenthics species richness", 
                "Threatened species richness", "Commercial species richness")  
 
 
