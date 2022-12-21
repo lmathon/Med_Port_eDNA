@@ -83,7 +83,7 @@ dev.off()
 ####### Plot lockdown / reserve / ports
 ################################################################################
 # load data
-ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1)
+ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_port.csv", header=T, row.names=1)
 # Combiner les deux datasets
 ind_all <- rbind(ind_nat[,1:14],ind_ports) %>%
   mutate(DeBRa = log10(DeBRa))
@@ -191,14 +191,14 @@ df <- ind_ports %>%
   separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
   mutate(Campaign = factor(Campaign, levels = c("October21", "June22")))
 
-#df <- ind_ports %>%
-#  rownames_to_column(var="RowNames") %>%
-#  separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
-#  mutate(Campaign = factor(Campaign, levels = c("October21", "June22"))) %>%
-#  group_by(Site) %>%
-#  summarise(All = mean(R),
-#            Threatened = mean(RedList)) %>%
-#  pivot_longer(cols=2:3, names_to = "Species", values_to = "Y")
+df <- ind_ports %>%
+  rownames_to_column(var="RowNames") %>%
+  separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
+  mutate(Campaign = factor(Campaign, levels = c("October21", "June22"))) %>%
+  group_by(Site) %>%
+  summarise(All = mean(R),
+            Cryptobenthics = mean(Crypto)) %>%
+  pivot_longer(cols=2:3, names_to = "Species", values_to = "Y")
 
 # list of port names
 ports <- unique(df$Site)
@@ -209,16 +209,15 @@ port_names[7] <- "St.Maries Mer"
 bp <- list()
 
 for (i in 1: 7) {
-  df_i <- df[which(df$Site %in% ports[i]),c("R", "Site", "Campaign")]
-  colnames(df_i) <- c("Y", "Site", "Sampling")
+  df_i <- df[which(df$Site %in% ports[i]),c("Y", "Site", "Species")]
   to_plot <- df_i %>% 
-    group_by(Sampling) %>% 
+    group_by(Species) %>% 
     summarise(value = mean(Y),
               sd=sd(Y)) 
   
-  bp[[i]]<-ggplot(data=to_plot, aes(x=Sampling, y=value, fill=Sampling)) +
+  bp[[i]]<-ggplot(data=to_plot, aes(x=Species, y=value, fill=Species)) +
     geom_bar( position = 'dodge',stat="identity") +
-    scale_fill_manual(values=c("lightsalmon", "lightblue2")) +
+    scale_fill_manual(values=c("lightgreen", "grey70")) +
     ylim(0,68) +
     theme(
       panel.background = element_rect(fill='transparent'), #transparent panel bg
@@ -226,9 +225,9 @@ for (i in 1: 7) {
       panel.grid.major = element_blank(), #remove major gridlines
       panel.grid.minor = element_blank(), #remove minor gridlines 
       legend.position="none") +
-    labs(y="Richness",
+    labs(y="Species richness",
          title=port_names[i]) +
-    scale_x_discrete(labels=c("Oct. 21","Jun. 22")) +
+    scale_x_discrete(labels=c("Total","Cryptobenthics")) +
     theme(axis.text.y=element_text(colour="black",size=10)) +
     theme(axis.text.x=element_text(colour="black",size=10, angle=30, vjust=0.8)) +
     theme(axis.title.y = element_blank()) +
@@ -278,7 +277,7 @@ final <- image_composite(final, barfig7, offset = "+440+330") #
 final
 
 ### Save the map
-image_write(final, "01_Analyses_teleo/03_Outputs/Map_Richesse.png", density=300)
+image_write(final, "01_Analyses_teleo/03_Outputs/Map_Richesse_crypto.png", density=300)
 
 #############################################################################################
 ## Barplot per port per campaign
