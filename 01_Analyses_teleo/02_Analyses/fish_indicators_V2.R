@@ -491,13 +491,26 @@ indicators2[,"PD"] <- pd.result$PD
 
 write.table(indicators2, file="01_Analyses_teleo/00_data/indicators_ports_2022_per_port.csv", sep=",")
 
-
 #### Summarize total
 indicators2  %>% 
   as.data.frame(.) %>%
   summarise(across(everything(), list(mean=mean,
                                       min=min,
                                       max=max)))
+
+############################################################################################################
+## Calculate total species richness per port (Combining Oct and June campaigns)
+############################################################################################################
+## Load data
+data <- read.csv("01_Analyses_teleo/00_data/teleo_presence_per_port.csv", row.names=1) 
+
+R_total <- apply(data, 2, sum)
+R_total_df <- cbind.data.frame(colnames(data),
+                            R_total)
+colnames(R_total_df)[1] <- "Port"
+R_total_df$Port <- gsub("\\.", " ", R_total_df$Port)
+
+write.csv("01_Analyses_teleo/00_data/Richness_total_port.csv", row.names=F)
 
 #######################################################################################################
 ## Plots
