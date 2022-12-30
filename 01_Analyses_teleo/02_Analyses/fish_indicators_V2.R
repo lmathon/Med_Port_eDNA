@@ -510,7 +510,7 @@ R_total_df <- cbind.data.frame(colnames(data),
 colnames(R_total_df)[1] <- "Port"
 R_total_df$Port <- gsub("\\.", " ", R_total_df$Port)
 
-write.csv("01_Analyses_teleo/00_data/Richness_total_port.csv", row.names=F)
+write.csv(R_total_df, "01_Analyses_teleo/00_data/Richness_total_port.csv", row.names=F)
 
 #######################################################################################################
 ## Plots
