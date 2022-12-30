@@ -192,6 +192,12 @@ library(tidyr)
 ########################################################################################
 ## MAP
 #########################################################################################
+ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_port.csv", header=T, row.names=1)
+R_tot <- read.csv("01_Analyses_teleo/00_data/Richness_total_port.csv") %>%
+  mutate(Campaign ="Total") %>%
+  rename(R = R_total,
+         Site = Port) %>%
+  dplyr::select(Site, Campaign, R)
 
 # Download the map for the Mediterranean Sea
 wH <- map_data("worldHires",  xlim=c(-8,37), ylim=c(29.5,47)) # subset polygons surrounding med sea
@@ -226,7 +232,10 @@ dev.off()
 df <- ind_ports %>%
   rownames_to_column(var="RowNames") %>%
   separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
-  mutate(Campaign = factor(Campaign, levels = c("October21", "June22")))
+  mutate(Campaign = factor(Campaign, levels = c("October21", "June22"))) %>%
+  dplyr::select(Site, Campaign, R) %>%
+  bind_rows(R_tot) %>%
+  mutate(Campaign = factor(Campaign, levels = c("Total","October21", "June22"))) 
 
 df <- ind_ports %>%
   rownames_to_column(var="RowNames") %>%
@@ -246,16 +255,12 @@ port_names[7] <- "St.Maries Mer"
 bp <- list()
 
 for (i in 1: 7) {
-  df_i <- df[which(df$Site %in% ports[i]),c("Y", "Site", "Species")]
-  to_plot <- df_i %>% 
-    group_by(Species) %>% 
-    summarise(value = mean(Y),
-              sd=sd(Y)) 
+  to_plot <- df[which(df$Site %in% ports[i]),]
   
-  bp[[i]]<-ggplot(data=to_plot, aes(x=Species, y=value, fill=Species)) +
+  bp[[i]]<-ggplot(data=to_plot, aes(x=Campaign, y=R, fill=Campaign)) +
     geom_bar( position = 'dodge',stat="identity") +
-    scale_fill_manual(values=c("lightgreen", "sandybrown")) +
-    ylim(0,68) +
+    scale_fill_manual(values=c("lightblue","lightgreen", "sandybrown")) +
+    ylim(0,78) +
     theme(
       panel.background = element_rect(fill='transparent'), #transparent panel bg
       plot.background = element_rect(fill='transparent', color=NA), #transparent plot bg
@@ -264,12 +269,12 @@ for (i in 1: 7) {
       legend.position="none") +
     labs(y="Species richness",
          title=port_names[i]) +
-    scale_x_discrete(labels=c("Total","Cryptobenthics")) +
-    theme(axis.text.y=element_text(colour="black",size=8)) +
-    theme(axis.text.x=element_text(colour="black",size=8, angle=30, vjust=0.8)) +
+    scale_x_discrete(labels=c("Total","Autumn", "Spring")) +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=7, angle=30, vjust=0.8)) +
     theme(axis.title.y = element_blank()) +
     theme(axis.title.x=element_blank())  +
-    theme(plot.title = element_text(colour="black", size=9, face="bold", hjust=0.5)) 
+    theme(plot.title = element_text(colour="black", size=7, face="bold", hjust=0.5)) 
   
 }
 names(bp) <- ports
@@ -314,7 +319,7 @@ final <- image_composite(final, barfig7, offset = "+440+330") #
 final
 
 ### Save the map
-image_write(final, "01_Analyses_teleo/03_Outputs/Map_Richesse_crypto.png", density=300)
+image_write(final, "01_Analyses_teleo/03_Outputs/Map_Richesse_total.png", density=300)
 
 #############################################################################################
 ## Barplot per port per campaign
