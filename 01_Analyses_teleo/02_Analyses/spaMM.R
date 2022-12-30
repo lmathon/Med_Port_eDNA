@@ -45,7 +45,10 @@ ind_ports <- ind_ports %>%
 # Combiner les deux datasets
 ind_all <- rbind(ind_nat,ind_ports) %>%
   mutate(DeBRa = log10(DeBRa)) %>%
-  mutate_at('Confinement', as.factor)
+  mutate_at('Confinement', as.factor)  %>%
+  mutate_at('X', as.numeric)  %>%
+  mutate_at('Y', as.numeric)
+
 
 ind_all$habitat <- factor(ind_all$habitat, levels=c("reserve", "outside", "Port"))
 ind_all$Confinement <- factor(ind_all$Confinement, labels=c("Unlock", "Lockdown"))
@@ -59,39 +62,24 @@ coords<- ind_all %>%
   as.matrix(.)
 
 
-# Create a vector of distributions : Poisson for RedList and Chondri, 
-# and Gaussian for all the others
-distri <- c("gaussian", "gaussian", 
-            "quasipoisson", "gaussian")
-
 
 ###################################################################
 ## Fit models
 ###################################################################
 # Fit the model
 mod <- list()
-mod[[1]] <- fitme(R ~ Protection + Depth + gravtot2_log + CoralCover + 
-                    Env_PC1 + Env_PC2 + Env_PC3 + 
-                    Hab_PC1 + Hab_PC2 + Hab_PC3 + Hab_PC4 + Hab_PC5 +
-                    Matern(1 | SiteLongitude + SiteLatitude),
+mod[[1]] <- fitme(R ~ habitat * Confinement + Matern(1|X+Y),
                   family = "gaussian",  data = ind_all)
 
-mod[[2]] <- fitme(Fhill ~ Protection + Depth + gravtot2_log + CoralCover + 
-                    Env_PC1 + Env_PC2 + Env_PC3 + 
-                    Hab_PC1 + Hab_PC2 + Hab_PC3 + Hab_PC4 + Hab_PC5 +
-                    Matern(1 | SiteLongitude + SiteLatitude),
-                  family = "gaussian",  data = mydata)
-mod[[3]] <- fitme(Phill ~ Protection + Depth + gravtot2_log + CoralCover + 
-                    Env_PC1 + Env_PC2 + Env_PC3 + 
-                    Hab_PC1 + Hab_PC2 + Hab_PC3 + Hab_PC4 + Hab_PC5 +
-                    Matern(1 | SiteLongitude + SiteLatitude),
-                  family = "gaussian",  data = mydata)
-mod[[4]] <- fitme(DeBRa_log ~ Protection + Depth + gravtot2_log + CoralCover + 
-                    Env_PC1 + Env_PC2 + Env_PC3 + 
-                    Hab_PC1 + Hab_PC2 + Hab_PC3 + Hab_PC4 + Hab_PC5 +
-                    Matern(1 | SiteLongitude + SiteLatitude),
-                  family = "gaussian",  data = mydata)
+mod[[2]] <- fitme(Crypto ~ habitat * Confinement + Matern(1|X+Y),
+                  family = "gaussian",  data = ind_all)
+
+mod[[3]] <- fitme(RedList ~ habitat * Confinement + Matern(1|X+Y),
+                  family = "poisson",  data = ind_all)
+
+mod[[4]] <- fitme(Commercial ~ habitat * Confinement + Matern(1|X+Y),
+                  family = "gaussian",  data = ind_all)
 
 
-names(mod) <- colnames(Y)[-2]
-saveRDS(mod, file="models_spaMM_presence.RDS")
+names(mod) <- ind_names
+saveRDS(mod, file="01_Analyses_teleo/02_Analyses/models_spaMM_indicators.RDS")
