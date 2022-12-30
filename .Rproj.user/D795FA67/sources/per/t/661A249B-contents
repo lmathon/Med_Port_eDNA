@@ -1,0 +1,537 @@
+library(tidyverse)
+library(dplyr)
+library(fastDummies)
+library(corrplot)
+library(ggpubr)
+library(gridExtra)
+library(spdep)
+library(rsq)
+library(MuMIn)
+library(visreg)
+library(sjPlot)
+library(car)
+library(MASS)
+library(spdep)
+
+# Load metadata data 
+metadata <- read.csv("Data/Site_Env_Socio_MPA_metadata_AllenAtlas.csv", header=T) %>%
+  mutate(SurveyID = as.character(SurveyID))
+
+# summarise data
+#metadata %>%
+  #group_by(Protection) %>%
+  #summarise(n=n())
+# Fishing n = 1411 ; No-take n = 939 ; Partialn= 755
+
+# Load indicators
+indicators <- read.csv("Data/Indicators_unweighted_20220301.csv", header=T, row.names=1) %>%
+  rownames_to_column(var="SurveyID") %>%
+  mutate(SurveyID = gsub("X", "", SurveyID))
+# Load environmenal PCA axis
+env.pca <- read.csv("PCA_Env_survey_coord.csv", header=T, row.names = 1) %>%
+  rename(Env_PC1 = Dim.1,
+         Env_PC2 = Dim.2,
+         Env_PC3 = Dim.3,
+         Env_PC4 = Dim.4) %>%
+  rownames_to_column(var="SurveyID")
+
+# Load environmenal PCA axis
+hab.pca <- read.csv("PCA_Habitat_survey_coord.csv", header=T, row.names = 1) %>%
+  rename(Hab_PC1 = Dim.1,
+         Hab_PC2 = Dim.2,
+         Hab_PC3 = Dim.3,
+         Hab_PC4 = Dim.4,
+         Hab_PC5 = Dim.5) %>%
+  rownames_to_column(var="SurveyID")
+
+## Combine data
+mydata <- indicators %>%
+  inner_join(metadata, by="SurveyID") %>%
+  inner_join(env.pca, by="SurveyID") %>%
+  inner_join(hab.pca, by="SurveyID") %>%
+  # order the levels of the protection variables
+  mutate(Protection = ordered(Protection, levels = c("Fishing", "Partial", "No-Take")))
+
+
+## Y variables : indicators
+Y <- mydata %>%
+  dplyr::select("R",  
+         "Thill",
+         "Fhill",  # functional metrics
+         "Phill",  # phylogenetic metrics
+         "DeBRa",  # Crypto
+         "RedList", # IUCN
+         "LRFI", # commercial
+         "TopPred") # Trophic
+
+## X variables : Protection, habitat, depth, gravity,Environmental PCA axis
+X <- mydata %>%
+  dplyr::select(Protection, Depth, gravtot2, Env_PC1, Env_PC2, Env_PC3, Hab_PC1, Hab_PC2, Hab_PC3)
+
+###################################################################
+## Species richness
+###################################################################
+# Fit the model
+modR <- glm(R ~ Protection*Depth*gravtot2 + Env_PC1 + Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+            data = mydata, na.action="na.fail")
+Anova(modR,test.statistic="F")
+## variable selection
+stepAIC(modR)
+# Fit the parsimonious model
+modR2 <- glm(R ~ Protection + Depth + gravtot2 + Env_PC2 + 
+               Env_PC3 + Hab_PC1 + Hab_PC3 + Protection:Depth, 
+            data = mydata, na.action="na.fail")
+
+rsq(modR2) # 0.32
+Anova(modR2,test.statistic="F")
+# VIF of model without interactions
+vif(glm(R ~ Protection + Depth + gravtot2 + Env_PC2 + 
+          Env_PC3 + Hab_PC1 + Hab_PC3 , data = mydata, na.action="na.fail"))
+
+# Extract conditional effects of variables
+vR_DP <- visreg(modR2, "Depth",by = 'Protection', scale='response')
+vR_P <- visreg(modR2, "Protection",scale='response', type="conditional")
+vR_G <- visreg(modR2, "gravtot2",scale='response', type="conditional")
+
+###################################################################
+## Taxonomic Hill Diversity
+###################################################################
+# Fit the model
+modT <- glm(Thill ~ Protection*Depth*gravtot2 + Env_PC1 + Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+            data = mydata, na.action="na.fail")
+Anova(modT,test.statistic="F")
+## variable selection
+stepAIC(modT)
+# Fit the parsimonious model
+modT2 <- glm(Thill ~ Protection + Depth + gravtot2 + 
+               Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC3 + Protection:Depth, 
+             data = mydata, na.action="na.fail")
+
+rsq(modT2) # 0.32
+Anova(modT2,test.statistic="F")
+# Extract conditional effects of variables
+vT_DP <- visreg(modT2, "Depth",by = 'Protection', scale='response')
+vT_P <- visreg(modT2, "Protection",scale='response', type="conditional")
+vT_G <- visreg(modT2, "gravtot2",scale='response', type="conditional")
+
+###################################################################
+## Funcional Hill Diversity
+###################################################################
+# Fit the model
+modF <- glm(Fhill ~ Protection*Depth+gravtot2 + Env_PC1 + Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+            data = mydata, na.action="na.fail")
+Anova(modF,test.statistic="F")
+## variable selection
+stepAIC(modF)
+# Fit the parsimonious model
+modF2 <- glm(Fhill ~ Protection + Depth + Env_PC1 + Hab_PC3 , 
+             data = mydata, na.action="na.fail")
+
+rsq(modF2) # 0.17
+Anova(modF2,test.statistic="F")
+# Extract conditional effects of variables
+vF_D <- visreg(modF2, "Depth",scale='response', type="conditional")
+vF_DP <- visreg(modF2, "Depth",by = 'Protection', scale='response')
+vF_P <- visreg(modF2, "Protection",scale='response', type="conditional")
+
+###################################################################
+## Phylogenetic Hill Diversity
+###################################################################
+# Fit the model
+modP <- glm(Phill ~ Protection*Depth+gravtot2 + Env_PC1 + Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+            data = mydata, na.action="na.fail")
+Anova(modP,test.statistic="F")
+## variable selection
+stepAIC(modP)
+# Fit the parsimonious model
+modP2 <- glm(Phill ~ Protection * Depth  + Env_PC1 + 
+               Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+             data = mydata, na.action="na.fail")
+
+rsq(modP2) # 0.40
+Anova(modP2,test.statistic="F")
+# Extract conditional effects of variables
+vP_DP <- visreg(modP2, "Depth",by = 'Protection', scale='response')
+vP_P <- visreg(modP2, "Protection", scale='response', type="conditional")
+
+###################################################################
+## Ration dermerso-pelagic / benthic
+###################################################################
+# Log-transformm to get normal distribution of Y
+mydata <- mydata %>%
+  mutate(DeBRa_log = log10(DeBRa))
+# Fit the model
+modD <- glm(DeBRa_log ~ Protection*Depth*gravtot2 + Env_PC1 + Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+            data = mydata, na.action="na.fail")
+Anova(modD,test.statistic="F")
+## variable selection
+stepAIC(modD)
+# Fit the parsimonious model
+modD2 <- glm(DeBRa_log ~ Protection + Depth + gravtot2 + Env_PC1 + 
+               Env_PC2 + Env_PC3 + Hab_PC1 + Protection:gravtot2, 
+             data = mydata, na.action="na.fail")
+
+rsq(modD2) # 0.14
+Anova(modD2,test.statistic="F")
+# Extract conditional effects of variables
+vD_D <- visreg(modD2, "Depth",scale='response', type="conditional")
+vD_GP <- visreg(modD2, "gravtot2",by = 'Protection', scale='response')
+vD_P <- visreg(modD2, "Protection",scale='response', type="conditional")
+
+###################################################################
+## Threatened species
+###################################################################
+# Fit the model with Poisson distribution
+modRed <- glm(RedList ~ Protection*Depth*gravtot2 + Env_PC1 + Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+            data = mydata, na.action="na.fail", family='poisson')
+Anova(modRed,test.statistic="F")
+## variable selection
+stepAIC(modRed)
+# Fit the parsimonious model
+modRed2 <- glm(RedList ~ Protection + Depth + gravtot2 + Env_PC1 + 
+                 Env_PC2 + Env_PC3 + Hab_PC3 + Protection:gravtot2, 
+             data = mydata, na.action="na.fail", family='poisson')
+
+rsq(modRed2) # 0.18
+Anova(modRed2,test.statistic="F")
+# Extract conditional effects of variables
+vRed_D <- visreg(modRed2, "Depth", scale='response', type="conditional")
+vRed_GP <- visreg(modRed2, "gravtot2",by = 'Protection', scale='response')
+vRed_P <- visreg(modRed2, "Protection",scale='response', type="conditional")
+
+###################################################################
+## Large Reef Fish
+###################################################################
+# Fit the model 
+modL <- glm(LRFI ~ Protection*gravtot2+Depth + Env_PC1 + Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+              data = mydata, na.action="na.fail")
+Anova(modL,test.statistic="F")
+## variable selection
+stepAIC(modL)
+# Fit the parsimonious model
+modL2 <- glm(LRFI ~ Protection + gravtot2 + Env_PC1 + Env_PC2 + 
+               Env_PC3 + Hab_PC1 + Hab_PC3, 
+               data = mydata, na.action="na.fail")
+
+rsq(modL2) # 0.31
+Anova(modL2,test.statistic="F")
+# Extract conditional effects of variables
+vL_G <- visreg(modL2, "gravtot2",scale='response', type="conditional")
+vL_P <- visreg(modL2, "Protection",scale='response', type="conditional")
+
+###################################################################
+## Top Predators
+###################################################################
+# Fit the model with Poisson distribution
+modTop <- glm(TopPred ~ Protection*gravtot2*Depth + Env_PC1 + Env_PC2 + Env_PC3 + Hab_PC1 + Hab_PC2 + Hab_PC3, 
+              data = mydata, na.action="na.fail", family='poisson')
+Anova(modTop,test.statistic="F")
+## variable selection
+stepAIC(modTop)
+# Fit the parsimonious model
+modTop2 <- glm(TopPred ~ Protection + gravtot2 + Depth + Env_PC2 + 
+                 Hab_PC1 + Hab_PC3 + Protection:gravtot2, 
+               data = mydata, na.action="na.fail", family="poisson")
+
+rsq(modTop2) # 0.16
+Anova(modTop2,test.statistic="F")
+# Extract conditional effects of variables
+vTop_D <- visreg(modTop2, "Depth", scale='response', type="conditional")
+vTop_GP <- visreg(modTop2, "gravtot2",by = 'Protection', scale='response')
+vTop_P <- visreg(modTop2, "Protection",scale='response', type="conditional")
+
+
+## Save all models in a list
+mod_list_pres <- list(modR2, modT2, modF2, modP2, modL2, modTop2, modRed2, modD2)
+save(mod_list_pres, file="GLMs_presence_ALL.RData")
+
+#####################################################################################
+### Figures for binary explanatory variable : Protection
+#####################################################################################
+mytheme <- theme_bw() +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.position="none",
+        axis.text.y=element_text(colour="black",size=9),
+        axis.text.x=element_text(colour="black",size=10),
+        axis.title.y=element_text(colour="black",size=10),
+        axis.title.x=element_blank()) 
+
+## List all visreg plots for Protection
+visreg_protection <- list(vT_P, vF_P,vP_P, vL_P, vTop_P,vRed_P,vD_P)
+# vector of indicator names
+ind_name <- c("Species richness", "Functional Hill", "Phylogenetic Hill",
+              "LRFI", "Top predators", "Threatened species",
+              "log(DeBRa)")
+# initiate plot list
+p <- list()
+
+## Loop to draw plots
+for (i in 1:7) {
+  v_i <- visreg_protection[[i]]
+  p[[i]] <- ggplot(v_i$fit,aes(x=Protection, y = visregFit))+
+    #geom_jitter(data = v_i$res, mapping = aes(x = Protection, y = visregRes), colour="grey50", size=0.1) +
+    geom_crossbar(aes(ymin=visregLwr, ymax=visregUpr, fill = Protection), 
+                  linetype=0, alpha=0.3) +
+    geom_errorbar(aes(ymin=visregFit, ymax=visregFit, colour = Protection), 
+                  linetype=1, width=0.9, lwd=1.2) +
+    scale_colour_manual(values = c("darkorange", "springgreen4","dodgerblue3")) +
+    scale_fill_manual(values = c("darkorange", "springgreen4","dodgerblue3")) +
+    ylab(ind_name[i]) +
+    scale_x_discrete(labels = c("Fished", "Restricted", "No-take")) +
+    mytheme
+  # annotate("text", x = 0.55, y = 0.75, label = "a)", size = 8)
+}
+
+## Combine plots and save
+library(gridExtra)
+Fig1 <- do.call("grid.arrange", c(p, ncol=3))
+# save the figure
+ggsave("Plots/Presence/Visreg_Protection.jpeg",
+       plot=Fig1,
+       width = 20,
+       height = 18,
+       units = "cm")
+
+#####################################################################################
+### Figures for Depth by Protection
+#####################################################################################
+## List all visreg plots for Depth by Protection
+visreg_depthprotection <- list(vT_DP, vF_DP,vP_DP)
+# vector of indicator names
+ind_name <- c("Species richness", "Functional Hill", "Phylogenetic Hill")
+# initiate plot list : one per protection level
+pF <- list()
+pR <- list()
+pN <- list()
+
+## Loop to draw plots
+for (i in 1:3) {
+  v_i <- visreg_depthprotection[[i]]
+  pF[[i]] <- ggplot(v_i$fit[which(v_i$fit$Protection == "Fishing"),],aes(x=Depth, y = visregFit))+
+  geom_ribbon (aes(x = Depth, ymin=visregLwr, ymax=visregUpr), 
+               fill = "grey70", alpha = 0.3) +
+  geom_line(aes(x = Depth, y = visregFit), size=1, color="black") +
+  theme_bw() +
+  labs(title = "Fished") +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  ylab(ind_name[i]) +
+  xlab("Depth (m)") +
+  theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=6)) +
+    theme(axis.title=element_text(colour="black",size=8)) +
+    theme(plot.title = element_text(size = 8, face="bold", hjust=0.5)) 
+  
+  pR[[i]] <- ggplot(v_i$fit[which(v_i$fit$Protection == "Partial"),],aes(x=Depth, y = visregFit))+
+    geom_ribbon (aes(x = Depth, ymin=visregLwr, ymax=visregUpr), 
+                 fill = "grey70", alpha = 0.3) +
+    geom_line(aes(x = Depth, y = visregFit), size=1, color="black") +
+    theme_bw() +
+    labs(title = "Restricted") +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    ylab(ind_name[i]) +
+    xlab("Depth (m)") +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=6)) +
+    theme(axis.title=element_text(colour="black",size=8)) +
+    theme(plot.title = element_text(size = 8, face="bold", hjust=0.5))  
+  
+  pN[[i]] <- ggplot(v_i$fit[which(v_i$fit$Protection == "No-Take"),],aes(x=Depth, y = visregFit))+
+    geom_ribbon (aes(x = Depth, ymin=visregLwr, ymax=visregUpr), 
+                 fill = "grey70", alpha = 0.3) +
+    geom_line(aes(x = Depth, y = visregFit), size=1, color="black") +
+    theme_bw() +
+    labs(title = "No-take") +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    ylab(ind_name[i]) +
+    xlab("Depth (m)") +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=6)) +
+    theme(axis.title=element_text(colour="black",size=8)) +
+    theme(plot.title = element_text(size = 8, face="bold", hjust=0.5)) 
+  
+}
+
+Fig2 <- gridExtra::grid.arrange(grobs = c(pF, pR, pN), ncol=3, as.table=F)
+# save the figure
+ggsave("Plots/Presence/Visreg_DepthProtection.jpeg",
+       plot=Fig2,
+       width = 15,
+       height = 15,
+       units = "cm")
+
+#####################################################################################
+### Figures for Gravity by Protection
+#####################################################################################
+## List all visreg plots for Gravity by protection
+visreg_Gravityprotection <- list(vD_GP, vRed_GP, vTop_GP)
+# vector of indicator names
+ind_name <- c("log(DeBRa)", "Top predators", "Threatened species")
+# initiate plot list : one per protection level
+pF <- list()
+pR <- list()
+pN <- list()
+
+## Loop to draw plots
+for (i in 1:3) {
+  v_i <- visreg_Gravityprotection[[i]]
+  pF[[i]] <- ggplot(v_i$fit[which(v_i$fit$Protection == "Fishing"),],aes(x=gravtot2, y = visregFit))+
+    geom_ribbon (aes(x = gravtot2, ymin=visregLwr, ymax=visregUpr), 
+                 fill = "grey70", alpha = 0.3) +
+    geom_line(aes(x = gravtot2, y = visregFit), size=1, color="black") +
+    theme_bw() +
+    labs(title = "Fished") +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    ylab(ind_name[i]) +
+    xlab("Gravity") +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=6)) +
+    theme(axis.title=element_text(colour="black",size=8)) +
+    theme(plot.title = element_text(size = 8, face="bold", hjust=0.5)) 
+  
+  pR[[i]] <- ggplot(v_i$fit[which(v_i$fit$Protection == "Partial"),],aes(x=gravtot2, y = visregFit))+
+    geom_ribbon (aes(x = gravtot2, ymin=visregLwr, ymax=visregUpr), 
+                 fill = "grey70", alpha = 0.3) +
+    geom_line(aes(x = gravtot2, y = visregFit), size=1, color="black") +
+    theme_bw() +
+    labs(title = "Restricted") +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    ylab(ind_name[i]) +
+    xlab("Gravity") +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=6)) +
+    theme(axis.title=element_text(colour="black",size=8)) +
+    theme(plot.title = element_text(size = 8, face="bold", hjust=0.5))  
+  
+  pN[[i]] <- ggplot(v_i$fit[which(v_i$fit$Protection == "No-Take"),],aes(x=gravtot2, y = visregFit))+
+    geom_ribbon (aes(x = gravtot2, ymin=visregLwr, ymax=visregUpr), 
+                 fill = "grey70", alpha = 0.3) +
+    geom_line(aes(x = gravtot2, y = visregFit), size=1, color="black") +
+    theme_bw() +
+    labs(title = "No-take") +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    ylab(ind_name[i]) +
+    xlab("Gravity") +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=6)) +
+    theme(axis.title=element_text(colour="black",size=8)) +
+    theme(plot.title = element_text(size = 8, face="bold", hjust=0.5)) 
+  
+}
+
+Fig3 <- gridExtra::grid.arrange(grobs = c(pF, pR, pN), ncol=3, as.table=F)
+# save the figure
+ggsave("Plots/Presence/Visreg_GravityProtection.jpeg",
+       plot=Fig3,
+       width = 15,
+       height = 15,
+       units = "cm")
+
+#####################################################################################
+### Figures for Gravity / Depth without interaction
+#####################################################################################
+## List all visreg plots
+visreg_GravDepth <- list(vT_G, vL_G, vRed_D, vTop_D)
+# vector of indicator names
+ind_name <- c("Species richness","LRFI", "Top predators", "Threatened species")
+# vector of X variable
+X_name <- c("Gravity", "Gravity", "Depth (m)", "Depth (m)")
+# initiate plot list : one per protection level
+p2 <- list()
+
+## Loop to draw plots
+for (i in 1:2) {
+  v_i <- visreg_GravDepth[[i]]
+  p2[[i]] <- ggplot(v_i$fit,aes(x=gravtot2, y = visregFit))+
+    geom_ribbon (aes(x = gravtot2, ymin=visregLwr, ymax=visregUpr), 
+                 fill = "grey70", alpha = 0.3) +
+    geom_line(aes(x = gravtot2, y = visregFit), size=1, color="black") +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    ylab(ind_name[i]) +
+    xlab(X_name[i]) +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=6)) +
+    theme(axis.title=element_text(colour="black",size=8)) +
+    theme(plot.title = element_text(size = 8, face="bold", hjust=0.5)) 
+}
+
+for (i in 3:4) {
+  v_i <- visreg_GravDepth[[i]]
+  p2[[i]] <- ggplot(v_i$fit,aes(x=Depth, y = visregFit))+
+    geom_ribbon (aes(x = Depth, ymin=visregLwr, ymax=visregUpr), 
+                 fill = "grey70", alpha = 0.3) +
+    geom_line(aes(x = Depth, y = visregFit), size=1, color="black") +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    ylab(ind_name[i]) +
+    xlab(X_name[i]) +
+    theme(legend.position="none") +
+    theme(axis.text.y=element_text(colour="black",size=7)) +
+    theme(axis.text.x=element_text(colour="black",size=6)) +
+    theme(axis.title=element_text(colour="black",size=8)) +
+    theme(plot.title = element_text(size = 8, face="bold", hjust=0.5)) 
+}
+
+Fig4 <- do.call("grid.arrange", c(p2, ncol=2))
+# save the figure
+ggsave("Plots/Presence/Visreg_GravityDepth.jpeg",
+       plot=Fig4,
+       width = 15,
+       height = 15,
+       units = "cm")
+
+#####################################################################################
+### Test for spatial autocorrelation in the residuals
+#####################################################################################
+### Matrix of spatial coordinates
+coords<- mydata %>%
+  dplyr::select(SiteLongitude, SiteLatitude) %>%
+  as.matrix(.)
+
+lstw <- nb2listw((knn2nb(knearneigh(coords, k=1, longlat = T, 
+                                    use_kd_tree=F))))
+
+# Compute Moran's I using residuals of model and also raw data
+png("Plots/Presence/QQplot_residuals.png", width = 800, height = 900)
+layout(
+  matrix(1:9, ncol=3, byrow=TRUE),  # plot 12 graphs in 3 columns
+  widths=c(1,1,1), # widths of each column
+  heights=c(1,1,1)) # height of each row
+
+moran_p <- vector()
+for (i in 1:8) {
+  m_i <- mod_list_pres[[i]]
+  moran_p[i] <-moran.test(m_i$residuals, lstw, 
+                          alternative="two.sided")$p.value 
+  
+  # QQ plot of residuals
+  m.stdres = rstandard(m_i)
+  qqnorm(m.stdres, 
+         ylab="Standardized Residuals", 
+         xlab="Normal Scores", 
+         main=paste0(colnames(Y)[i], " - Moran.I test p=", round(moran_p[i], 3)),
+         cex=1.2, cex.axis=1.3,cex.lab=1.3, cex.main=1.5)
+  qqline(m.stdres)
+}
+
+dev.off()
+
+moran_res <- cbind.data.frame(colnames(Y),moran_p)
+moran_res[which(moran_res$moran_p < 0.05),] # No SAS
+mean(moran_p) 
