@@ -3,6 +3,7 @@ library(dplyr)
 library(rsq)
 library(fastDummies)
 library(tidyr)
+library(tidyverse)
 library(purrr)
 library(scales)
 library(margins)
@@ -108,7 +109,7 @@ saveRDS(mod, file="01_Analyses_teleo/02_Analyses/models_spaMM_indicators.RDS")
 #################################################################################
 ## Get coefficients and conditional effects of covariates
 #################################################################################
-mod <- readRDS("01_Analyses_teleo/02_Analyses/models_spaMM_indicators")
+mod <- readRDS("01_Analyses_teleo/02_Analyses/models_spaMM_indicators.RDS")
 
 
 ## post-fit evaluation
@@ -136,11 +137,13 @@ for (i in 1:4) {
 names(R2) <- ind_names
 
 write.csv(coef, file="01_Analyses_teleo/02_Analyses/spaMM_indicators_variables_coefficients.csv")
-saveRDS(R2, file="01_Analyses_teleo/02_Analyses/spaMM_indicators_R2.csv")
+saveRDS(R2, file="01_Analyses_teleo/02_Analyses/spaMM_indicators_R2.RDS")
 
 #############################################################################################
 ### Partial effects
 ##########################################################################################
+coef <- read.csv("01_Analyses_teleo/02_Analyses/spaMM_indicators_variables_coefficients.csv", header=T, row.names=1)
+r2 <- readRDS("01_Analyses_teleo/02_Analyses/spaMM_indicators_R2.RDS")
 
 pdep <- list()
 
@@ -172,33 +175,50 @@ names(pdep) <-  names(mod)
 saveRDS(pdep, "01_Analyses_teleo/02_Analyses/spaMM_Conditional_effect_variables.RDS")
 
 #####################################################################################
-### Figures 3a - Work in progress
+### Figures 3a 
 #####################################################################################
+pdep <- readRDS("01_Analyses_teleo/02_Analyses/spaMM_Conditional_effect_variables.RDS")
+
 mytheme <- theme_bw() +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         legend.position="none",
-        axis.text.y=element_text(colour="black",size=9),
-        axis.text.x=element_text(colour="black",size=10),
-        axis.title.y=element_text(colour="black",size=10),
-        axis.title.x=element_blank()) 
+        axis.text.y=element_text(colour="black",size=14),
+        axis.text.x=element_text(colour="black",size=15),
+        axis.title.y=element_text(colour="black",size=14),
+        strip.text = element_text(size = 15),
+        axis.title.x=element_blank(),
+        plot.title = element_text(colour="black", size=15, face="bold", hjust=0.5),
+        plot.subtitle = element_text(colour="black", size=15,  hjust=0.5)) 
 
 # initiate plot list
 p <- list()
 
 ## Loop to draw plots
 for (i in 1:4) {
-  v_i <- visreg_protection[[i]]
-  p[[i]] <- ggplot(v_i$fit,aes(x=Protection, y = visregFit))+
+  v_i <- pdep[[i]]
+  v_i$focal_var <- factor(v_i$focal_var, levels=c("reserve", "outside", "Port"))
+  v_i$Confinement <- factor(v_i$Confinement, levels=c("Unlock", "Lockdown"))
+  R2round <- round(R2[i], digit=3)
+  
+  p[[i]] <- ggplot(v_i,aes(x=focal_var, y = pointp))+
     #geom_jitter(data = v_i$res, mapping = aes(x = Protection, y = visregRes), colour="grey50", size=0.1) +
-    geom_crossbar(aes(ymin=visregLwr, ymax=visregUpr, fill = Protection), 
+    geom_crossbar(aes(ymin=low, ymax=up, fill = focal_var), 
                   linetype=0, alpha=0.3) +
-    geom_errorbar(aes(ymin=visregFit, ymax=visregFit, colour = Protection), 
+    facet_wrap(~Confinement, scales="free_x") + # argument scales = "free_x" removes the empty factors (no Port during lockdown)
+    geom_errorbar(aes(ymin=pointp, ymax=pointp, colour = focal_var), 
                   linetype=1, width=0.9, lwd=1.2) +
-    scale_colour_manual(values = c("darkorange", "springgreen4","dodgerblue3")) +
-    scale_fill_manual(values = c("darkorange", "springgreen4","dodgerblue3")) +
-    ylab(ind_name[i]) +
-    scale_x_discrete(labels = c("Fished", "Restricted", "No-take")) +
-    mytheme
-  # annotate("text", x = 0.55, y = 0.75, label = "a)", size = 8)
+    scale_colour_manual(values = c("darkblue", "cyan4",  "darkorange")) +
+    scale_fill_manual(values =  c("darkblue", "cyan4",  "darkorange")) +
+    labs(y="Species richness",
+         title=ind_names[i],
+         subtitle = bquote(R^2 == .(R2round))) +
+    scale_x_discrete(labels = c("Reserve", "Fished", "Port")) +
+    mytheme 
 }
+
+## Save plot
+png("01_Analyses_teleo/03_Outputs/Figure3a.png", 
+    width = 1200, height = 1000, ) 
+do.call(grid.arrange,c(p, list(ncol=2)))
+dev.off()
