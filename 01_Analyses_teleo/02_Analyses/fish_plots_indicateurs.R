@@ -21,12 +21,16 @@ data <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", header=T, row.n
   t(.)  %>%
   as.data.frame(.)
 
-meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
+meta <- read.csv2("00_Metadata/metadata_port.csv", header=T)
+biohut <- meta %>% 
+  filter(type == "BIOHUT_port") %>%
+  pull(code_spygen)
 
 traits <- read.csv("01_Analyses_teleo/00_data/Functional_data_corrected_20220124.csv", header=T)
 
 ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1) %>%
-  mutate(Location = "port")
+  mutate(Location = "port") %>%
+  dplyr::filter(!rownames(.) %in% biohut)
 
 # Charger datas milieu naturel (= réserve et hors réserve)
 meta_nat <- read.csv2("00_Metadata/metadata_milieu_naturel.csv", header=T)
@@ -35,7 +39,7 @@ ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", h
   inner_join(meta_nat[,c("SPYGEN_code", "protection")], by=c("Sample"="SPYGEN_code")) %>%
   rename(Location = protection) %>%
   column_to_rownames(var="Sample") %>%
-  select(colnames(ind_ports))
+  dplyr::select(colnames(ind_ports))
 
 # Combiner les deux datasets
 ind_all <- rbind(ind_nat,ind_ports) %>%
@@ -84,12 +88,14 @@ dev.off()
 ####### Plot lockdown / reserve / ports
 ################################################################################
 # load data
-ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1)
+ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1) %>%
+  dplyr::filter(!rownames(.) %in% biohut)
+
 # Combiner les deux datasets
 ind_all <- rbind(ind_nat[,1:14],ind_ports) %>%
   mutate(DeBRa = log10(DeBRa))
 
-meta_tot <- read.csv2("00_Metadata/metadata_tot.csv", header=T)
+meta_tot <- read.csv("00_Metadata/metadata_tot.csv", header=T)
 
 meta_tot <- meta_tot %>%
   filter(habitat != "BIOHUT_port")
@@ -97,7 +103,6 @@ meta_tot <- meta_tot %>%
 ind_all <- ind_all %>%
   rownames_to_column(var="code_spygen") %>%
   inner_join(meta_tot, by="code_spygen") %>%
-  column_to_rownames(var="code_spygen") %>%
   mutate_at('Confinement', as.factor)
 
 ind_all$habitat <- factor(ind_all$habitat, levels=c("reserve", "outside", "Port"))
@@ -274,7 +279,7 @@ for (i in 1: 7) {
     theme(axis.text.x=element_text(colour="black",size=7, angle=30, vjust=0.8)) +
     theme(axis.title.y = element_blank()) +
     theme(axis.title.x=element_blank())  +
-    theme(plot.title = element_text(colour="black", size=7, face="bold", hjust=0.5)) 
+    theme(plot.title = element_text(colour="black", size=7, face="bold")) 
   
 }
 names(bp) <- ports
@@ -311,9 +316,9 @@ dev.off()
 
 final <- image_composite(fig, barfig1, offset = "+100+460")
 final <- image_composite(final, barfig2, offset = "+970+250") #
-final <- image_composite(final, barfig3, offset = "+600+440") #
+final <- image_composite(final, barfig3, offset = "+620+480") #
 final <- image_composite(final, barfig4, offset = "+250+380")
-final <- image_composite(final, barfig5, offset = "+820+480") #
+final <- image_composite(final, barfig5, offset = "+820+540") #
 final <- image_composite(final, barfig6, offset = "+100+650") #
 final <- image_composite(final, barfig7, offset = "+440+330") #
 final
