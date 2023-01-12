@@ -1,32 +1,32 @@
-"code_spygen","date","station","site","project","habitat","port","port_propre","Campaign","X","Y","surface_couverte_ha","lineaire_exterieur_m"
-"SPY213515","04/10/2021","Cannes Biohut","Cannes","MedPortADNe","BIOHUT_port","true","Port propre","October21","43.54027858308602","7.0326685845926935","10.23","1096.32"
-"SPY213512","04/10/2021","Cannes Port","Cannes","MedPortADNe","Port","true","Port propre","October21","43.54027858308602","7.0326685845926935","10.23","1096.32"
-"SPY213516","04/10/2021","Cannes Port","Cannes","MedPortADNe","Port","true","Port propre","October21","43.54027858308602","7.0326685845926935","10.23","1096.32"
-"SPY213517","05/10/2021","La Ciotat Port","La Ciotat","MedPortADNe","Port","true","Port propre","October21","43.1778044292684","5.613601324184733","5.05","630.72"
-"SPY213514","05/10/2021","La Ciotat Port","La Ciotat","MedPortADNe","Port","true","Port propre","October21","43.1778044292684","5.613601324184733","5.05","630.72"
-"SPY202505","11/10/2021","Marseillan Port","Marseillan","MedPortADNe","Port","true","Non certifie","October21","43.356587405373155","3.5343557706122213","2.34","590.09"
-"SPY202519","11/10/2021","Marseillan Port","Marseillan","MedPortADNe","Port","true","Non certifie","October21","43.356587405373155","3.5343557706122213","2.34","590.09"
-"SPY202520","11/10/2021","Marseillan Port","Marseillan","MedPortADNe","BIOHUT_port","true","Non certifie","October21","43.356587405373155","3.5343557706122213","2.34","590.09"
-"SPY213521","12/10/2021","SMM Port ","Saintes Maries de la Mer","MedPortADNe","Port","true","Port propre","October21","43.44862324479564","4.423255624743435","2.52","390.19"
-"SPY213522","12/10/2021","SMM Port ","Saintes Maries de la Mer","MedPortADNe","Port","true","Port propre","October21","43.44862324479564","4.423255624743435","2.52","390.19"
-"SPY213518","12/10/2021","SMM Port ","Saintes Maries de la Mer","MedPortADNe","BIOHUT_port","true","Port propre","October21","43.44862324479564","4.423255624743435","2.52","390.19"
-"SPY213520","13/10/2021","Agde Port","Agde","MedPortADNe","Port","true","Non certifie","October21","43.27291794682697","3.5092290417139","7.5","1322.68"
-"SPY213513","13/10/2021","Agde Port","Agde","MedPortADNe","Port","true","Non certifie","October21","43.27291794682697","3.5092290417139","7.5","1322.68"
-"SPY213525","25/10/2021","Port Vendre Port","Port Vendres","MedPortADNe","Port","true","Non certifie","October21","42.520597103260194","3.1117181010975012","5.94","102.73"
-"SPY213523","25/10/2021","Port Vendre Port","Port Vendres","MedPortADNe","Port","true","Non certifie","October21","42.520597103260194","3.1117181010975012","5.94","102.73"
-"SPY213527","29/10/2021","Porquerolles Port ","Porquerolles","MedPortADNe","Port","true","Port propre","October21","43.003408386663075","6.200826313414731","1.92","581.12"
-"SPY213519","29/10/2021","Porquerolles Port ","Porquerolles","MedPortADNe","Port","true","Port propre","October21","43.003408386663075","6.200826313414731","1.92","581.12"
-"SPY221739","3/6/2022","SMM Port ","Saintes Maries de la Mer","MedPorteDNA","Port","true","Port propre","June22","43.44862324479564","4.423255624743435","2.52","390.19"
-"SPY221740","3/6/2022","SMM Port ","Saintes Maries de la Mer","MedPorteDNA","Port","true","Port propre","June22","43.44862324479564","4.423255624743435","2.52","390.19"
-"SPY221741","7/6/2022","Agde Port","Agde","MedPorteDNA","Port","true","Non certifie","June22","43.27291794682697","3.5092290417139","7.5","1322.68"
-"SPY221742","7/6/2022","Agde Port","Agde","MedPorteDNA","Port","true","Non certifie","June22","43.27291794682697","3.5092290417139","7.5","1322.68"
-"SPY221743","22/06/2022","Port Vendre Port","Port Vendres","MedPorteDNA","Port","true","Non certifie","June22","42.520597103260194","3.1117181010975012","5.94","102.73"
-"SPY221744","22/6/2022","Port Vendre Port","Port Vendres","MedPorteDNA","Port","true","Non certifie","June22","42.520597103260194","3.1117181010975012","5.94","102.73"
-"SPY221745","28/6/2022","Cannes Port Canto","Cannes","MedPorteDNA","Port","true","Port propre","June22","43.54027858308602","7.0326685845926935","10.23","1096.32"
-"SPY221746","28/6/2022","Cannes Port Canto","Cannes","MedPorteDNA","Port","true","Port propre","June22","43.54027858308602","7.0326685845926935","10.23","1096.32"
-"SPY221747","29/6/2022","Porquerolles Port ","Porquerolles","MedPorteDNA","Port","true","Port propre","June22","43.003408386663075","6.200826313414731","1.92","581.12"
-"SPY221748","29/6/2022","Porquerolles Port ","Porquerolles","MedPorteDNA","Port","true","Port propre","June22","43.003408386663075","6.200826313414731","1.92","581.12"
-"SPY221749","30/6/2022","La Ciotat Nouveau Port","La Ciotat","MedPorteDNA","Port","true","Port propre","June22","43.1778044292684","5.613601324184733","5.05","630.72"
-"SPY221750","30/6/2022","La Ciotat Nouveau Port","La Ciotat","MedPorteDNA","Port","true","Port propre","June22","43.1778044292684","5.613601324184733","5.05","630.72"
-"SPY221751","30/6/2022","La Ciotat Nouveau Port","La Ciotat","MedPorteDNA","Port","true","Port propre","June22","43.1778044292684","5.613601324184733","5.05","630.72"
-"SPY221753","30/6/2022","La Ciotat Nouveau Port","La Ciotat","MedPorteDNA","Port","true","Port propre","June22","43.1778044292684","5.613601324184733","5.05","630.72"
+code_spygen;date;station;site;project;type;port;Certification;Campaign;Longitude;Latitude;Area_ha;Depth_m;Habitat
+SPY213515;04/10/2021;Cannes Biohut;Cannes;MedPortADNe;BIOHUT_port;TRUE;Port propre;October21;43.54027858;7.032668585;10.48;4.5;Rock
+SPY213512;04/10/2021;Cannes Port;Cannes;MedPortADNe;Port;TRUE;Port propre;October21;43.54027858;7.032668585;10.48;4.5;Rock
+SPY213516;04/10/2021;Cannes Port;Cannes;MedPortADNe;Port;TRUE;Port propre;October21;43.54027858;7.032668585;10.48;4.5;Rock
+SPY213517;05/10/2021;La Ciotat Port;La Ciotat;MedPortADNe;Port;TRUE;Port propre;October21;43.17780443;5.613601324;4.11;4;Rock
+SPY213514;05/10/2021;La Ciotat Port;La Ciotat;MedPortADNe;Port;TRUE;Port propre;October21;43.17780443;5.613601324;4.11;4;Rock
+SPY202505;11/10/2021;Marseillan Port;Marseillan;MedPortADNe;Port;TRUE;Non certifie;October21;43.35658741;3.534355771;5.81;2.25;Sand
+SPY202519;11/10/2021;Marseillan Port;Marseillan;MedPortADNe;Port;TRUE;Non certifie;October21;43.35658741;3.534355771;5.81;2.25;Sand
+SPY202520;11/10/2021;Marseillan Port;Marseillan;MedPortADNe;BIOHUT_port;TRUE;Non certifie;October21;43.35658741;3.534355771;5.81;2.25;Sand
+SPY213521;12/10/2021;SMM Port ;Saintes Maries de la Mer;MedPortADNe;Port;TRUE;Port propre;October21;43.44862324;4.423255625;4.69;2.5;Sand
+SPY213522;12/10/2021;SMM Port ;Saintes Maries de la Mer;MedPortADNe;Port;TRUE;Port propre;October21;43.44862324;4.423255625;4.69;2.5;Sand
+SPY213518;12/10/2021;SMM Port ;Saintes Maries de la Mer;MedPortADNe;BIOHUT_port;TRUE;Port propre;October21;43.44862324;4.423255625;4.69;2.5;Sand
+SPY213520;13/10/2021;Agde Port;Agde;MedPortADNe;Port;TRUE;Non certifie;October21;43.27291795;3.509229042;45.51;3.35;Rock
+SPY213513;13/10/2021;Agde Port;Agde;MedPortADNe;Port;TRUE;Non certifie;October21;43.27291795;3.509229042;45.51;3.35;Rock
+SPY213525;25/10/2021;Port Vendre Port;Port Vendres;MedPortADNe;Port;TRUE;Non certifie;October21;42.5205971;3.111718101;27.29;10;Rock
+SPY213523;25/10/2021;Port Vendre Port;Port Vendres;MedPortADNe;Port;TRUE;Non certifie;October21;42.5205971;3.111718101;27.29;10;Rock
+SPY213527;29/10/2021;Porquerolles Port ;Porquerolles;MedPortADNe;Port;TRUE;Port propre;October21;43.00340839;6.200826313;15.08;2.48;Rock
+SPY213519;29/10/2021;Porquerolles Port ;Porquerolles;MedPortADNe;Port;TRUE;Port propre;October21;43.00340839;6.200826313;15.08;2.48;Rock
+SPY221739;03/06/2022;SMM Port ;Saintes Maries de la Mer;MedPorteDNA;Port;TRUE;Port propre;June22;43.44862324;4.423255625;4.69;2.5;Sand
+SPY221740;03/06/2022;SMM Port ;Saintes Maries de la Mer;MedPorteDNA;Port;TRUE;Port propre;June22;43.44862324;4.423255625;4.69;2.5;Sand
+SPY221741;07/06/2022;Agde Port;Agde;MedPorteDNA;Port;TRUE;Non certifie;June22;43.27291795;3.509229042;45.51;3.35;Rock
+SPY221742;07/06/2022;Agde Port;Agde;MedPorteDNA;Port;TRUE;Non certifie;June22;43.27291795;3.509229042;45.51;3.35;Rock
+SPY221743;22/06/2022;Port Vendre Port;Port Vendres;MedPorteDNA;Port;TRUE;Non certifie;June22;42.5205971;3.111718101;27.29;10;Rock
+SPY221744;22/06/2022;Port Vendre Port;Port Vendres;MedPorteDNA;Port;TRUE;Non certifie;June22;42.5205971;3.111718101;27.29;10;Rock
+SPY221745;28/06/2022;Cannes Port Canto;Cannes;MedPorteDNA;Port;TRUE;Port propre;June22;43.54027858;7.032668585;10.48;4.5;Rock
+SPY221746;28/06/2022;Cannes Port Canto;Cannes;MedPorteDNA;Port;TRUE;Port propre;June22;43.54027858;7.032668585;10.48;4.5;Rock
+SPY221747;29/06/2022;Porquerolles Port ;Porquerolles;MedPorteDNA;Port;TRUE;Port propre;June22;43.00340839;6.200826313;15.08;2.48;Rock
+SPY221748;29/06/2022;Porquerolles Port ;Porquerolles;MedPorteDNA;Port;TRUE;Port propre;June22;43.00340839;6.200826313;15.08;2.48;Rock
+SPY221749;30/06/2022;La Ciotat Nouveau Port;La Ciotat;MedPorteDNA;Port;TRUE;Port propre;June22;43.17780443;5.613601324;4.11;4;Rock
+SPY221750;30/06/2022;La Ciotat Nouveau Port;La Ciotat;MedPorteDNA;Port;TRUE;Port propre;June22;43.17780443;5.613601324;4.11;4;Rock
+SPY221751;30/06/2022;La Ciotat Nouveau Port;La Ciotat;MedPorteDNA;Port;TRUE;Port propre;June22;43.17780443;5.613601324;4.11;4;Rock
+SPY221753;30/06/2022;La Ciotat Nouveau Port;La Ciotat;MedPorteDNA;Port;TRUE;Port propre;June22;43.17780443;5.613601324;4.11;4;Rock
