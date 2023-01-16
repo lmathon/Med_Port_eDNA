@@ -1,4 +1,4 @@
-code_spygen;date;station;site;project;type;port;Certification;Campaign;Longitude;Latitude;Area_ha;Depth_m;Habitat
+code_spygen;date;station;site;project;type;port;Certification;Campaign;Latitude;Longitude;Area_ha;Depth_m;Habitat
 SPY213515;04/10/2021;Cannes Biohut;Cannes;MedPortADNe;BIOHUT_port;TRUE;Port propre;October21;43.54027858;7.032668585;10.48;4.5;Rock
 SPY213512;04/10/2021;Cannes Port;Cannes;MedPortADNe;Port;TRUE;Port propre;October21;43.54027858;7.032668585;10.48;4.5;Rock
 SPY213516;04/10/2021;Cannes Port;Cannes;MedPortADNe;Port;TRUE;Port propre;October21;43.54027858;7.032668585;10.48;4.5;Rock
