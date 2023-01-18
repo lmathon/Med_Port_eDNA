@@ -76,7 +76,7 @@ permu.hp(vegdist(data_dbrda_port,method="jaccard"),
 
 #### dbRDA Condition(longitude)
 
-RDA_port<- capscale(data_dbrda_port ~ Campaign + Certification + Area_ha + Depth_m + Habitat + Condition(Longitude), 
+RDA_port<- capscale(data_dbrda_port ~ Certification + Area_ha + Depth_m + Habitat + Condition(Longitude), 
                     meta_dbrda_port, distance ="jaccard")
 
 # get scores
@@ -110,7 +110,7 @@ species_centroids$PC_names <- rownames(species_centroids)
 ### Add information of arrows
 continuous_arrows <- data.frame(scrs$biplot)
 continuous_arrows
-rownames(continuous_arrows) <- c("Season","Certification", "Area", "Depth", "Habitat")
+rownames(continuous_arrows) <- c("Certification", "Area", "Depth", "Habitat")
 
 ### Add names of variables
 continuous_arrows$number <- rownames(continuous_arrows)
