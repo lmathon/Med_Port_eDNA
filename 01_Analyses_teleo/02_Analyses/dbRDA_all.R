@@ -34,12 +34,13 @@ data_all=left_join(biodiv,meta)
 data_all <- data_all %>%
   distinct(code_spygen, .keep_all=T)
 rownames(data_all)=data_all[,"code_spygen"]
-head(data_all)
-dim(data_all)
 
 data_all <- data_all %>%
   filter(!is.na(port))
 
+# filter out lockdown
+data_all <- data_all %>%
+  filter(Confinement=="N")
 
 # data for dbRDA
 data_dbrda <- data_all[,c(1:184)]
@@ -54,8 +55,15 @@ beta_tur <- beta$beta.jtu
 beta_nes <- beta$beta.jne
 
 
+########################################################################################################################
 #### Compute dbRDA on total beta-diversity ####
-RDA_all<- capscale(beta_tot ~ habitat + Condition(Longitude), meta_dbrda)
+RDA_all<- capscale(beta_tot ~ habitat+Confinement + Condition(Longitude), meta_dbrda)
+
+
+### Test the significance
+anova(RDA_all, perm=999)
+anova(RDA_all, perm=999, by="margin") # significant predictors : 
+anova(RDA_all, perm=999, by="axis")
 
 # get scores
 site_scores <- scores(RDA_all)$sites     ## separating out the site scores
@@ -105,11 +113,13 @@ grda_sites
 
 
 # export figure
-ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale.jpeg", 
+ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_without_lockdown.jpeg", 
        width = 7,  height = 7, dpi = 600)
 
 
 
+
+########################################################################################################################
 #### Compute dbRDA on turnover beta-diversity ####
 RDA_tur<- capscale(beta_tur ~ habitat + Condition(Longitude), meta_dbrda)
 
@@ -165,7 +175,7 @@ ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_
        width = 7,  height = 7, dpi = 600)
 
 
-
+########################################################################################################################
 #### Compute dbRDA on nestedness beta-diversity ####
 RDA_nes<- capscale(beta_nes ~ habitat + Condition(Longitude), meta_dbrda)
 

@@ -92,7 +92,7 @@ vif.cca(RDA_port)
 
 ### Test the significance
 anova(RDA_port, perm=999)
-anova(RDA_port, perm=999, by="margin") # significant predictors : 
+anova(RDA_port, perm=999, by="margin") # significant predictors : Area, Depth, Habitat
 anova(RDA_port, perm=999, by="axis")
 
 ### Getting the scores for plotting.

@@ -117,6 +117,7 @@ for (i in 1:length(fam)) {
   fam_proportion[i,"both"] <- sum(df$both)
 }
 
+write.csv(fam_proportion, file="01_Analyses_teleo/03_Outputs/count_families.csv", row.names = F)
 
 # Plot graph count families
 
