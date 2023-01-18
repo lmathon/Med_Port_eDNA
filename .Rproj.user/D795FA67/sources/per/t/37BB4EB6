@@ -1,0 +1,26 @@
+{
+    "id": "37BB4EB6",
+    "path": "~/SPYGEN/CEFE/Ports_SC21250/Med_Port_eDNA/03_Analyses_eukaryotes/02_Analyses/permanova_tous_Habitats.R",
+    "project_path": "03_Analyses_eukaryotes/02_Analyses/permanova_tous_Habitats.R",
+    "type": "r_source",
+    "hash": "3318261084",
+    "contents": "",
+    "dirty": false,
+    "created": 1673533481105.0,
+    "source_on_save": false,
+    "relative_order": 13,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "11,46",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1669125937,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1669125937,
+    "read_only": false,
+    "read_only_alternatives": []
+}
