@@ -1,0 +1,26 @@
+{
+    "id": "B31BC1AA",
+    "path": "~/SPYGEN/CEFE/Ports_SC21250/Med_Port_eDNA/03_Analyses_eukaryotes/02_Analyses/permanova_PORT_HORS_PORT.R",
+    "project_path": "03_Analyses_eukaryotes/02_Analyses/permanova_PORT_HORS_PORT.R",
+    "type": "r_source",
+    "hash": "582739747",
+    "contents": "",
+    "dirty": false,
+    "created": 1673533259431.0,
+    "source_on_save": false,
+    "relative_order": 12,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "11,50",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1673542480,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1673542480398,
+    "read_only": false,
+    "read_only_alternatives": []
+}
