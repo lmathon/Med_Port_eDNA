@@ -15,7 +15,7 @@ library(ggrepel)
 library(grid)
 library(ggpubr)
 library(RColorBrewer)
-
+library(rdacca.hp)
 
 ###########################################################################################
 ## dbRDA ports only 
@@ -36,8 +36,7 @@ meta_port=read.csv("00_Metadata/metadata_port.csv", sep=";")
 # combiner toutes les donnees
 data_port=left_join(biodiv_port,meta_port)
 rownames(data_port)=data_port[,"code_spygen"]
-head(data_port)
-dim(data_port)
+
 
 # remove biohut
 data_port = data_port %>%
@@ -46,6 +45,32 @@ data_port = data_port %>%
 #### faire la dbRDA
 data_dbrda_port <- data_port[,c(2:123)]
 meta_dbrda_port <- data_port[,c(124:ncol(data_port))]
+
+
+# Hierarchical and Variation Partitioning for Canonical Analysis 
+# Include all variable - Table Sxx
+
+
+rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
+          meta_dbrda_port[,c("Campaign","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
+
+
+rda.port<-rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
+                    meta_dbrda_port[,c("Campaign","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
+
+rda.port
+plot(rda.port)
+ggsave(file="01_Analyses_teleo/03_Outputs/rdacca_port_FigureSXX.png")
+
+rda_port<- as.data.frame(rda.port$Hier.part)
+write.csv(rda_port, file="01_Analyses_teleo/03_Outputs/Table_SXX_rdacca_port.csv", row.names = F)
+
+
+permu.hp(vegdist(data_dbrda_port,method="jaccard"),
+         meta_dbrda_port[,c("Campaign","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2",permutations=100)
+
+permu.hp(vegdist(data_dbrda_port,method="jaccard"),
+         meta_dbrda_port[,c("Campaign","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2",permutations=1000)
 
 
 
@@ -67,7 +92,7 @@ vif.cca(RDA_port)
 
 ### Test the significance
 anova(RDA_port, perm=999)
-anova(RDA_port, perm=999, by="margin") # significant predictors : coastline, substrate
+anova(RDA_port, perm=999, by="margin") # significant predictors : 
 anova(RDA_port, perm=999, by="axis")
 
 ### Getting the scores for plotting.

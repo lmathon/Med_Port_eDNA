@@ -90,7 +90,7 @@ beta_nes <- beta$beta.jne
 
 
 
-RDA_all<- capscale(data_dbrda ~ port + Condition(Longitude), meta_dbrda, distance ="jaccard")
+RDA_all<- capscale(data_dbrda ~ port, meta_dbrda, distance ="jaccard")
 
 # get scores
 site_scores <- scores(RDA_all)$sites     ## separating out the site scores
@@ -186,7 +186,7 @@ fig2 <-  ggarrange(grda_sites,grda_species, ncol=2)
 fig2
 
 # export figure
-ggsave(plot = fig2, filename = "01_Analyses_teleo/03_Outputs/dbRDA_with_species.jpeg", 
+ggsave(plot = fig2, filename = "01_Analyses_teleo/03_Outputs/dbRDA_with_species_2.jpeg", 
        width = 15,  height = 7, dpi = 600)
 
 
