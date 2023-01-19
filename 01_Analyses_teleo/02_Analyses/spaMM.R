@@ -37,7 +37,7 @@ meta_nat <- read.csv2("00_Metadata/metadata_milieu_naturel.csv", header=T)
 ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T, row.names = 1) %>%
   rownames_to_column(var="Sample") %>%
   inner_join(meta_nat, by=c("Sample"="SPYGEN_code")) %>%
-  rename(type = protection,
+  dplyr::rename(type = protection,
          Longitude = longitude_start_DD,
          Latitude = latitude_start_DD) %>%
   column_to_rownames(var="Sample") %>%
@@ -77,7 +77,7 @@ ind_names <- c("Total species richness", "Cryptobenthic species richness", "Thre
 
 ### Matrix of spatial coordinates
 coords<- ind_all %>%
-  dplyr::select(X, Y) %>%
+  dplyr::select(Longitude, Latitude) %>%
   as.matrix(.)
 
 
@@ -87,16 +87,16 @@ coords<- ind_all %>%
 ###################################################################
 # Fit the model
 mod <- list()
-mod[[1]] <- fitme(R ~ Reserve * Confinement + Port + Matern(1|X+Y),
+mod[[1]] <- fitme(R ~ Reserve * Confinement + Port + Matern(1|Longitude+Latitude),
                   family = "gaussian",  data = ind_all)
 
-mod[[2]] <- fitme(Crypto ~ Reserve * Confinement + Port  + Matern(1|X+Y),
+mod[[2]] <- fitme(Crypto ~ Reserve * Confinement + Port  + Matern(1|Longitude+Latitude),
                   family = "gaussian",  data = ind_all)
 
-mod[[3]] <- fitme(RedList ~ Reserve * Confinement + Port  + Matern(1|X+Y),
+mod[[3]] <- fitme(RedList ~ Reserve * Confinement + Port  + Matern(1|Longitude+Latitude),
                   family = "poisson",  data = ind_all)
 
-mod[[4]] <- fitme(Commercial ~ Reserve * Confinement + Port  + Matern(1|X+Y),
+mod[[4]] <- fitme(Commercial ~ Reserve * Confinement + Port  + Matern(1|Longitude+Latitude),
                   family = "gaussian",  data = ind_all)
 
 
@@ -229,12 +229,6 @@ dev.off()
 #################################################################################################################
 ## Model testing effects of port characteristics on indicators
 #################################################################################################################
-
-## Load data
-data <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", header=T, row.names=1) %>%
-  filter(rowSums(.) > 0) %>%
-  t(.)  %>%
-  as.data.frame(.)
 
 meta <- read.csv2("00_Metadata/metadata_port.csv", header=T)  %>%
   filter(type != "BIOHUT_port")
