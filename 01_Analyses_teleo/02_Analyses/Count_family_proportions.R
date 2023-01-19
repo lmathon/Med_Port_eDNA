@@ -17,6 +17,11 @@ species_port <- read.csv("01_Analyses_teleo/00_data/matrice_teleo_port.csv", row
 colnames(species_port) <- "species"
 species_port$port <- 1
 
+species_to_keep <- readRDS("01_Analyses_teleo/00_data/species_to_keep_ports.RDS")
+species_port <- species_port %>%
+  filter(species %in% species_to_keep)
+
+
 # load outside data
 
 species_outside <- read.csv("01_Analyses_teleo/00_data/biodiv_milieu_naturel.csv", row.names = 1) %>%
@@ -119,11 +124,18 @@ for (i in 1:length(fam)) {
 
 write.csv(fam_proportion, file="01_Analyses_teleo/03_Outputs/count_families.csv", row.names = F)
 
-# Plot graph count families
 
+#number of families in ports
+names(fam_proportion)
+n_port = fam_proportion[fam_proportion$port>0 | fam_proportion$both>0, ]
+dim(n_port) #54 families
+
+
+# Plot graph count families
 
 fam_proportion2 <- melt(fam_proportion)
 colnames(fam_proportion2) <- c("Family", "Zone", "Count")
+
 
 plot <- ggplot(fam_proportion2, aes(x=reorder(Family, Count), y = Count, fill = Zone)) + 
   geom_bar(stat="identity", show.legend = TRUE) + 
