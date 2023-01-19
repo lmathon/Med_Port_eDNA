@@ -14,9 +14,13 @@ library(ggpubr)
 library(fishtree)
 library(multcomp)
 
+# select species to keep
+species_to_keep <- readRDS("01_Analyses_teleo/00_data/species_to_keep_ports.RDS")
 
 ## Load data
-data <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", header=T, row.names=1) %>%
+data <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv", header=T) %>%
+  filter(scientific_name %in% species_to_keep) %>%
+  column_to_rownames(var="scientific_name") %>%
   filter(rowSums(.) > 0) %>%
   t(.)  %>%
   as.data.frame(.)
@@ -37,7 +41,7 @@ meta_nat <- read.csv2("00_Metadata/metadata_milieu_naturel.csv", header=T)
 ind_nat <- read.csv("01_Analyses_teleo/00_data/indicators_milieu_naturel.csv", header=T, row.names = 1) %>%
   rownames_to_column(var="Sample") %>%
   inner_join(meta_nat[,c("SPYGEN_code", "protection")], by=c("Sample"="SPYGEN_code")) %>%
-  rename(Location = protection) %>%
+  dplyr::rename(Location = protection) %>%
   column_to_rownames(var="Sample") %>%
   dplyr::select(colnames(ind_ports))
 
@@ -200,7 +204,7 @@ library(tidyr)
 ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_port.csv", header=T, row.names=1)
 R_tot <- read.csv("01_Analyses_teleo/00_data/Richness_total_port.csv") %>%
   mutate(Campaign ="Total") %>%
-  rename(R = R_total,
+  dplyr::rename(R = R_total,
          Site = Port) %>%
   dplyr::select(Site, Campaign, R)
 
@@ -242,14 +246,7 @@ df <- ind_ports %>%
   bind_rows(R_tot) %>%
   mutate(Campaign = factor(Campaign, levels = c("Total","October21", "June22"))) 
 
-df <- ind_ports %>%
-  rownames_to_column(var="RowNames") %>%
-  separate(RowNames, c("Site", "Campaign"), "_", extra = "merge") %>%
-  mutate(Campaign = factor(Campaign, levels = c("October21", "June22"))) %>%
-  group_by(Site) %>%
-  summarise(All = mean(R),
-            Cryptobenthics = mean(Crypto)) %>%
-  pivot_longer(cols=2:3, names_to = "Species", values_to = "Y")
+
 
 # list of port names
 ports <- unique(df$Site)
