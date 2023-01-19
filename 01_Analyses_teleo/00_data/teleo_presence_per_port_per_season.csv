@@ -5,7 +5,6 @@
 "Muraena helena",0,0,0,0,1,1,0,1,1,0,0,0,0
 "Atherina boyeri",0,0,0,0,0,0,1,0,0,0,1,0,1
 "Belone belone",0,1,0,0,0,1,1,0,0,1,1,1,1
-"Cololabis saira",0,0,1,0,0,0,0,0,0,0,0,0,0
 "Aidablennius sphynx",0,0,0,0,1,0,1,0,0,0,0,1,0
 "Lipophrys trigloides",0,0,0,0,1,1,1,1,0,1,0,1,1
 "Parablennius gattorugine",0,0,0,0,1,1,1,0,0,1,0,1,1
@@ -16,29 +15,24 @@
 "Parablennius incognitus P sanguinolentus",0,1,1,1,1,1,1,1,0,1,1,1,1
 "Salaria pavo",1,1,1,1,1,0,1,0,0,1,1,1,1
 "Lepadogaster candolii",0,0,0,0,1,0,0,0,0,1,0,1,0
-"Lepadogaster lepadogaster",0,0,0,0,0,0,0,0,0,1,0,0,0
 "Tripterygion delaisi",0,0,1,0,1,0,0,1,0,0,0,0,0
 "Tripterygion melanurum",0,0,0,1,1,0,0,1,0,0,0,0,0
 "Tripterygion tripteronotum",0,1,0,0,1,1,1,1,0,0,0,0,0
 "Seriola dumerili",0,0,1,0,0,0,0,0,1,0,1,0,0
-"Trachinotus ovatus",0,0,0,0,0,0,0,0,0,0,0,1,0
 "Trachurus picturatus",0,0,0,0,1,0,0,0,0,0,0,0,0
 "Trachurus sp.",1,1,1,1,1,1,1,1,1,1,1,1,1
 "Alosa sp.",0,0,0,0,0,0,0,0,0,0,1,1,1
 "Sardina pilchardus",0,1,1,1,1,1,1,1,1,1,1,1,1
 "Sardinella aurita",0,1,0,1,1,1,1,1,1,0,1,1,0
 "Sprattus sprattus",0,0,0,0,0,0,1,0,0,1,0,0,1
-"Engraulis sp.",0,0,0,0,1,0,0,0,0,0,0,0,0
 "Cyprininae",0,0,0,0,0,0,0,0,0,0,0,1,0
 "Leuciscinae",0,0,1,0,0,0,0,0,0,0,0,1,1
 "Rutilus rutilus",0,0,0,1,0,0,0,0,0,0,0,0,0
 "Gambusia holbrooki",0,0,0,0,0,0,0,1,0,0,0,0,1
 "Gadidae",0,0,0,0,0,0,0,0,1,0,0,0,0
 "Trisopterus capelanus",0,0,0,0,0,0,0,0,0,1,0,0,0
-"Gaidropsarus mediterraneus",0,0,0,0,0,1,0,0,0,0,0,0,0
 "Merluccius merluccius",0,0,0,0,0,0,0,0,0,1,1,0,0
 "Aphia minuta",0,0,0,0,0,0,0,0,0,1,0,0,1
-"Gammogobius steinitzi",0,0,1,0,0,0,0,0,0,0,0,0,0
 "Gobius ater",0,1,1,0,1,1,1,1,0,0,0,1,1
 "Gobius bucchichi",0,1,0,1,1,1,0,1,0,1,1,0,0
 "Gobius cobitis",0,1,0,0,1,1,1,1,1,0,0,1,1
@@ -46,7 +40,6 @@
 "Gobius niger",1,1,1,1,1,1,1,1,1,1,1,1,1
 "Gobius xanthocephalus",0,1,1,0,1,1,1,1,1,1,1,0,0
 "Millerigobius macrocephalus",0,0,1,1,1,1,0,1,1,0,1,0,0
-"Odondebuenia balearica",0,0,0,0,0,0,0,0,1,0,0,0,0
 "Pomatoschistus microps",0,0,0,0,0,0,0,0,0,0,0,1,1
 "Pomatoschistus minutus",1,1,0,0,0,0,1,0,0,0,0,1,1
 "Zebrus zebrus",0,0,0,0,0,1,0,0,0,0,0,0,0
@@ -63,10 +56,9 @@
 "Thalassoma pavo",0,0,1,0,0,0,0,1,0,0,0,0,0
 "Lophius budegassa",0,0,0,0,0,0,1,0,0,1,1,0,0
 "Lophius piscatorius",0,0,0,0,0,0,0,1,0,1,1,0,0
-"Pomadasys incisus",0,0,0,0,0,0,0,0,0,0,0,1,0
-"Chelon auratus",1,1,1,1,1,1,1,1,1,1,1,1,1
+"Liza aurata",1,1,1,1,1,1,1,1,1,1,1,1,1
 "Chelon labrosus",1,1,1,1,1,1,1,1,1,1,1,1,1
-"Chelon ramada",1,1,1,1,1,1,1,1,1,1,1,1,1
+"Liza ramada",1,1,1,1,1,1,1,1,1,1,1,1,1
 "Mugil sp.",0,0,0,0,1,1,1,0,0,1,0,1,1
 "Oedalechilus labeo",0,0,0,1,1,1,0,1,1,0,0,0,0
 "Myctophum punctatum",0,0,1,1,0,0,0,1,0,0,0,0,0
@@ -96,40 +88,34 @@
 "Scomber colias",0,0,1,0,1,1,0,0,0,0,0,0,1
 "Scomber scombrus",0,0,0,0,0,0,1,1,0,1,1,1,1
 "Thunnus thynnus",0,0,0,1,0,1,0,0,1,0,1,0,1
-"Silurus glanis",0,0,0,0,0,0,0,0,0,0,0,1,0
 "Spicara maena",0,0,1,0,1,1,0,1,1,0,0,0,0
 "Spicara flexuosa S smaris",0,1,0,1,0,0,1,0,0,1,1,0,0
 "B. boops O. melanura",1,1,1,1,1,1,1,1,1,1,1,1,1
 "D. dentex P. auriga P. pagrus",0,1,1,0,1,1,1,0,1,0,1,0,0
 "Diplodus annularis",0,1,1,1,1,1,1,1,1,1,1,1,1
-"Diplodus cervinus",0,0,0,0,0,0,0,0,0,1,0,0,0
 "Diplodus puntazzo",1,0,1,1,1,1,0,1,1,1,1,1,1
-"Diplodus sargus",1,1,1,1,1,1,1,1,1,1,1,1,1
+"Diplodus sargus sargus",1,1,1,1,1,1,1,1,1,1,1,1,1
 "Diplodus vulgaris",1,1,1,1,1,1,1,1,1,1,1,1,1
 "Lithognathus mormyrus",1,1,1,1,1,1,1,1,1,1,0,1,0
 "Pagellus acarne",0,1,1,0,1,1,1,1,1,1,1,1,1
 "Pagellus bogaraveo",0,1,1,1,1,1,0,1,1,1,1,1,0
 "Pagellus erythrinus",0,1,1,1,1,0,1,0,1,1,1,1,1
 "Sarpa salpa",1,1,1,1,1,1,1,1,1,1,1,1,1
-"Sparidae",0,0,0,0,0,0,0,0,0,0,1,0,0
 "Sparus aurata",1,1,1,1,1,1,1,1,1,1,1,1,1
 "Spondyliosoma cantharus",0,0,0,1,1,0,1,0,0,1,0,1,0
-"Mullus barbatus",0,1,1,1,1,1,1,1,1,1,1,1,1
+"Mullus barbatus barbatus",0,1,1,1,1,1,1,1,1,1,1,1,1
 "Mullus surmuletus",1,1,1,1,1,1,1,1,1,1,1,1,1
 "Syngnathus acus",0,0,0,0,0,0,1,0,0,0,0,0,0
 "Syngnathus sp.",0,0,0,0,0,0,1,0,1,0,0,0,0
 "Balistes capriscus",0,0,0,0,0,0,0,0,0,0,0,0,1
 "Mola mola",0,0,1,0,0,0,0,0,0,1,0,0,0
-"Uranoscopus scaber",0,0,1,0,0,0,0,0,0,0,0,0,0
 "Zeus faber",0,0,0,0,0,0,0,0,0,0,1,0,0
 "Chromis chromis",0,0,1,1,1,1,0,1,1,1,1,0,0
-"Argyrosomus regius",0,0,0,0,0,0,0,1,0,0,0,0,0
 "Sciaena umbra",0,0,0,1,0,1,0,0,1,0,0,0,0
 "Sphyraena sphyraena",0,0,0,0,1,0,0,0,0,0,0,1,0
 "Sphyraena viridensis",0,0,1,1,0,1,0,1,1,1,0,0,0
 "Mustelus mustelus",0,0,0,0,0,0,0,0,0,0,0,0,1
 "Hexanchus griseus",0,0,0,0,0,0,0,1,0,0,0,0,0
-"Raja undulata",0,0,0,0,0,0,0,0,0,1,0,0,0
 "Raja asterias Raja clavata",0,1,1,0,0,0,1,1,0,0,1,1,1
 "Tetronarce nobiliana",0,1,0,0,0,0,0,0,0,0,0,0,0
 "Torpedo marmorata",0,1,0,0,0,0,0,0,0,0,1,1,1

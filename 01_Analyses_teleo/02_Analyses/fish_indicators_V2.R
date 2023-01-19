@@ -13,12 +13,15 @@ library(viridis)
 library(ggpubr)
 library(fishtree)
 
+# select species to keep
+species_to_keep <- readRDS("01_Analyses_teleo/00_data/species_to_keep_ports.RDS")
 
 ## Load data
-data <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv")
+data <- read.csv("01_Analyses_teleo/00_data/teleo_presence.csv") %>%
+  filter(scientific_name %in% species_to_keep)
 data$scientific_name <- gsub("_", " ", data$scientific_name)
 
-meta <- read.csv("00_Metadata/metadata_port.csv", header=T)
+meta <- read.csv2("00_Metadata/metadata_port.csv", header=T)
 # Add a column "campaign" : October21 or June22
 #meta <- meta %>%
 #  mutate(Campaign = ifelse(grepl("2022", meta$date,fixed = TRUE), 'June22', 'October21'))
@@ -271,10 +274,10 @@ data2 <- data %>%
   rownames_to_column(var="code_spygen") %>%
   left_join(meta, by="code_spygen") %>%
   # remove the biohut samples
-  filter(habitat == "Port") %>%
+  filter(type == "Port") %>%
   group_by(site, Campaign) %>%
-  mutate_at(.vars=c(2:137), as.numeric) %>%
-  summarise_at(2:137, sum) %>% 
+  mutate_at(.vars=c(2:123), as.numeric) %>%
+  summarise_at(2:123, sum) %>% 
   # convert to presence/abscence
   mutate_if(is.numeric, ~1 * (. > 0)) %>%
   # create a new var combining site and campaign column
@@ -292,10 +295,10 @@ data3 <- data %>%
   rownames_to_column(var="code_spygen") %>%
   left_join(meta, by="code_spygen") %>%
   # remove the biohut samples
-  filter(habitat == "Port") %>%
+  filter(type == "Port") %>%
   group_by(site) %>%
-  mutate_at(.vars=c(2:137), as.numeric) %>%
-  summarise_at(2:137, sum) %>% 
+  mutate_at(.vars=c(2:123), as.numeric) %>%
+  summarise_at(2:123, sum) %>% 
   # convert to presence/abscence
   mutate_if(is.numeric, ~1 * (. > 0)) %>%
   column_to_rownames(var="site") %>%
@@ -522,7 +525,7 @@ toplot <- indicators %>%
   # selectionner les sites où les biohuts on été échantillonné
   filter(site %in% c("Cannes", "Marseillan ", "Saintes Maries de la Mer")) %>%
   dplyr::select(code_spygen, R, Crypto, Chondri, Commercial, Exo, 
-                RedList, habitat, site)
+                RedList, type, site)
 colnames(toplot)[c(2:7)] <- c("Richesse spécifique", "Cryptobenthiques", 
                                 "Requins & raies", "Espèces commerciales" ,
                               "Espèces exotiques", "Espèces menacées")
@@ -557,7 +560,7 @@ resp_expl
 all_plots = pmap(resp_expl, ~ boxplot_fun(x = .y, y = .x) )
 
 ## Print the plots in a grid
-png("01_Analyses_teleo/03_Outputs/boxplots_indicateurs_habitat.png", width = 900, height = 900)
+png("01_Analyses_teleo/03_Outputs/Old plots/boxplots_indicateurs_habitat.png", width = 900, height = 900)
 cowplot::plot_grid(plotlist = all_plots)
 dev.off()
 
