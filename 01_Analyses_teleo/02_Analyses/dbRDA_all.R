@@ -38,7 +38,7 @@ rownames(data_all)=data_all[,"code_spygen"]
 data_all <- data_all %>%
   filter(!is.na(port))
 
-# filter out lockdown
+# filter out lockdown (facultatif)
 data_all <- data_all %>%
   filter(Confinement=="N")
 
@@ -57,7 +57,7 @@ beta_nes <- beta$beta.jne
 
 ########################################################################################################################
 #### Compute dbRDA on total beta-diversity ####
-RDA_all<- capscale(beta_tot ~ habitat+Confinement + Condition(Longitude), meta_dbrda)
+RDA_all<- capscale(beta_tot ~ habitat + Condition(Longitude), meta_dbrda)
 
 
 ### Test the significance
@@ -89,7 +89,7 @@ grda_sites <- ggplot(site_scores_groups, aes(x= CAP1, y = CAP2)) +
   geom_encircle(aes(group = habitat,linetype = habitat,fill= habitat), s_shape = 1, expand = 0,
                 alpha = 0.6, show.legend = FALSE) + # hull area 
   geom_point(aes(pch = habitat, fill = habitat), cex = 3, col = "black") +
-  ylim(-3.7, 2.4) + # limites axes Y
+  #ylim(-3.7, 2.4) + # limites axes Y
   scale_fill_manual(values = as.vector(mycol),
                     name = "", labels = c("Fished", "Port", "Reserve")) +
   scale_shape_manual(values = c(22,21,23),
@@ -113,7 +113,7 @@ grda_sites
 
 
 # export figure
-ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_without_lockdown.jpeg", 
+ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale.jpeg", 
        width = 7,  height = 7, dpi = 600)
 
 
@@ -147,7 +147,7 @@ grda_sites <- ggplot(site_scores_groups, aes(x= CAP1, y = CAP2)) +
   geom_encircle(aes(group = habitat,linetype = habitat,fill= habitat), s_shape = 1, expand = 0,
                 alpha = 0.6, show.legend = FALSE) + # hull area 
   geom_point(aes(pch = habitat, fill = habitat), cex = 3, col = "black") +
-  ylim(-3.7, 2.4) + # limites axes Y
+  #ylim(-3.7, 2.4) + # limites axes Y
   scale_fill_manual(values = as.vector(mycol),
                     name = "", labels = c("Fished", "Port", "Reserve")) +
   scale_shape_manual(values = c(22,21,23),

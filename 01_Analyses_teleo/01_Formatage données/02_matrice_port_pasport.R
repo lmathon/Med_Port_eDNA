@@ -17,18 +17,25 @@ adne <- read.csv("01_Analyses_teleo/00_data/biodiv_milieu_naturel.csv", header=T
   tibble::rownames_to_column(var="Species") #--> prends les noms de ligne pour en faire une colonne 
 adne$Species <- gsub(" ", "_", adne$Species)
 
-#jointure by Species 
-adne_tot <- adne %>%
-  full_join(adne_port, by = "Species") %>% #NA quand sp. pas dans les matrices 
-  replace(is.na(.), 0)
 
 
 # Species for rownames
+species_to_keep <- readRDS("01_Analyses_teleo/00_data/species_to_keep_ports.RDS")
+
+adne_port <- adne_port %>%
+  filter(Species %in% species_to_keep)
+
 rownames(adne_port) <- adne_port$Species
 adne_port <- adne_port[,-1]
 
 write.csv(adne_port, "01_Analyses_teleo/00_data/matrice_teleo_port.csv")
 
+#jointure by Species 
+adne_port$Species <- rownames(adne_port)
+
+adne_tot <- adne %>%
+  full_join(adne_port, by = "Species") %>% #NA quand sp. pas dans les matrices 
+  replace(is.na(.), 0)
 
 
 rownames(adne_tot) <- adne_tot$Species

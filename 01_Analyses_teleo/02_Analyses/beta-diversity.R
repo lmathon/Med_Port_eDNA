@@ -13,10 +13,6 @@ biodiv_port=read.csv("01_Analyses_teleo/00_data/matrice_teleo_port.csv", row.nam
   as.data.frame(.) %>%
   rownames_to_column(var='code_spygen')
 
-species_to_keep_ports <- readRDS("01_Analyses_teleo/00_data/species_to_keep_ports.RDS")
-
-biodiv_port <- biodiv_port[, c("code_spygen", species_to_keep_ports)]
-
 meta_port=read.csv("00_Metadata/metadata_port.csv", sep=";") 
 
 
@@ -144,7 +140,7 @@ biodiv <- biodiv %>%
   filter(!is.na(site))
 
 Site <- unique(biodiv$site)
-df_all <- data.frame(matrix(0, ncol = 184, nrow = 13))
+df_all <- data.frame(matrix(0, ncol = 289, nrow = 13))
 colnames(df_all) <- colnames(biodiv[,-ncol(biodiv)])
 
 for (i in 1:length(Site)) {

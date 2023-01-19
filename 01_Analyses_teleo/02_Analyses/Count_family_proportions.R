@@ -17,10 +17,6 @@ species_port <- read.csv("01_Analyses_teleo/00_data/matrice_teleo_port.csv", row
 colnames(species_port) <- "species"
 species_port$port <- 1
 
-species_to_keep <- readRDS("01_Analyses_teleo/00_data/species_to_keep_ports.RDS")
-species_port <- species_port %>%
-  filter(species %in% species_to_keep)
-
 
 # load outside data
 

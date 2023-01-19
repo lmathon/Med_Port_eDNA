@@ -25,10 +25,6 @@ biodiv_port=read.csv("01_Analyses_teleo/00_data/matrice_teleo_port.csv", row.nam
   as.data.frame(.) %>%
   rownames_to_column(var='code_spygen')
 
-# select species to keep
-species_to_keep <- readRDS("01_Analyses_teleo/00_data/species_to_keep_ports.RDS")
-
-biodiv_port <- biodiv_port[, c("code_spygen", species_to_keep)]
 
 # metadata
 meta_port=read.csv("00_Metadata/metadata_port.csv", sep=";") 
