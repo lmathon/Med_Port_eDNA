@@ -18,7 +18,7 @@ library(RColorBrewer)
 
 ### Load data
 # eDNA presence/abscence
-biodiv=read.csv("01_Analyses_teleo/00_data/matrice_teleo_totale.csv", row.names=1) %>%
+biodiv=read.csv("01_Analyses_teleo/00_data/reduced_matrice_teleo_totale.csv", row.names=1) %>%
   t(.) %>%
   as.data.frame(.)
 
@@ -43,8 +43,8 @@ data_all <- data_all %>%
   filter(Confinement=="N")
 
 # data for dbRDA
-data_dbrda <- data_all[,c(1:289)]
-meta_dbrda <- data_all[,c(290:ncol(data_all))]
+data_dbrda <- data_all[,c(1:282)]
+meta_dbrda <- data_all[,c(283:ncol(data_all))]
 
 
 # Compute beta_diversity
@@ -113,7 +113,7 @@ grda_sites
 
 
 # export figure
-ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale.jpeg", 
+ggsave(plot = grda_sites, filename = "01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/dbRDA_totale.jpeg", 
        width = 7,  height = 7, dpi = 600)
 
 
@@ -171,7 +171,7 @@ grda_sites
 
 
 # export figure
-ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_turnover.jpeg", 
+ggsave(plot = grda_sites, filename = "01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/dbRDA_totale_turnover.jpeg", 
        width = 7,  height = 7, dpi = 600)
 
 
@@ -227,7 +227,7 @@ grda_sites
 
 
 # export figure
-ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_nestedness.jpeg", 
+ggsave(plot = grda_sites, filename = "01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/dbRDA_totale_nestedness.jpeg", 
        width = 7,  height = 7, dpi = 600)
 
 
