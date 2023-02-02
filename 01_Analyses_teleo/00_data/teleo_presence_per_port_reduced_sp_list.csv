@@ -1,0 +1,102 @@
+"","Agde","Cannes","La Ciotat","Marseillan","Porquerolles","Port Vendres","Saintes Maries de la Mer"
+"Anguilla sp.",1,0,1,1,0,1,1
+"Conger conger",0,0,1,1,1,1,1
+"Muraena helena",0,0,1,0,1,0,0
+"Atherina boyeri",0,0,0,1,0,1,1
+"Belone belone",1,0,1,1,0,1,1
+"Aidablennius sphynx",0,0,1,1,0,0,1
+"Lipophrys trigloides",0,0,1,1,1,1,1
+"Parablennius gattorugine",0,0,1,1,0,1,1
+"Parablennius incognitus",1,1,0,1,1,1,1
+"Parablennius pilicornis",0,0,1,1,0,1,1
+"Parablennius rouxi",0,0,1,0,0,1,0
+"Parablennius zvonimiri",0,0,0,0,0,0,1
+"Parablennius incognitus P sanguinolentus",1,1,1,1,1,1,1
+"Salaria pavo",1,1,1,1,0,1,1
+"Lepadogaster candolii",0,0,1,0,0,1,1
+"Lepadogaster lepadogaster",0,0,0,0,0,1,0
+"Tripterygion delaisi",0,1,1,0,1,0,0
+"Tripterygion melanurum",0,1,1,0,1,0,0
+"Tripterygion tripteronotum",1,0,1,1,1,0,0
+"Seriola dumerili",0,1,0,0,1,1,0
+"Trachinotus ovatus",0,0,0,0,0,0,1
+"Trachurus sp.",1,1,1,1,1,1,1
+"Alosa sp.",0,0,0,0,0,1,1
+"Sardina pilchardus",1,1,1,1,1,1,1
+"Sardinella aurita",1,1,1,1,1,1,1
+"Engraulis sp.",0,0,1,0,0,0,0
+"Gadidae",0,0,0,0,1,0,0
+"Gaidropsarus mediterraneus",0,0,1,0,0,0,0
+"Aphia minuta",0,0,0,0,0,1,1
+"Gobius ater",1,1,1,1,1,0,1
+"Gobius bucchichi",1,1,1,0,1,1,0
+"Gobius cobitis",1,0,1,1,1,0,1
+"Gobius cruentatus",0,1,1,1,1,1,0
+"Gobius niger",1,1,1,1,1,1,1
+"Gobius xanthocephalus",1,1,1,1,1,1,0
+"Millerigobius macrocephalus",0,1,1,0,1,1,0
+"Pomatoschistus microps",0,0,0,0,0,0,1
+"Pomatoschistus minutus",1,0,0,1,0,0,1
+"Zebrus zebrus",0,0,1,0,0,0,0
+"Zosterisessor ophiocephalus",1,0,1,1,0,0,0
+"Apogon imberbis",0,1,1,0,1,0,0
+"Coris julis",0,1,1,0,1,1,0
+"Ctenolabrus rupestris",0,0,0,1,0,0,1
+"Labrus merula Labrus viridis",0,0,1,1,1,0,1
+"Symphodus bailloni",0,0,0,1,0,0,1
+"Symphodus ocellatus",0,1,1,0,1,0,0
+"Symphodus sp.",1,1,1,1,1,0,1
+"Symphodus tinca",0,1,1,1,1,1,1
+"Thalassoma pavo",0,1,0,0,1,0,0
+"Liza aurata",1,1,1,1,1,1,1
+"Chelon labrosus",1,1,1,1,1,1,1
+"Liza ramada",1,1,1,1,1,1,1
+"Mugil sp.",0,0,1,1,0,1,1
+"Oedalechilus labeo",0,1,1,0,1,0,0
+"Scorpaena notata",0,1,1,0,0,1,1
+"Scorpaena porcus",1,1,1,1,1,1,1
+"Scorpaena scrofa",0,1,1,0,1,0,0
+"Epinephelus marginatus",0,0,1,0,1,0,0
+"Serranus cabrilla",0,0,1,1,0,1,1
+"Serranus hepatus",0,0,0,0,0,1,1
+"Serranus scriba",0,1,1,0,1,0,0
+"C. lucerna L. dieuzeidei",1,0,0,1,0,1,1
+"C. obscurus T. lastoviza",0,0,0,0,0,1,1
+"Arnoglossus laterna",0,0,0,1,0,1,1
+"Pleuronectidae",0,0,0,0,0,0,1
+"Scophthalmus rhombus",0,0,0,1,0,0,1
+"Pegusa nasuta",0,0,0,1,0,0,1
+"Solea senegalensis",1,0,0,1,0,0,1
+"Solea solea",0,0,0,1,0,1,1
+"Pomatomus saltatrix",1,1,1,1,1,0,1
+"Scomber colias",0,1,1,0,0,0,1
+"Scomber scombrus",0,0,0,1,1,1,1
+"Spicara maena",0,1,1,0,1,0,0
+"Spicara flexuosa S smaris",1,1,0,1,0,1,0
+"B. boops O. melanura",1,1,1,1,1,1,1
+"D. dentex P. auriga P. pagrus",1,1,1,1,1,1,0
+"Diplodus annularis",1,1,1,1,1,1,1
+"Diplodus puntazzo",1,1,1,0,1,1,1
+"Diplodus sargus sargus",1,1,1,1,1,1,1
+"Diplodus vulgaris",1,1,1,1,1,1,1
+"Lithognathus mormyrus",1,1,1,1,1,1,1
+"Pagellus acarne",1,1,1,1,1,1,1
+"Pagellus bogaraveo",1,1,1,0,1,1,1
+"Pagellus erythrinus",1,1,1,1,1,1,1
+"Sarpa salpa",1,1,1,1,1,1,1
+"Sparidae",0,0,0,0,0,1,0
+"Sparus aurata",1,1,1,1,1,1,1
+"Spondyliosoma cantharus",0,1,1,1,0,1,1
+"Mullus barbatus barbatus",1,1,1,1,1,1,1
+"Mullus surmuletus",1,1,1,1,1,1,1
+"Syngnathus acus",0,0,0,1,0,0,0
+"Syngnathus sp.",0,0,0,1,1,0,0
+"Balistes capriscus",0,0,0,0,0,0,1
+"Zeus faber",0,0,0,0,0,1,0
+"Chromis chromis",0,1,1,0,1,1,0
+"Sciaena umbra",0,1,1,0,1,0,0
+"Sphyraena sphyraena",0,0,1,0,0,0,1
+"Sphyraena viridensis",0,1,1,0,1,1,0
+"Raja asterias Raja clavata",1,1,0,1,1,1,1
+"Engraulis encrasicolus",1,1,1,1,1,1,1
+"Dicentrarchus labrax",1,1,1,1,1,1,1
