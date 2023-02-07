@@ -42,17 +42,18 @@ data_port = data_port %>%
 data_dbrda_port <- data_port[,c(2:123)]
 meta_dbrda_port <- data_port[,c(124:ncol(data_port))]
 
+colnames(meta_dbrda_port)[colnames(meta_dbrda_port) == "Campaign"] <- "Season"
 
 # Hierarchical and Variation Partitioning for Canonical Analysis 
 # Include all variable - Table Sxx
 
 
 rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
-          meta_dbrda_port[,c("Campaign","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
+          meta_dbrda_port[,c("Season","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
 
 
 rda.port<-rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
-                    meta_dbrda_port[,c("Campaign","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
+                    meta_dbrda_port[,c("Season","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
 
 rda.port
 plot(rda.port)
@@ -63,10 +64,10 @@ write.csv(rda_port, file="01_Analyses_teleo/03_Outputs/Table_SXX_rdacca_port.csv
 
 
 permu.hp(vegdist(data_dbrda_port,method="jaccard"),
-         meta_dbrda_port[,c("Campaign","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2",permutations=100)
+         meta_dbrda_port[,c("Season","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2",permutations=100)
 
 permu.hp(vegdist(data_dbrda_port,method="jaccard"),
-         meta_dbrda_port[,c("Campaign","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2",permutations=1000)
+         meta_dbrda_port[,c("Season","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2",permutations=1000)
 
 
 
