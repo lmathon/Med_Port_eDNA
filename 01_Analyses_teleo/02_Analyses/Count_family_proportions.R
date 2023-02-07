@@ -107,7 +107,7 @@ colnames(family) <- c("Family", "port", "outside", "both")
 family_all <- rbind(family, genus, species)
 
 fam <- unique(family_all$Family)
-fam_proportion <- data.frame(Family=character(102), port=numeric(102), outside=numeric(102), both=numeric(102))
+fam_proportion <- data.frame(Family=character(101), port=numeric(101), outside=numeric(101), both=numeric(101))
 
 for (i in 1:length(fam)) {
   df <- family_all %>%
