@@ -1,19 +1,16 @@
 "Port_only","Reserve_only","Lockdown_only"
-"Acipenser sp.","Gobiesocidae","Gobius geniporus"
-"Trachinotus ovatus","Chelidonichthys sp.","Lebetus guilleti"
-"Alosa sp.","Boops sp.","Ceratoscopelus maderensis"
-"Cyprininae","Sphyraenidae","Sarda sp."
-"Leuciscinae","Mobula mobular","Gymnammodytes semisquamatus"
-"Rutilus rutilus","Lebetus guilleti","Scyliorhinus stellaris"
-"Gambusia holbrooki","Sarda sp.","Dasyatis marmorata"
-"Gadidae","Gymnammodytes semisquamatus","Myliobatis aquila"
-"Trisopterus capelanus","Scyliorhinus stellaris","Nerophis maculatus"
-"Aphia minuta","Dasyatis marmorata","Aetomylaeus bovinus"
-"Gammogobius steinitzi",NA,NA
-"Pomatoschistus minutus",NA,NA
-"Zosterisessor ophiocephalus",NA,NA
-"Lophius piscatorius",NA,NA
-"Pomadasys incisus",NA,NA
+"Acipenser sp.","Gobiesocidae","Gaidropsarus mediterraneus"
+"Alosa sp.","Chelidonichthys sp.","Gobius geniporus"
+"Cyprininae","Boops sp.","Lebetus guilleti"
+"Leuciscinae","Sphyraenidae","Ceratoscopelus maderensis"
+"Rutilus rutilus","Mobula mobular","Sarda sp."
+"Gambusia holbrooki","Lebetus guilleti","Gymnammodytes semisquamatus"
+"Gadidae","Sarda sp.","Scyliorhinus stellaris"
+"Trisopterus capelanus","Gymnammodytes semisquamatus","Dasyatis marmorata"
+"Aphia minuta","Scyliorhinus stellaris","Myliobatis aquila"
+"Pomatoschistus minutus","Dasyatis marmorata","Odondebuenia balearica"
+"Zosterisessor ophiocephalus",NA,"Nerophis maculatus"
+"Lophius piscatorius",NA,"Aetomylaeus bovinus"
 "Sander sp.",NA,NA
 "C. obscurus T. lastoviza",NA,NA
 "E. gurnardus T. lyra",NA,NA
@@ -21,14 +18,11 @@
 "Pleuronectidae",NA,NA
 "Solea solea",NA,NA
 "Salmo salar",NA,NA
-"Silurus glanis",NA,NA
 "Spicara flexuosa S smaris",NA,NA
 "Syngnathus acus",NA,NA
 "Balistes capriscus",NA,NA
 "Zeus faber",NA,NA
-"Argyrosomus regius",NA,NA
 "Mustelus mustelus",NA,NA
 "Hexanchus griseus",NA,NA
-"Raja undulata",NA,NA
 "Raja asterias Raja clavata",NA,NA
 "Tetronarce nobiliana",NA,NA
