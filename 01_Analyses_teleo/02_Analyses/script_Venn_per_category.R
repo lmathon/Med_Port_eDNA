@@ -10,6 +10,7 @@
 #_libs
 library(dplyr)
 library(VennDiagram)
+library(cowplot)
 
 # Input
 ## Fun
@@ -84,7 +85,7 @@ plot_venn <- function(list_cate, file_name, pal_fill, pal_col, cat_just){
     output=TRUE,
     
     # Set Output
-    imagetype = "png" ,
+    imagetype = "tiff" ,
     height = 2500 , 
     width = 3100 , 
     resolution = 300,
@@ -117,7 +118,7 @@ species_venn <- list(
   Fished_Lockdown = fished_Y,
   Fished_Unlock = fished_N
 )
-plot_venn(list_cate = species_venn, file_name = "01_Analyses_teleo/03_Outputs/Species_Venn_categories.png", 
+plot_venn(list_cate = species_venn, file_name = "01_Analyses_teleo/03_Outputs/Species_Venn_categories.tiff", 
           pal_fill = c("#fdd8a8", "#b3b1d9", "#b3b1d9", "#b2dadb", "#b2dadb"), 
           pal_col = c("#fd9435", "#1c0087", "#b3b1d9", "#b2dadb", "#138889"),
           cat_just = list(c(.5, 2), c(0, -5), c(0, 0), c(.3, 0), c(1, -4)))
@@ -128,7 +129,7 @@ species_venn2 <- list(
   Unlock = union(reserve_N, fished_N),
   Lockdown = union(reserve_Y, fished_Y)
 )
-plot_venn(list_cate = species_venn2, file_name = "01_Analyses_teleo/03_Outputs/Species_Venn_port_lockdown_unlock.png", 
+plot_venn(list_cate = species_venn2, file_name = "01_Analyses_teleo/03_Outputs/Species_Venn_port_lockdown_unlock.tiff", 
           pal_fill = c("#fdd8a8", "#B2C6DA", "#B2C6DA"), 
           pal_col = c("#fd9435", "#6763b0", "#B2C6DA"),
           cat_just = list(c(0, 0), c(1, 0), c(.4, 0)))
@@ -139,10 +140,26 @@ species_venn3 <- list(
   Reserve = union(reserve_N, reserve_Y),
   Fished = union(fished_N, fished_Y)
 )
-plot_venn(list_cate = species_venn3, file_name = "01_Analyses_teleo/03_Outputs/Species_Venn_port_reserve_fished.png", 
+plot_venn(list_cate = species_venn3, file_name = "01_Analyses_teleo/03_Outputs/Species_Venn_port_reserve_fished.tiff", 
           pal_fill = c("#fdd8a8", "#b3b1d9", "#b2dadb"), 
           pal_col = c("#fd9435", "#1c0087", "#138889"),
           cat_just = list(c(0, 0), c(1, 0), c(.4, 0)))
+
+## Format Venn for publication + SAVE
+
+v2 <- plot_venn(list_cate = species_venn2, file_name = NULL, 
+                pal_fill = c("#fdd8a8", "#B2C6DA", "#B2C6DA"), 
+                pal_col = c("#fd9435", "#6763b0", "#B2C6DA"),
+                cat_just = list(c(0, 0), c(.7, 0), c(.4, .2)))
+v3 <- plot_venn(list_cate = species_venn3, file_name = NULL, 
+                pal_fill = c("#fdd8a8", "#b3b1d9", "#b2dadb"), 
+                pal_col = c("#fd9435", "#1c0087", "#138889"),
+                cat_just = list(c(0, 0), c(.7, 0), c(.4, .2)))
+patch <- cowplot::plot_grid(v3, v2, labels = "auto")
+
+tiff(file = "01_Analyses_teleo/03_Outputs/Species_Venn.tiff", width = 2800, height = 1400, res = 300)
+patch
+dev.off()
 
 # Output table
 reserve <- union(reserve_N,reserve_Y)
