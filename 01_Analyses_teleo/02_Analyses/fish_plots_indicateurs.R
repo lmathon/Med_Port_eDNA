@@ -1,18 +1,10 @@
 ## Librairies
-library(dplyr)
-library(rsq)
-library(fastDummies)
-library(tidyr)
 library(tidyverse)
-library(purrr)
-library(scales)
-library(margins)
-library(ggplot2)
 library(gridExtra)
-library(viridis)
 library(ggpubr)
-library(fishtree)
-library(multcomp)
+library(lemon)
+library(magick)
+library(mapdata)
 
 # select species to keep
 species_to_keep <- readRDS("01_Analyses_teleo/00_data/species_to_keep_ports.RDS")
@@ -32,7 +24,7 @@ biohut <- meta %>%
 
 traits <- read.csv("01_Analyses_teleo/00_data/Functional_data_corrected_20220124.csv", header=T)
 
-ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1) %>%
+ind_ports <- read.csv("01_Analyses_teleo/00_data/Indicators_ports_2022_per_filter.csv", header=T, row.names=1) %>%
   mutate(Location = "port") %>%
   dplyr::filter(!rownames(.) %in% biohut)
 
@@ -92,7 +84,7 @@ dev.off()
 ####### Plot lockdown / reserve / ports
 ################################################################################
 # load data
-ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1) %>%
+ind_ports <- read.csv("01_Analyses_teleo/00_data/Indicators_ports_2022_per_filter.csv", header=T, row.names=1) %>%
   dplyr::filter(!rownames(.) %in% biohut)
 
 # Combiner les deux datasets
@@ -192,12 +184,7 @@ write.csv(res_tukey,"01_Analyses_teleo/03_Outputs/PostHoc_test_indicators.csv")
 ################################################################################
 ## Map of species richness for each port for the 2 campaigns
 ################################################################################
-library(ggsn)
-library(ggmap)
-library(maps)
-library(magick)
-library(mapdata)
-library(tidyr)
+
 ########################################################################################
 ## MAP
 #########################################################################################
@@ -379,8 +366,6 @@ for (i in c(3,4,15,6,7,9,10,11,13)) {
 }
 
 ## Combine plots and save
-library(gridExtra)
-library(lemon)
 Fig1 <- do.call("grid_arrange_shared_legend", c(bp, ncol=3, nrow=3, position="bottom"))
 # save the figure
 ggsave("01_Analyses_teleo/03_Outputs/Barplot_indicators_per_ports.jpeg",
