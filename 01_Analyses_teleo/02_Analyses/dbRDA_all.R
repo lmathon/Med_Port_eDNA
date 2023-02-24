@@ -1,20 +1,7 @@
-library(dplyr)
-library(forcats)
-library(stringr)
-library(rsq)
-library(margins)
 library(betapart)
-library(reshape)
 library(tidyverse)
-library(tidyselect)
 library(vegan)
-library(ggplot2)
-library(patchwork)
 library(ggalt)
-library(ggrepel)
-library(grid)
-library(ggpubr)
-library(RColorBrewer)
 
 ### Load data
 # eDNA presence/abscence
@@ -30,7 +17,7 @@ meta <- meta %>%
   filter(code_spygen %in% biodiv$code_spygen)
 
 # combiner data and metadata
-data_all=left_join(biodiv,meta)
+data_all=left_join(biodiv,meta, by = 'code_spygen', multiple = 'first')
 data_all <- data_all %>%
   distinct(code_spygen, .keep_all=T)
 rownames(data_all)=data_all[,"code_spygen"]
