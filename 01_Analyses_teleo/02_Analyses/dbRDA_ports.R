@@ -132,3 +132,6 @@ RDA_plot
 # export figure
 ggsave(plot = RDA_plot, filename = "01_Analyses_teleo/03_Outputs/dbRDA_ports_partiel_longitude.jpeg", 
        dpi = 600)
+
+# Save in RData
+saveRDS(RDA_plot, file = "01_Analyses_teleo/04_Plots/Fig2_b_dbRDA_ports_partiel_longitude.RData")

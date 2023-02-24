@@ -145,21 +145,18 @@ plot_venn(list_cate = species_venn3, file_name = "01_Analyses_teleo/03_Outputs/S
           pal_col = c("#fd9435", "#1c0087", "#138889"),
           cat_just = list(c(0, 0), c(1, 0), c(.4, 0)))
 
-## Format Venn for publication + SAVE
+## Save plots in publication
 
-v2 <- plot_venn(list_cate = species_venn2, file_name = NULL, 
+venn_portlockun <- plot_venn(list_cate = species_venn2, file_name = NULL, 
                 pal_fill = c("#fdd8a8", "#B2C6DA", "#B2C6DA"), 
                 pal_col = c("#fd9435", "#6763b0", "#B2C6DA"),
                 cat_just = list(c(0, 0), c(.7, 0), c(.4, .2)))
-v3 <- plot_venn(list_cate = species_venn3, file_name = NULL, 
+venn_portreservfish <- plot_venn(list_cate = species_venn3, file_name = NULL, 
                 pal_fill = c("#fdd8a8", "#b3b1d9", "#b2dadb"), 
                 pal_col = c("#fd9435", "#1c0087", "#138889"),
                 cat_just = list(c(0, 0), c(.7, 0), c(.4, .2)))
-patch <- cowplot::plot_grid(v3, v2, labels = "auto")
 
-tiff(file = "01_Analyses_teleo/03_Outputs/Species_Venn.tiff", width = 2800, height = 1400, res = 300)
-patch
-dev.off()
+save(venn_portlockun, venn_portlockun, file = "01_Analyses_teleo/04_Plots/Fig3_ab_venn.RData")
 
 # Output table
 reserve <- union(reserve_N,reserve_Y)

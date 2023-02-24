@@ -96,11 +96,11 @@ identical(as.character(meta_dbrda$code_spygen), rownames(site_scores)) # verify 
 site_scores_groups <- cbind(site_scores,select(meta_dbrda, habitat))
 
 ### plot sites 
-grda_sites <- plot_grda_sites(df = site_scores_groups)
-grda_sites
+grda_sites_total <- plot_grda_sites(df = site_scores_groups)
+grda_sites_total
 
 # export figure
-ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale.jpeg", 
+ggsave(plot = grda_sites_total, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale.jpeg", 
        width = 7,  height = 7, dpi = 600)
 
 ########################################################################################################################
@@ -122,11 +122,11 @@ identical(as.character(meta_dbrda$code_spygen), rownames(site_scores)) # verify 
 site_scores_groups <- cbind(site_scores,select(meta_dbrda, habitat))
 
 ### plot sites
-grda_sites <- plot_grda_sites(df = site_scores_groups)
-grda_sites
+grda_sites_turnover <- plot_grda_sites(df = site_scores_groups)
+grda_sites_turnover
 
 # export figure
-ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_turnover.jpeg", 
+ggsave(plot = grda_sites_turnover, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_turnover.jpeg", 
        width = 7,  height = 7, dpi = 600)
 
 
@@ -149,9 +149,12 @@ identical(as.character(meta_dbrda$code_spygen), rownames(site_scores)) # verify 
 site_scores_groups <- cbind(site_scores,select(meta_dbrda, habitat))
 
 ### plot sites 
-grda_sites <- plot_grda_sites(df = site_scores_groups)
-grda_sites
+grda_sites_nestedness <- plot_grda_sites(df = site_scores_groups)
+grda_sites_nestedness
 
 # export figure
-ggsave(plot = grda_sites, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_nestedness.jpeg", 
+ggsave(plot = grda_sites_nestedness, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_nestedness.jpeg", 
        width = 7,  height = 7, dpi = 600)
+
+## Save plots in publication
+save(grda_sites_total, grda_sites_total, file = "01_Analyses_teleo/04_Plots/Fig3_gh_dbRDA_totale.RData")

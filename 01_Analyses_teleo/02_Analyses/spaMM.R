@@ -28,9 +28,8 @@ library(gplots)
 library(piecewiseSEM)
 library(emmeans)
 
-
 # load data ports
-ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_filter.csv", header=T, row.names=1)
+ind_ports <- read.csv("01_Analyses_teleo/00_data/Indicators_ports_2022_per_filter.csv", header=T, row.names=1)
 
 # Charger datas milieu naturel (= réserve et hors réserve)
 meta_nat <- read.csv2("00_Metadata/metadata_milieu_naturel.csv", header=T)
@@ -214,10 +213,8 @@ for (i in 1:4) {
          title=ind_names[i]) +
     scale_x_discrete(labels = c("Reserve", "Fished", "Port")) +
     mytheme +
-    labs(tag = paste("(", letters[i],")", sep="")) +
     coord_cartesian(clip = "off")
 }
-
 
 ## Save plot
 png("01_Analyses_teleo/03_Outputs/Figure3a.png", 
@@ -225,6 +222,8 @@ png("01_Analyses_teleo/03_Outputs/Figure3a.png",
 do.call(grid.arrange,c(p, list(ncol=2)))
 dev.off()
 
+## Save plot in RData
+saveRDS(p, file = "01_Analyses_teleo/04_Plots/Fig3_cf.RData")
 
 #################################################################################################################
 ## Model testing effects of port characteristics on indicators
