@@ -1,19 +1,4 @@
-library(dplyr)
-library(forcats)
-library(stringr)
-library(rsq)
-library(margins)
-library(betapart)
-library(reshape)
 library(tidyverse)
-library(tidyselect)
-library(vegan)
-library(ggplot2)
-library(patchwork)
-library(ggalt)
-library(ggrepel)
-library(grid)
-library(ggpubr)
 library(RColorBrewer)
 library(rdacca.hp)
 
@@ -47,12 +32,7 @@ colnames(meta_dbrda_port)[colnames(meta_dbrda_port) == "Campaign"] <- "Season"
 # Hierarchical and Variation Partitioning for Canonical Analysis 
 # Include all variable - Table Sxx
 
-
-rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
-          meta_dbrda_port[,c("Season","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
-
-
-rda.port<-rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
+rda.port <- rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
                     meta_dbrda_port[,c("Season","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
 
 rda.port
