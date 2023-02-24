@@ -1,6 +1,5 @@
 library(tidyverse)
 library(betapart)
-library(ggplot2)
 library(reshape2)
 library(ggpubr)
 
@@ -73,9 +72,9 @@ species_to_keep_out <- readRDS("01_Analyses_teleo/00_data/species_to_keep_milieu
 biodiv_out <- biodiv_out[, c("code_spygen", species_to_keep_out)]
 
 meta_out=read.csv("00_Metadata/metadata_milieu_naturel.csv", sep=";") 
+meta_out <- plyr::rename(x = meta_out, replace =  c("SPYGEN_code" = "code_spygen"))
 
-
-biodiv_out <- left_join(biodiv_out, meta_out[,c("ï..SPYGEN_code", "Site")], by=c("code_spygen"="ï..SPYGEN_code"))
+biodiv_out <- left_join(biodiv_out, meta_out[,c("code_spygen", "Site")], by=c("code_spygen"))
 
 
 # Biodiv per site
@@ -131,7 +130,7 @@ biodiv=read.csv("01_Analyses_teleo/00_data/reduced_matrice_teleo_totale.csv", ro
 meta=read.csv("00_Metadata/metadata_tot.csv", sep=";") 
 
 
-biodiv <- left_join(biodiv, meta[,c("code_spygen", "site")])
+biodiv <- left_join(biodiv, meta[,c("code_spygen", "site")], by = 'code_spygen', multiple = "all")
 
 
 # Biodiv per port
@@ -182,7 +181,9 @@ plot_beta <- ggarrange(plot_port, plot_out, plot_all, ncol=3)
 ggsave(plot_beta, file="01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/beta-diversity.png", width = 12, height = 6)
 
 
+# Save Webfigure in RData
 
+save(plot_port, plot_out, plot_all, file = "01_Analyses_teleo/04_Plots/WebFig4_jkl_beta_diversity.RData")
 
 
 # test for differences in turnover
