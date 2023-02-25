@@ -156,5 +156,6 @@ grda_sites_nestedness
 ggsave(plot = grda_sites_nestedness, filename = "01_Analyses_teleo/03_Outputs/dbRDA_totale_nestedness.jpeg", 
        width = 7,  height = 7, dpi = 600)
 
+########################################################################################################################
 ## Save plots in publication
-save(grda_sites_total, grda_sites_total, file = "01_Analyses_teleo/04_Plots/Fig3_gh_dbRDA_totale.RData")
+save(grda_sites_total, grda_sites_turnover, grda_sites_nestedness, file = "01_Analyses_teleo/04_Plots/Fig3_gh_dbRDA_totale.RData")

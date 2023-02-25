@@ -156,7 +156,7 @@ venn_portreservfish <- plot_venn(list_cate = species_venn3, file_name = NULL,
                 pal_col = c("#fd9435", "#1c0087", "#138889"),
                 cat_just = list(c(0, 0), c(.7, 0), c(.4, .2)))
 
-save(venn_portlockun, venn_portlockun, file = "01_Analyses_teleo/04_Plots/Fig3_ab_venn.RData")
+save(venn_portlockun, venn_portreservfish, file = "01_Analyses_teleo/04_Plots/Fig3_ab_venn.RData")
 
 # Output table
 reserve <- union(reserve_N,reserve_Y)

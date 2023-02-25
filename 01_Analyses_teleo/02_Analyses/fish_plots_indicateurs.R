@@ -308,7 +308,7 @@ final <- image_composite(final, barfig7, offset = "+440+330") #
 final
 
 # Save in RData
-saveRDS(final, file = "01_Analyses_teleo/04_Plots/Fig2_a_Map_Richesse_total.RData")
+save(final, file = "01_Analyses_teleo/04_Plots/Fig2_a_Map_Richesse_total.RData")
 
 ### Save the map
 image_write(final, "01_Analyses_teleo/03_Outputs/Map_Richesse_total.png", density=300)

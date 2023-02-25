@@ -223,7 +223,7 @@ do.call(grid.arrange,c(p, list(ncol=2)))
 dev.off()
 
 ## Save plot in RData
-saveRDS(p, file = "01_Analyses_teleo/04_Plots/Fig3_cf.RData")
+save(p, file = "01_Analyses_teleo/04_Plots/Fig3_cf.RData")
 
 #################################################################################################################
 ## Model testing effects of port characteristics on indicators
