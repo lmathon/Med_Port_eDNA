@@ -214,7 +214,7 @@ for (i in 1:4) {
          title=ind_names[i]) +
     scale_x_discrete(labels = c("Reserve", "Fished", "Port")) +
     mytheme +
-    labs(tag = paste("(", letters[i],")", sep="")) +
+    #labs(tag = paste("(", letters[i],")", sep="")) +
     coord_cartesian(clip = "off")
 }
 
@@ -225,6 +225,8 @@ png("01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/Figure3
 do.call(grid.arrange,c(p, list(ncol=2)))
 dev.off()
 
+## Save webfigure in RData
+save(p, file = "01_Analyses_teleo/04_Plots/WebFig4_dg.RData")
 
 #################################################################################################################
 ## Model testing effects of port characteristics on indicators

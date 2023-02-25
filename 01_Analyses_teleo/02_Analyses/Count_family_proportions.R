@@ -144,4 +144,4 @@ plot_family_count <- ggplot(fam_proportion2, aes(x=reorder(Family, Count), y = C
 ggsave(plot_family_count, file="01_Analyses_teleo/03_Outputs/Families_count.png", width=6, height=16)
 
 # Save Webfigure in RData
-saveRDS(plot_family_count, file = "01_Analyses_teleo/04_Plots/WebFig2_a_families_count.RData")
+save(plot_family_count, file = "01_Analyses_teleo/04_Plots/WebFig2_a_families_count.RData")

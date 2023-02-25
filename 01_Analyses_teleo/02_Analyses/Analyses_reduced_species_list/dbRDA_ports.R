@@ -1,19 +1,4 @@
-library(dplyr)
-library(forcats)
-library(stringr)
-library(rsq)
-library(margins)
-library(betapart)
-library(reshape)
 library(tidyverse)
-library(tidyselect)
-library(vegan)
-library(ggplot2)
-library(patchwork)
-library(ggalt)
-library(ggrepel)
-library(grid)
-library(ggpubr)
 library(RColorBrewer)
 library(rdacca.hp)
 
@@ -57,7 +42,7 @@ rda.port<-rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
                     meta_dbrda_port[,c("Season","Certification","Area_ha","Depth_m","Habitat", "Longitude")],method="dbRDA",add=F,type="R2")
 
 rda.port
-plot(rda.port)
+rda_port_hist <- plot(rda.port)
 ggsave(file="01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/rdacca_port_FigureSXX.png")
 
 rda_port<- as.data.frame(rda.port$Hier.part)
@@ -153,3 +138,5 @@ RDA_plot
 # export figure
 ggsave(plot = RDA_plot, filename = "01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/dbRDA_ports_partiel_longitude.jpeg", 
        dpi = 600)
+# Save in RData
+save(mult, RDA_plot, rda_port_hist, file = "01_Analyses_teleo/04_Plots/WebFig4_bc.RData")

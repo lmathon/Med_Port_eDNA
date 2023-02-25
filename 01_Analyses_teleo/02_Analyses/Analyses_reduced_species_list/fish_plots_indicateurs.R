@@ -1,18 +1,10 @@
 ## Librairies
-library(dplyr)
-library(rsq)
-library(fastDummies)
-library(tidyr)
 library(tidyverse)
-library(purrr)
-library(scales)
-library(margins)
-library(ggplot2)
 library(gridExtra)
-library(viridis)
 library(ggpubr)
-library(fishtree)
-library(multcomp)
+library(lemon)
+library(magick)
+library(mapdata)
 
 
 ## Load data
@@ -28,7 +20,7 @@ biohut <- meta %>%
 
 traits <- read.csv("01_Analyses_teleo/00_data/Functional_data_corrected_20220124.csv", header=T)
 
-ind_ports <- read.csv("01_Analyses_teleo/00_data/indicators_ports_2022_per_port_reduced_sp_list.csv", header=T, row.names=1) %>%
+ind_ports <- read.csv("01_Analyses_teleo/00_data/Indicators_ports_2022_per_port_reduced_sp_list.csv", header=T, row.names=1) %>%
   mutate(Location = "port") %>%
   dplyr::filter(!rownames(.) %in% biohut)
 
@@ -53,12 +45,6 @@ ind_all <- rbind(ind_nat,ind_ports) %>%
 ################################################################################
 ## Map of species richness for each port for the 2 campaigns
 ################################################################################
-library(ggsn)
-library(ggmap)
-library(maps)
-library(magick)
-library(mapdata)
-library(tidyr)
 ########################################################################################
 ## MAP
 #########################################################################################
@@ -183,3 +169,5 @@ final
 ### Save the map
 image_write(final, "01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/Map_Richesse_total.png", density=300)
 
+# Save in RData
+save(final, file = "01_Analyses_teleo/04_Plots/WebFig4_a_Map_Richesse_total.RData")

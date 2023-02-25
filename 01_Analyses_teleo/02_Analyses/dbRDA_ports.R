@@ -38,6 +38,8 @@ rda.port <- rdacca.hp(vegdist(data_dbrda_port,method="jaccard"),
 rda.port
 plot(rda.port)
 ggsave(file="01_Analyses_teleo/03_Outputs/rdacca_port_FigureSXX.png")
+rda_port_hist <- plot(rda.port)
+save(rda_port_hist, file = "01_Analyses_teleo/04_Plots/WebFig3_rdacca_port.RData")
 
 rda_port<- as.data.frame(rda.port$Hier.part)
 write.csv(rda_port, file="01_Analyses_teleo/03_Outputs/Table_SXX_rdacca_port.csv", row.names = F)
@@ -134,4 +136,4 @@ ggsave(plot = RDA_plot, filename = "01_Analyses_teleo/03_Outputs/dbRDA_ports_par
        dpi = 600)
 
 # Save in RData
-saveRDS(RDA_plot, file = "01_Analyses_teleo/04_Plots/Fig2_b_dbRDA_ports_partiel_longitude.RData")
+save(mult, RDA_plot, file = "01_Analyses_teleo/04_Plots/Fig2_b_dbRDA_ports_partiel_longitude.RData")
