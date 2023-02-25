@@ -133,7 +133,7 @@ fam_proportion2 <- melt(fam_proportion)
 colnames(fam_proportion2) <- c("Family", "Zone", "Count")
 
 
-plot <- ggplot(fam_proportion2, aes(x=reorder(Family, Count), y = Count, fill = Zone)) + 
+plot_family_count_reduced <- ggplot(fam_proportion2, aes(x=reorder(Family, Count), y = Count, fill = Zone)) + 
   geom_bar(stat="identity", show.legend = TRUE) + 
   theme_bw() +
   scale_fill_manual(values =c("#FFC47E","#7FC5C5", "grey"))+ 
@@ -141,4 +141,7 @@ plot <- ggplot(fam_proportion2, aes(x=reorder(Family, Count), y = Count, fill = 
   coord_flip()
 
 
-ggsave(plot, file="01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/Families_count.png", width=6, height=16)
+ggsave(plot_family_count_reduced, file="01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/Outputs/Families_count.png", width=6, height=16)
+
+# Save Webfigure in RData
+saveRDS(plot_family_count_reduced, file = "01_Analyses_teleo/04_Plots/WebFig2_b_families_count_reduced.RData")
