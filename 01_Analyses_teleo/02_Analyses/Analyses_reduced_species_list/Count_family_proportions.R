@@ -126,6 +126,8 @@ names(fam_proportion)
 n_port = fam_proportion[fam_proportion$port>0 | fam_proportion$both>0, ]
 dim(n_port) #36 families
 
+fam_proportion <- fam_proportion %>%
+  filter(!is.na(Family))
 
 # Plot graph count families
 
