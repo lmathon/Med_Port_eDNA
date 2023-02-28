@@ -112,7 +112,7 @@ plot_venn <- function(list_cate, file_name, pal_fill, pal_col, cat_just){
 
 ## Venn diagram 1 - CATEGORY = Port, Reserve Unlock, Reserve Lockdown, Fished Unlock, Fished Lockdown
 species_venn <- list(
-  Ports = port,
+  Port = port,
   Reserve_Unlock = reserve_N,
   Reserve_Lockdown = reserve_Y,
   Fished_Lockdown = fished_Y,
@@ -125,7 +125,7 @@ plot_venn(list_cate = species_venn, file_name = "01_Analyses_teleo/03_Outputs/Sp
 
 ## Venn diagram 2 - CATEGORY = Port, Lockdown, Unlock
 species_venn2 <- list(
-  Ports = port,
+  Port = port,
   Unlock = union(reserve_N, fished_N),
   Lockdown = union(reserve_Y, fished_Y)
 )
@@ -136,7 +136,7 @@ plot_venn(list_cate = species_venn2, file_name = "01_Analyses_teleo/03_Outputs/S
 
 ## Venn diagram 3 - CATEGORY = Port, Reserve, Fished
 species_venn3 <- list(
-  Ports = port,
+  Port = port,
   Reserve = union(reserve_N, reserve_Y),
   Fished = union(fished_N, fished_Y)
 )
