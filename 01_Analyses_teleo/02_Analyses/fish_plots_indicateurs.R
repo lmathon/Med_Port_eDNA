@@ -210,7 +210,6 @@ ggplot() +
   #         st.bottom=T, location = "bottomright",
   #         anchor = c(x=8.95,y=42.495),
   #         st.dist = 0.05) +
-  labs(title = "Species richness") +
   theme(panel.background = element_blank(),
         axis.title = element_blank(),
         panel.grid.major = element_blank(), #remove major gridlines
