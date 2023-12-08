@@ -72,7 +72,7 @@ ind_all <- rbind(ind_nat,ind_ports) %>%
 ind_all$habitat <- factor(ind_all$type, levels=c("reserve", "outside", "Port"))
 ind_all$Confinement <- factor(ind_all$Confinement, labels=c("Unlock", "Lockdown"))
 
-ind_names <- c("Total species richness", "Cryptobenthic species richness", "Threatened species richness", "Commercial species richness")  
+ind_names <- c("Total species richness", "Cryptobenthic species richness", "Threatened species richness", "Harvested species richness")  
 
 
 ### Matrix of spatial coordinates
@@ -268,7 +268,7 @@ coords<- mydata %>%
 
 ### Create a vector of indicator names
 ind_names <- c("Total species richness", "Cryptobenthics species richness", 
-               "Threatened species richness", "Commercial species richness")  
+               "Threatened species richness", "Harvested species richness")  
 
 
 # Create a vector of distributions : Poisson for RedList and Chondri, 
