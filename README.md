@@ -1,6 +1,6 @@
-# Benchmarking biodiversity of seaports with eDNA and nearby marine reserves
+# Benchmarking fish biodiversity of seaports with eDNA and nearby marine reserves
 
-This repository contains the codes to analyze eDNA data collected in ports and open areas in the Mediterranean French coast.
+This repository contains the codes to analyze eDNA data collected in seaports and open areas in the Mediterranean French coast.
 
 
 ### Metadata
@@ -14,7 +14,7 @@ The [01_Analyses_teleo](01_Analyses_teleo/) folder contains all the scripts to c
 
 #### Data
 
-The [00_data](01_Analyses_teleo/00_data/) folder contains all the data files, matrices of sequences per sample, for the differnet sampling campaign.
+The [00_data](01_Analyses_teleo/00_data/) folder contains all the data files, matrices of sequences per sample, for the different sampling campaigns.
 
 The [01_Format_data](01_Analyses_teleo/01_Format_data/) folder contains the scripts to clean and assemble this data.
 
@@ -23,7 +23,7 @@ The [01_Format_data](01_Analyses_teleo/01_Format_data/) folder contains the scri
 
 
 The [02_Analyses](01_Analyses_teleo/02_Analyses/) folder contains the scripts to run the ecological analyses on the teleo eDNA data.
-The folder [Analyses_reduced_species_list](01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/) contains teh same analyses scripts but for the matrices containing only species validated by experts.
+The folder [Analyses_reduced_species_list](01_Analyses_teleo/02_Analyses/Analyses_reduced_species_list/) contains the same analyses scripts but for the matrices containing only species validated by experts.
 
 
 #### Outputs and plots
